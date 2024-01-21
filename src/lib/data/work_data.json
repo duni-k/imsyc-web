@@ -1,0 +1,38 @@
+[
+   {
+      "label":"NEXTBANK",
+      "src":"/images/nextbank.png",
+      "href":"nextbank",
+      "desc":"Mobile App UIUX Design"
+   },
+   {
+      "label":"COBINHOOD",
+      "src":"/images/cobinhood.png",
+      "href":"cobinhood",
+      "desc":"Business Model Innovation"
+   },
+   {
+      "label":"MOTC X UMAJI",
+      "src":"/images/umaji.png",
+      "href":"umaji",
+      "desc":"Transit System Integration Design"
+   },
+   {
+      "label":"Taiwan High Speed Rail",
+      "src":"/images/THSR.png",
+      "href":"thsr",
+      "desc":"Passenger Journey and PIDS Design"
+   },
+   {
+      "label":"RAKUTEN",
+      "src":"/images/rakuten.png",
+      "href":"rakuten",
+      "desc":"Growth Strategy and UX Design"
+   },
+   {
+      "label":"MOCACARE",
+      "src":"/images/mocacare.png",
+      "href":"mocacare",
+      "desc":"Service Design for Heart Disease"
+   }
+]
