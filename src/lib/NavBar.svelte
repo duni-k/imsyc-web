@@ -1,10 +1,10 @@
 <script>
-	import { cubicInOut, quintInOut } from 'svelte/easing';
-	import { slide } from 'svelte/transition';
+	import { blur, slide } from "svelte/transition";
 
 	export let workExpRoutes;
 
 	let isExpanded = false;
+	let innerWidth = 0;
 
 	function clickHandler() {
 		isExpanded = !isExpanded;
@@ -18,81 +18,98 @@
 		isExpanded = true;
 	}
 
-	let color = 'grey';
+	$: transitionAnimation = innerWidth <= 768 ? slide : blur
+	console.log(transitionAnimation)
 </script>
 
-<header>
-	<nav class="navbar" transition:slide>
-		<a href="/"><img class="logo" src="/images/favicon.svg" alt="my logo" /></a>
-		<input class="menu-btn" type="checkbox" id="menu-btn" />
-		<label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-		<ul class="menu">
-			<div class="internal-btn-grp">
-				<li>
-					<button
-						on:click={clickHandler}
-						on:mouseenter={mouseEnter}
-						on:mouseleave={mouseLeave}
-						class="dd-btn"
-					>
-						<span class="link-text expander-txt">Experience</span>
+<svelte:window bind:innerWidth />
+<nav class="navbar" transition:transitionAnimation>
+	<a href="/"><img class="logo" src="/images/favicon.svg" alt="my logo" /></a>
+	<input class="menu-btn" type="checkbox" id="menu-btn" />
+	<label class="menu-icon" for="menu-btn"><span class="navicon"></span></label
+	>
+	<ul class="menu">
+		<div class="internal-btn-grp">
+			<li>
+				<button
+					on:click={clickHandler}
+					on:mouseenter={mouseEnter}
+					on:mouseleave={mouseLeave}
+					class="dd-btn"
+				>
+					<span class="link-text expander-txt">Experience</span>
+					<img
+						class="expander-icon"
+						src={isExpanded
+							? "/images/minus.svg"
+							: "/images/plus.svg"}
+						alt="expander-icon"
+					/>
+				</button>
+			</li>
+			{#if isExpanded}
+				<div
+					class="dropdown"
+					role="button"
+					tabindex="-1"
+					on:mouseenter={mouseEnter}
+					on:mouseleave={mouseLeave}
+					transition:transitionAnimation={{ delay: 0, duration: 300 }}
+				>
+					<ul>
+						{#each workExpRoutes as workExpRoute}
+							{#if !workExpRoute.isFirstItem}
+								<li class="dd-li">
+									<a
+										class="dd-link-text"
+										href={workExpRoute.href}
+										>{workExpRoute.employer}</a
+									>
+								</li>
+							{/if}
+						{/each}
+					</ul>
+				</div>
+			{/if}
+			<li class="menu-item">
+				<div>
+					<a class="link-text" href="/">UX articles</a>
+				</div>
+			</li>
+			<li class="menu-item">
+				<div>
+					<a class="link-text" href="/">Resume</a>
+				</div>
+			</li>
+		</div>
+		<div class="ext-btn-grp">
+			<li>
+				<a href="https://se.linkedin.com/in/stellahsiaoyuchen">
+					<button class="ext-btn">
+						<div class="btn-text">Linkedin</div>
 						<img
-							class="expander-icon"
-							src={isExpanded ? '/images/minus.svg' : '/images/plus.svg'}
-							alt="expander-icon"
+							class="btn-icon"
+							src="/images/linkedin.svg"
+							alt="linkedin icon"
 						/>
 					</button>
-				</li>
-				{#if isExpanded}
-					<div
-						class="dropdown"
-						role="button"
-						tabindex="-1"
-						on:mouseenter={mouseEnter}
-						on:mouseleave={mouseLeave}
-						transition:slide={{ delay: 100, duration: 500, easing: cubicInOut }}
-					>
-						<ul>
-							{#each workExpRoutes as { text, href }}
-								<li class="dd-li">
-									<a class="dd-link-text" {href}>{text}</a>
-								</li>
-							{/each}
-						</ul>
-					</div>
-				{/if}
-				<li class="menu-item">
-					<div>
-						<a class="link-text" href="/">UX articles</a>
-					</div>
-				</li>
-				<li class="menu-item">
-					<div>
-						<a class="link-text" href="/">Resume</a>
-					</div>
-				</li>
-			</div>
-			<div class="ext-btn-grp">
-				<li>
-					<a href="https://se.linkedin.com/in/stellahsiaoyuchen">
-						<button class="ext-btn">
-							<div class="btn-text">Linkedin</div>
-							<img class="btn-icon" src="/images/linkedin.svg" alt="linkedin icon" />
-						</button>
-					</a>
-				</li>
-				<li>
-					<a href="mailto:imsyc1992@gmail.com">
-						<button class="ext-btn">
-							<span class="btn-text">Email me</span>
-							<img class="btn-icon" src="/images/mail.svg" alt="mail icon" />
-						</button>
-					</a>
-				</li>
-			</div>
-		</ul>
-	</nav>
-</header>
+				</a>
+			</li>
+			<li>
+				<a href="mailto:imsyc1992@gmail.com">
+					<button class="ext-btn">
+						<span class="btn-text">Email me</span>
+						<img
+							class="btn-icon"
+							src="/images/mail.svg"
+							alt="mail icon"
+						/>
+					</button>
+				</a>
+			</li>
+		</div>
+	</ul>
+</nav>
 
 <style>
 	* {
@@ -123,10 +140,6 @@
 
 	button:focus {
 		outline: none;
-	}
-
-	header {
-		position: fixed;
 	}
 
 	.btn-text {
@@ -252,7 +265,7 @@
 	.navbar .menu-icon .navicon:before,
 	.navbar .menu-icon .navicon:after {
 		background: #333;
-		content: '';
+		content: "";
 		display: block;
 		height: 100%;
 		position: absolute;
@@ -300,25 +313,26 @@
 	}
 
 	@media (min-width: 768px) {
-		header {
-			position: static;
-			height: 80px;
-		}
-
 		* {
 			margin: 0;
 			padding: 0;
 			font-size: 16px;
 		}
 
+		button {
+			height: 100%;
+		}
+
 		.btn-text,
 		.link-text {
-            font-size: 18px;
 			color: black;
 		}
 
+		ul {
+			height: 100%;
+		}
+
 		li {
-			width: 80px;
 			float: right;
 			height: 100%;
 			background-color: white;
@@ -335,23 +349,40 @@
 			color: #a0a09f;
 		}
 
+		.link-text {
+			font-size: 16px;
+		}
+
 		.dropdown {
 			position: absolute;
-			left: 0px;
-			top: 80px;
+			left: -5px;
+			top: 10vh;
+			width: 200px;
+			border-radius: 2px;
+			z-index: 99;
+			background: rgba(255, 255, 255, 0.8);
+			backdrop-filter: blur(2px);
+		}
+
+		.dropdown * {
+			background-color: rgba(0, 0, 0, 0);
 		}
 
 		.dropdown > ul {
 			display: flex;
 			flex-direction: column;
 			text-align: left;
-			background: rgba(255, 255, 255, 0);
+		}
+
+		.dropdown > ul li {
+			height: 43px;
 		}
 
 		.ext-btn {
+			width: 100%;
 			height: 100%;
-            border: 0;
-            margin: 0;
+			border: 0;
+			margin: 0;
 			background-color: white;
 		}
 
@@ -372,6 +403,11 @@
 			max-height: 100%;
 		}
 
+		.menu-item {
+			display: flex;
+			margin: auto;
+		}
+
 		.btn-icon,
 		.menu-icon,
 		.expander-icon {
@@ -382,9 +418,10 @@
 			width: 100%;
 		}
 
-        .dd-link-text {
-            font-size: 14px;
-        }
+		.dd-link-text {
+			padding-left: 5px;
+			font-size: 14px;
+		}
 
 		.dd-link-text:hover {
 			color: black;
@@ -393,20 +430,24 @@
 		.ext-btn {
 			background-color: white;
 			color: black;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 
 		.navbar {
 			background-color: #fff;
 			width: 100%;
-			height: 100%;
+			height: 10vh;
 			display: flex;
 			flex-direction: row;
 			justify-content: space-around;
+			align-items: center;
 			z-index: 3;
 		}
 
 		.navbar .logo {
-			padding-bottom: 1em;
+			padding-top: 2em;
 		}
 	}
 </style>

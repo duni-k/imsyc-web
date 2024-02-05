@@ -33,6 +33,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"siema": "^1.5.1"
+		"siema": "github:pawelgrzybek/siema#pull/195/head"
 	}
 }
