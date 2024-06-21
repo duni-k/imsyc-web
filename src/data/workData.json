@@ -1,77 +1,65 @@
 [
-    {
-        "isFirstItem": true,
-        "text": "I craft the experience that wins hearts and drives opportunities.",
-        "id": 1
-    },
-    {
-        "src": "/images/hmgroup.png",
-        "employer": "H&M",
-        "year": "2022",
-        "role": "Tech product designer",
-        "bread": "Worked as a lead designer in responsible for the start page and an incubating project to enable fashion customers discover and develop their unique style.",
-        "isFirstItem": false,
-        "id": 2,
-        "href": "hmgroup"
-    },
-    {
-        "src": "/images/fantasy.png",
-        "employer": "Fantasy",
-        "year": "2021",
-        "role": "Lead experience expert",
-        "bread": "Worked as a lead experience expert with Huawei/Honor and rebuilt their brand identity and create a strategic roadmap that empower their inhouse product team to have sustainable growth.",
-        "isFirstItem": false,
-        "id": 3,
-        "href": "fantasy"
-    },
-    {
-        "src": "/images/nextbank.png",
-        "employer": "NEXTBANK",
-        "year": "2020",
-        "role": "Senior UX Designer",
-        "bread": "As the only UX designer in the design team, I created the core design value, interaction guideline and shipped the product withinn three months.",
-        "isFirstItem": false,
-        "id": 4,
-        "href": "nextbank"
-    },
-    {
-        "src": "/images/THSR.png",
-        "employer": "Taiwan High Speed Rail",
-        "year": "2019",
-        "role": "UX Researcher",
-        "bread": "Created passenger journey and traveler personas to highlight the painpoints of HSR passenger, this research was adapted both by THSR and the passenger information displayer system manufacturing company Delta Electronic, Inc. ",
-        "isFirstItem": false,
-        "id": 5,
-        "href": "thsr"
-    },
-    {
-        "src": "/images/cobinhood.png",
-        "employer": "COBINHOOD",
-        "year": "2018",
-        "role": "UX Designer",
-        "bread": "Worked as a UX designer and researcher that created the number one rated zero fee cryptocurrency exchange and won the Red Dot design award in 2018.",
-        "isFirstItem": false,
-        "id": 6,
-        "href": "cobinhood"
-    },
-    {
-        "src": "/images/rakuten.png",
-        "employer": "Rakuten",
-        "year": "2017",
-        "role": "UX Researcher",
-        "bread": "Established the first UX forum at Rakuten internatioinal that delivered user experience knowledge, workshops and introduced research methods.",
-        "isFirstItem": false,
-        "id": 7,
-        "href": "rakuten"
-    },
-    {
-        "src": "/images/mocacare.png",
-        "employer": "MOCACARE",
-        "year": "2016",
-        "role": "UX Designer",
-        "bread": "Created a new generation hypertension meter that not only assist patients control their blood pressure but empower people to create a healthy lifestyle.",
-        "isFirstItem": false,
-        "id": 8,
-        "href": "mocacare"
-    }
+  {
+    "src": "/images/nextbank.png",
+    "employer": "NEXTBANK",
+    "year": "2020",
+    "role": "Senior UX Designer",
+    "bread": "As the only UX designer in the design team, I created the core design value, interaction guideline and shipped the product withinn three months.",
+    "id": 4,
+    "href": "nextbank"
+  },
+  {
+    "src": "/images/fantasy.png",
+    "employer": "Fantasy",
+    "year": "2021",
+    "role": "Lead experience expert",
+    "bread": "Worked as a lead experience expert with Huawei/Honor and rebuilt their brand identity and create a strategic roadmap that empower their inhouse product team to have sustainable growth.",
+    "id": 3,
+    "href": "fantasy"
+  },
+  {
+    "src": "/images/cobinhood.png",
+    "employer": "COBINHOOD",
+    "year": "2018",
+    "role": "UX Designer",
+    "bread": "Worked as a UX designer and researcher that created the number one rated zero fee cryptocurrency exchange and won the Red Dot design award in 2018.",
+    "id": 6,
+    "href": "cobinhood"
+  },
+  {
+    "src": "/images/mocacare.png",
+    "employer": "MOCACARE",
+    "year": "2016",
+    "role": "UX Designer",
+    "bread": "Created a new generation hypertension meter that not only assist patients control their blood pressure but empower people to create a healthy lifestyle.",
+    "id": 8,
+    "href": "mocacare"
+  },
+  {
+    "src": "/images/THSR.png",
+    "employer": "Taiwan High Speed Rail",
+    "year": "2019",
+    "role": "UX Researcher",
+    "bread": "Created passenger journey and traveler personas to highlight the painpoints of HSR passenger, this research was adapted both by THSR and the passenger information displayer system manufacturing company Delta Electronic, Inc. ",
+    "id": 5,
+    "href": "thsr"
+  },
+  {
+    "src": "/images/rakuten.png",
+    "employer": "Rakuten",
+    "year": "2017",
+    "role": "UX Researcher",
+    "bread": "Established the first UX forum at Rakuten internatioinal that delivered user experience knowledge, workshops and introduced research methods.",
+    "id": 7,
+    "href": "rakuten"
+  },
+  {
+    "src": "/images/hmgroup.png",
+    "employer": "H&M",
+    "year": "2022",
+    "role": "Tech product designer",
+    "bread": "Worked as a lead designer in responsible for the start page and an incubating project to enable fashion customers discover and develop their unique style.",
+    "id": 2,
+    "href": "hmgroup"
+  }
 ]

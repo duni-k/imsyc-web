@@ -1,52 +1,59 @@
 :root {
-    font-family: Avenir, Playfair Display, Arial, sans-serif;
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 400;
-    color-scheme: light dark;
-    color: black;
-    background-color: #242424;
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
+  font-family: Avenir, Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+  cursor: default;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: none;
+  --background-primary: #f7ede2;
+  --highlight-primary: #e63946;
+  --text-primary: #1d3557;
+  --background-secondary: var(--text-primary);
+  --highlight-secondary: #fff;
+  --text-secondary: #fafafa;
+  --background-extended: var(--text-secondary);
+  --text-extended: #2f2e2e;
+  --inactive-extended: #686868;
+  --navbar-height: 153px;
+  --padding: 5vh;
+  --border-radius: 4px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
 }
 
 a {
-    font-style: bold;
-    text-decoration: none;
-}
-
-body {
-    margin: 0;
-    width: 100vw;
-    height: 100vw;
-    background-color: white;
-    overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 button {
-    border: none;
-    font-weight: 500;
-    font-family: inherit;
-    margin: 0;
-    cursor: pointer;
-    transition: border-color 0.25s;
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  cursor: pointer;
 }
 
-h1 {
-    font-family: "Playfair Display";
-    font-size: 42px;
-    color: #fafafa;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 64px; /* 152.381% */
-    letter-spacing: 1.26px;
-    margin: 48px;
+body {
+  width: 100vw;
+  height: 100vw;
+  overflow: hidden;
 }
 
-h2 {
-    font-family: "Avenir",
-    font-size: 24px;
+img {
+  object-fit: cover;
+}
+
+.primary-palette {
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+}
+
+.secondary-palette {
+  background-color: var(--background-secondary);
+  color: var(--text-secondary);
 }

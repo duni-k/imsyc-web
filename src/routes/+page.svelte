@@ -1,176 +1,189 @@
 <script>
-	import Carousel from "$lib/Carousel.svelte";
+  import { fade, fly } from "svelte/transition";
+  import workData from "../data/workData.json";
+  import Flipcard from "$lib/Flipcard.svelte";
 
-	import workData from "/src/data/workData.json";
-
-	function scrollIntoView({ target }) {
-		const el = document.querySelector(target.getAttribute("href"));
-		if (!el) return;
-		el.scrollIntoView({
-			behavior: "smooth",
-			top,
-		});
-	}
+  /**
+   * @type {number | null}
+   */
+  let active;
+  /**
+   * @type {HTMLLIElement}
+   */
+  /**
+   * @type {number}
+   */
+  let floatingCardX;
 </script>
 
-<div class="container">
-	<section id="experience">
-		<Carousel duration="1000">
-			{#each workData as carouselItem (carouselItem.id)}
-				<div id="carouselItem">
-					{#if !carouselItem.isFirstItem}
-						<img
-							id="carousel-image"
-							src={carouselItem.src}
-							alt={carouselItem.alt}
-						/>
-						<div id="description">
-							<p id="year">
-								{carouselItem.year}
-							</p>
-							<h2>
-								{carouselItem.role} @ {carouselItem.employer}
-							</h2>
-							<p id="bread">
-								{carouselItem.bread}
-							</p>
-						</div>
-					{:else}
-						<div id="first-item">
-							<h1>
-								{carouselItem.text}
-							</h1>
-						</div>
-					{/if}
-				</div>
-			{/each}
-		</Carousel>
+<div class="landing primary-palette">
+  <div class="motto">
+    <h1>
+      I CRAFT<br />
+      <span class="popout">HEARTFELT</span><br />
+      EXPERIENCE
+    </h1>
+  </div>
 
-		<a href="#speeches" on:click={scrollIntoView}>
-			<nav class="button-container" id="down-button">
-				<img src="/images/arrow-down.svg" alt="scroll to next page" />
-			</nav>
-		</a>
-	</section>
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <div class="footer">
+    <div class="footer-container__left">
+      <div class="buttons">
+        <a class="ext-link" href="https://se.linkedin.com/in/stellahsiaoyuchen">
+          <img src="/images/linkedin.svg" alt="linkedin icon" />
+        </a>
+        <a class="ext-link" href="mailto:imsyc1992@gmail.com">
+          <img src="/images/email.svg" alt="mail icon" />
+        </a>
+      </div>
+    </div>
 
-	<section id="speeches">
-		<a href="#experience" on:click={scrollIntoView}>
-			<nav class="button-container" id="up-button">
-				<img src="/images/arrow-up.svg" alt="scroll to previous page" />
-			</nav>
-		</a>
-
-		<h2 style="font-size: 54px; color: white">TESTING</h2>
-	</section>
+    <div class="highlights__container">
+      <h1 class="highlights__title">HIGHLIGHTS</h1>
+      <ul class="highlights">
+        {#each workData.slice(0, 4) as highlight, i}
+          <li
+            class="highlight"
+            on:mouseenter={(e) => {
+              active = i;
+              floatingCardX = e.clientX;
+            }}
+            on:mouseleave={() => {
+              active = null;
+            }}
+          >
+            <img class="thumbnail" src={highlight.src} alt={highlight.employer} />
+          </li>
+        {/each}
+      </ul>
+    </div>
+  </div>
 </div>
 
+{#if active != null}
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <div
+    in:fly={{ x: 100, y: 100, duration: 500 }}
+    out:fade={{ delay: 500 }}
+    style="position: absolute; left: {floatingCardX - 425}px; bottom: 182px;"
+    on:mouseenter={() => {
+      active = active;
+    }}
+    on:mouseleave={() => {
+      active = null;
+    }}
+  >
+    <Flipcard height="525px" width="425px">
+      <img
+        class="floating-card"
+        slot="front"
+        src={workData[active].src}
+        alt={workData[active].employer}
+      />
+    </Flipcard>
+  </div>
+{/if}
+
 <style>
-	@media (min-width: 768px) {
-		h1 {
-			font-family: "Playfair Display";
-			font-size: 42px;
-			color: #fafafa;
-			font-style: normal;
-			font-weight: 600;
-			line-height: 64px; /* 152.381% */
-			letter-spacing: 1.26px;
-			margin: 48px;
-		}
+  .landing {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - var(--navbar-height));
+  }
 
-		.container {
-			width: 100%;
-			height: 100vh;
-			scroll-snap-type: y mandatory;
-			overflow-x: hidden;
-			overflow-y: scroll;
-			scroll-behavior: smooth;
-		}
+  .footer {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: var(--padding);
+  }
 
-		section {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			width: 100vw;
-			height: 100vh;
-			scroll-snap-align: start;
-		}
+  .footer-container__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    width: 50%;
+  }
 
-		#experience {
-			justify-content: end;
-		}
+  .buttons {
+    display: flex;
+    gap: 24px;
+    padding-left: var(--padding);
+  }
 
-		#speeches {
-			justify-content: start;
-			background: #2f2e2e;
-		}
+  .ext-link {
+    width: 32px;
+    height: 32px;
+    padding-right: 2%;
+  }
 
-		#first-item {
-			width: 100%;
-			height: 100%;
-			background-color: #222;
-		}
+  .motto {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    text-align: center;
+    height: 40%;
+    padding-top: var(--navbar-height);
+    font-family: "Avenir";
+    font-weight: bold;
+    font-size: 48px;
+  }
 
-		#carouselItem {
-			display: flex;
-			flex-direction: column;
-			width: 80%;
-			height: 700px;
-			border-radius: 4px;
-			overflow: hidden;
-			-webkit-transition: background-color 0.5s ease-out;
-			-moz-transition: background-color 0.5s ease-out;
-			-o-transition: background-color 0.5s ease-out;
-			transition: background-color 0.5s ease-out;
-		}
+  .highlights__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: end;
+    width: 30%;
+    height: 100%;
+    padding-right: var(--padding);
+  }
 
-		#carouselItem:hover {
-			background-color: #d7d7d76e;
-		}
+  .highlights__title {
+    font-family: "Syncopate";
+    font-size: 24px;
+    font-weight: bold;
+    padding-bottom: 5%;
+  }
 
-		#description {
-			margin: 5px;
-		}
+  .highlights {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 5%;
+  }
 
-		#carousel-image {
-			height: 60%;
-			width: 100%;
-			object-fit: cover;
-		}
+  .highlight {
+    width: 96px;
+    height: 96px;
+  }
 
-		.button-container {
-			position: relative;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: 64px;
-			width: 128px;
-			background: rgba(255, 255, 255, 0.3);
-			backdrop-filter: blur(2px);
-			border-radius: 3px;
-		}
+  .highlight:hover {
+    -webkit-filter: opacity(0.5);
+    filter: opacity(0.5);
+  }
 
-		.button-container {
-			-webkit-transition: background-color 0.5s ease-out;
-			-moz-transition: background-color 0.5s ease-out;
-			-o-transition: background-color 0.5s ease-out;
-			transition: background-color 0.5s ease-out;
-		}
+  .thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+  }
 
-		#down-button:hover {
-			background: rgba(200, 200, 200, 0.3);
-		}
+  .popout {
+    font-family: "Chango";
+    font-size: 128px;
+    color: var(--highlight-primary);
+  }
 
-		#up-button:hover {
-			background: rgba(255, 255, 255, 0.6);
-		}
-
-		#down-button {
-			margin-bottom: 3vh;
-			margin-top: 3vh;
-		}
-
-		#up-button {
-			margin-top: 13vh;
-		}
-	}
+  .floating-card {
+    width: 425px;
+    height: 526px;
+    border-radius: var(--border-radius);
+  }
 </style>

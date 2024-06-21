@@ -1,23 +1,35 @@
 @font-face {
-    font-family: 'Avenir';
-    font-style: normal;
-    src: url('/fonts/Avenir/avenir_regular.ttf') format('truetype'),
+  font-family: "Syncopate";
+  font-style: normal;
+  src: url("/fonts/Syncopate/Syncopate-Regular.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: 'Avenir';
-    font-style: light;
-    src: url('/fonts/Avenir/avenir_light.ttf') format('truetype'),
+  font-family: "Syncopate";
+  font-style: bold;
+  src: url("/fonts/Syncopate/Syncopate-Bold.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: 'Avenir';
-    font-style: bold;
-    src: url('/fonts/Avenir/avenir_bold.ttf') format('truetype'),
+  font-family: "Chango";
+  font-style: normal;
+  src: url("/fonts/Chango/Chango-Regular.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: 'Playfair Display';
-    font-style: normal;
-    src: url('/fonts/playfair-display-v29-latin-500.eot') format('truetype'),
+  font-family: "Avenir";
+  font-style: normal;
+  src: url("/fonts/Avenir/avenir_regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Avenir";
+  font-style: light;
+  src: url("/fonts/Avenir/avenir_light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Avenir";
+  font-style: bold;
+  src: url("/fonts/Avenir/avenir_bold.ttf") format("truetype");
 }
