@@ -201,19 +201,18 @@
   #carousel {
     height: 100%;
     overflow-x: auto;
-    padding-left: 24px;
-    padding-right: 24px;
   }
 
   .carousel__inner {
-    width: min-content;
     display: flex;
+    height: 100%;
+    width: min-content;
+    align-items: center;
     overflow-x: auto;
     gap: 24px;
   }
 
   .carousel-item {
-    margin-top: 124px;
     width: 425px;
     height: 600px;
     border-radius: var(--border-radius);
