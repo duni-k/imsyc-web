@@ -12,12 +12,13 @@
   --background-secondary: var(--text-primary);
   --highlight-secondary: #fff;
   --text-secondary: #fafafa;
-  --background-extended: var(--text-secondary);
+  --background-extended: #fff;
   --text-extended: #2f2e2e;
   --inactive-extended: #686868;
-  --navbar-height: 153px;
-  --padding: 5vh;
-  --border-radius: 4px;
+  --navbar-height: 100px;
+  --padding: 64px;
+  --border-radius: 8px;
+  --scrollbar-width: 12px;
 }
 
 * {
@@ -26,26 +27,56 @@
 }
 
 a {
+  color: inherit;
   cursor: pointer;
   text-decoration: none;
-  color: inherit;
+}
+
+body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #555;
 }
 
 button {
-  background: none !important;
+  background: none;
   border: none;
-  padding: 0 !important;
+  padding: 0;
   cursor: pointer;
-}
-
-body {
-  width: 100vw;
-  height: 100vw;
-  overflow: hidden;
 }
 
 img {
   object-fit: cover;
+}
+
+main {
+  overflow: hidden;
+}
+
+p {
+  font-family: "Avenir";
+  line-height: normal;
+  font-weight: lighter;
+  font-size: 24px;
+  text-align: justify;
+  text-indent: 0;
+}
+
+h1,
+h2 {
+  font-family: "Syncopate";
+  text-transform: uppercase;
 }
 
 .primary-palette {
@@ -56,4 +87,149 @@ img {
 .secondary-palette {
   background-color: var(--background-secondary);
   color: var(--text-secondary);
+}
+
+.extended-palette {
+  background-color: var(--background-extended);
+  color: var(--text-extended);
+}
+
+.bread-text {
+  font-family: "Avenir";
+  line-height: 40px;
+}
+
+.workpage-container {
+  display: grid;
+  width: 100%;
+  overflow: hidden;
+  row-gap: 64px;
+
+  &>img {
+    width: 100vw;
+    object-fit: contain;
+  }
+}
+
+.headline-right,
+.headline-left {
+  padding-left: var(--padding);
+  padding-right: var(--padding);
+  font-family: "Syncopate";
+  font-size: 80px;
+  text-transform: uppercase;
+}
+
+.headline-left {
+  text-align: start;
+}
+
+.headline-right {
+  text-align: end;
+}
+
+.summary {
+  line-height: 40px;
+  font-size: 24px;
+  padding-left: var(--padding);
+  padding-right: var(--padding);
+  text-align: center;
+}
+
+.overview-container-left,
+.overview-container-right {
+  display: flex;
+  flex-direction: column;
+  padding-left: var(--padding);
+  gap: 64px;
+}
+
+.overview-container-right {
+  padding-left: calc(100% - 1098px - var(--padding));
+}
+
+.overview-headline {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.overview {
+  line-height: 40px;
+  width: 1098px;
+}
+
+.dual {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 64px;
+
+  &>* {
+    width: 918px;
+    height: 100%;
+  }
+}
+
+.list {
+  font-family: "Avenir";
+  font-weight: lighter;
+  font-size: 24px;
+  list-style: inside;
+  list-style-type: trad-chinese-informal;
+  padding-bottom: 16px;
+
+  &>li {
+    margin-bottom: 40px;
+  }
+}
+
+#tail {
+  display: grid;
+  gap: 0;
+
+  &>img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+/* Fonts section */
+@font-face {
+  font-family: "Syncopate";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/Syncopate/Syncopate-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Syncopate";
+  font-style: bold;
+  font-weight: 700;
+  src: url("/fonts/Syncopate/Syncopate-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Chango";
+  font-style: normal;
+  src: url("/fonts/Chango/Chango-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Avenir";
+  font-style: light;
+  font-weight: 300;
+  src: url("/fonts/Avenir/Avenir-Light.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Avenir";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/Avenir/Avenir-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Avenir";
+  font-style: bold;
+  font-weight: 700;
+  src: url("/fonts/Avenir/Avenir-Heavy.otf") format("opentype");
 }

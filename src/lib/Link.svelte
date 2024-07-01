@@ -1,6 +1,9 @@
 <script>
   export let strokeColor;
-  export let href;
+  /**
+  / @type string | null
+  */
+  export let href = null;
 </script>
 
 <a {href} class="wave-link" style="--stroke-color: {strokeColor}">
@@ -22,9 +25,6 @@
   a {
     position: relative;
     padding: 0.25rem 1rem;
-
-    text-decoration: none;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,7 +36,6 @@
 
   a.wave-link {
     cursor: pointer;
-    font-size: 18px;
     position: relative;
     white-space: nowrap;
     background: transparent;
@@ -60,14 +59,14 @@
     left: 0;
     pointer-events: none;
     fill: none;
-    stroke: var(--stroke-color);
+    stroke: var(--highlight-primary);
     stroke-width: 0px;
   }
 
   .link__graphic--slide {
     top: -3px;
     stroke-width: 0px;
-    transition: transform 0.9s;
+    transition: transform 0.8s;
     transition-timing-function: cubic-bezier(0, 0.25, 0.5, 1);
   }
   a.wave-link:hover .link__graphic--slide {

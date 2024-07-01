@@ -1,60 +1,120 @@
 <script>
-  export let width = "300px";
-  export let height = "300px";
+  export let click
+  export let data
+  export let blur = false
+
+  let flipCardImage = "/images/" + data.href + "/" + data.href + "-flipcard.png"
 </script>
 
-<div class="flip-card" style:width style:height>
-  <div class="flip-card-inner">
-    <div class="flip-card-front">
-      <slot name="front" />
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div class="card">
+  <a class="card-inner" href={data.href} on:click={click}>
+    <div id="front">
+      <p id="title" class="special-text">{data.name}</p>
+      <p id="branch">{data.branch}</p>
+      <img src={flipCardImage} alt={data.name} />
     </div>
-    <div class="flip-card-back">
-      <slot name="back" />
+    <div
+      id="back"
+      class="bread-text"
+      style={blur
+        ? "background-color: transparent; backdrop-filter: blur(15px) brightness(80%); border: 0;"
+        : "background-color: var(--background-secondary); color: var(--text-secondary);"}
+    >
+      <p>{data.role}</p>
+      <p><br />{data.bread}</p>
+      <p><br />{data.country}</p>
+      <img src="/images/card-corner.svg" />
     </div>
-  </div>
+  </a>
 </div>
 
 <style>
-  .flip-card {
-    background-color: transparent;
-    perspective: 1000px;
+  .card {
+    height: 90%;
+    width: 100%;
+    perspective: 2000px;
+    cursor: pointer;
   }
 
-  .flip-card-inner {
+  .card-inner {
     position: relative;
+    display: block;
     width: 100%;
     height: 100%;
-    text-align: center;
-    transition: transform 0.6s;
+    transition: transform 0.6s ease;
     transform-style: preserve-3d;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
   }
 
-  .flip-card:hover .flip-card-inner {
+  .card:hover .card-inner {
     transform: rotateY(180deg);
+    transition: transform 0.4s ease;
   }
 
-  .flip-card-front,
-  .flip-card-back {
+  #front,
+  #back {
     position: absolute;
     width: 100%;
     height: 100%;
-    -webkit-backface-visibility: hidden;
+    border-radius: var(--border-radius);
     backface-visibility: hidden;
-    border-radius: var(--border-radius);
+    -webkit-backface-visibility: hidden;
+
+    text-transform: uppercase;
   }
 
-  .flip-card-front {
-    background-color: #bbb;
-    color: black;
+  #front img {
     border-radius: var(--border-radius);
+    width: 100%;
+    height: 100%;
   }
 
-  .flip-card-back {
-    background-color: var(--background-secondary);
-    color: white;
+  #front p {
+    width: 100%;
+    color: var(--text-secondary);
+    position: absolute;
+    text-align: center;
+  }
+
+  #front #title {
+    font-family: "Syncopate";
+    font-weight: normal;
+    top: 16px;
+    font-size: 24px;
+  }
+
+  #front #branch {
+    font-weight: bold;
+    font-size: 16px;
+    bottom: 16px;
+  }
+
+  #back {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     transform: rotateY(180deg);
     border-radius: var(--border-radius);
-    border: 1px solid white;
+    border: 2px solid var(--background-primary);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+  }
+
+  #back p {
+    font-size: 16px;
+    line-height: 150%;
+    text-align: left;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-weight: bold;
+  }
+
+  #back img {
+    position: absolute;
+    bottom: 0;
+    right: 0;
   }
 </style>
