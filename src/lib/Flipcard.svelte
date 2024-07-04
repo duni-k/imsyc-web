@@ -3,12 +3,14 @@
   export let data
   export let blur = false
 
+  import { base } from "$app/paths"
+
   let flipCardImage = "/images/" + data.href + "/" + data.href + "-flipcard.png"
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="card">
-  <a class="card-inner" href={data.href} on:click={click}>
+  <a class="card-inner" href={base + "/" + data.href} on:click={click}>
     <div id="front">
       <p id="title" class="special-text">{data.name}</p>
       <p id="branch">{data.branch}</p>

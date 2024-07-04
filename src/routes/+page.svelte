@@ -1,6 +1,8 @@
 <script>
   import workData from "../data/workData.json"
   import Flipcard from "$lib/Flipcard.svelte"
+
+  import { base } from "$app/paths"
 </script>
 
 <div class="landing primary-palette">
@@ -40,7 +42,7 @@
           {@const thumbnail =
             "/images/" + data.href + "/" + data.href + "-thumbnail.png"}
           <li class="highlight">
-            <a href={data.href} class="thumbnail-container">
+            <a href={base + data.href} class="thumbnail-container">
               <img class="thumbnail" src={thumbnail} alt={employer} />
               <!-- svelte-ignore a11y-missing-attribute -->
               <img class="arrow" src="/images/thumbnail-arrow.svg" />

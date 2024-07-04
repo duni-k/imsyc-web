@@ -1,5 +1,6 @@
 <script lang="ts">
   import "../app.css"
+  import { base } from "$app/paths"
 
   import Flipcard from "$lib/Flipcard.svelte"
   import Link from "$lib/Link.svelte"
@@ -57,7 +58,7 @@
   <div class="nav-container">
     <nav class="navbar primary-palette">
       <div class="name">
-        <a href="/" style="">STELLA HSIAO</a>
+        <a href={base + "/"} style="">STELLA HSIAO</a>
       </div>
       <button
         class="workHandle"
@@ -76,7 +77,9 @@
       class="carousel-container{showMyWork ? '--show' : ''} secondary-palette"
     >
       <nav class="navbar secondary-palette">
-        <a class="name" href="/" on:click={myworkClickHandler}>STELLA HSIAO</a>
+        <a class="name" href={base + "/"} on:click={myworkClickHandler}
+          >STELLA HSIAO</a
+        >
         <button
           class="workHandle"
           on:click={myworkClickHandler}
