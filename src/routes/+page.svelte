@@ -123,23 +123,24 @@
   }
 
   .highlights {
-    list-style-type: none;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    height: 96px;
+    grid-template-columns: repeat(4, 96px);
     justify-content: end;
-    gap: 5%;
+    list-style-type: none;
+    gap: 14px;
   }
 
   .highlight {
     position: relative;
-    width: 96px;
-    height: 96px;
+    width: 100%;
+    height: 100%;
   }
 
   .thumbnail-container {
     position: relative;
-    width: 96px;
-    height: 96px;
+    width: 100%;
+    height: 100%;
   }
 
   .thumbnail {
