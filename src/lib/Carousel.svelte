@@ -1,6 +1,6 @@
-<script lang="ts">
-  export let title: string
-  export let images: { src: string; alt: string }[]
+<script>
+  export let title
+  export let images
   export let backgroundColor = "#222222"
   export let duration = 12
   export let color = "#fff"

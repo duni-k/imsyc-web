@@ -1,8 +1,5 @@
-<script lang="ts">
-  export let content: {
-    domains: string[]
-    bread: string[]
-  }
+<script>
+  export let content
   export let minHeight = 353
 </script>
 

@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
   import "../app.css"
 
   import Flipcard from "$lib/Flipcard.svelte"
@@ -8,7 +8,7 @@
   import { onMount } from "svelte"
   import { fade } from "svelte/transition"
 
-  let showMyWork: boolean = false
+  let showMyWork = false
   let currentItem = getRandomWorkItem()
 
   export let data
