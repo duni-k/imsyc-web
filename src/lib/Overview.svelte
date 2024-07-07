@@ -26,18 +26,16 @@
 
 <style>
   #section-overview {
-    display: grid;
-    column-gap: 64px;
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     line-height: 40px;
     & > div:first-child {
       padding-left: var(--padding);
-      grid-column-start: 1;
-      grid-column-end: 2;
-      width: 425px;
+      padding-right: var(--padding);
+      min-width: fit-content;
     }
     & > div ~ div {
-      grid-column-start: 3;
       width: 1098px;
     }
     & p {

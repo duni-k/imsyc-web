@@ -100,10 +100,11 @@ h2 {
 }
 
 .workpage-container {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  overflow: hidden;
   row-gap: 64px;
+  overflow: hidden;
 
   &>img {
     width: 100vw;
@@ -140,12 +141,14 @@ h2 {
 .overview-container-right {
   display: flex;
   flex-direction: column;
+  max-width: 1098px;
   padding-left: var(--padding);
+  padding-right: var(--padding);
   gap: 64px;
 }
 
 .overview-container-right {
-  padding-left: calc(100% - 1098px - var(--padding));
+  padding-left: max(var(--padding), calc(100% - 1098px));
 }
 
 .overview-headline {
@@ -154,8 +157,9 @@ h2 {
 }
 
 .overview {
+  display: flex;
   line-height: 40px;
-  width: 1098px;
+  max-width: 1098px;
 }
 
 .dual {
