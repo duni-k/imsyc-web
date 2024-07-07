@@ -1,5 +1,6 @@
 [
-  {"name": "Nextbank",
+  {
+    "name": "Nextbank",
     "isHighlight": true,
     "year": 2020,
     "bread": "Established the core design value, interaction guidelines and shipped the product within three months.",

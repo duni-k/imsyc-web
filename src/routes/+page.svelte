@@ -48,7 +48,7 @@
               <img class="arrow" src="/images/thumbnail-arrow.svg" />
             </a>
             <div class="flipcard">
-              <Flipcard {data} title={employer} />
+              <Flipcard {data} click={null} />
             </div>
           </li>
         {/each}
