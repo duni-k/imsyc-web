@@ -40,7 +40,7 @@
           {@const thumbnail =
             "/images/" + data.href + "/" + data.href + "-thumbnail.png"}
           <li class="highlight">
-            <a href={base + data.href} class="thumbnail-container">
+            <a href={data.href} class="thumbnail-container">
               <img class="thumbnail" src={thumbnail} alt={employer} />
               <!-- svelte-ignore a11y-missing-attribute -->
               <img class="arrow" src="/images/thumbnail-arrow.svg" />
