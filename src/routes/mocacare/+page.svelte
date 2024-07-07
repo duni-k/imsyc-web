@@ -210,4 +210,8 @@
   .mute-button:hover {
     transform: scale(1.2);
   }
+
+  .dual {
+    height: 918px;
+  }
 </style>
