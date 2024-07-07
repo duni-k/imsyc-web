@@ -16,13 +16,7 @@
       <p id="branch">{data.branch}</p>
       <img src={flipCardImage} alt={data.name} />
     </div>
-    <div
-      id="back"
-      class="bread-text"
-      style={blur
-        ? "background-color: transparent; backdrop-filter: blur(15px) brightness(80%); border: 0;"
-        : "background-color: var(--background-secondary); color: var(--text-secondary);"}
-    >
+    <div id="back" class="bread-text {blur ? 'blur' : 'noblur'}">
       <p>{data.role}</p>
       <p><br />{data.bread}</p>
       <p><br />{data.country}</p>
@@ -61,6 +55,9 @@
     border-radius: var(--border-radius);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    /* backface fix for firefox */
+    transform: rotate(0deg);
 
     text-transform: uppercase;
   }
@@ -98,8 +95,6 @@
     flex-direction: column;
     justify-content: center;
     transform: rotateY(180deg);
-    border-radius: var(--border-radius);
-    border: 2px solid var(--background-primary);
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -118,5 +113,17 @@
     position: absolute;
     bottom: 0;
     right: 0;
+  }
+
+  .blur {
+    background-color: transparent;
+    border: 0;
+    backdrop-filter: blur(15px) brightness(80%);
+  }
+  .noblur {
+    background-color: var(--background-secondary);
+    color: var(--text-secondary);
+    border-radius: var(--border-radius);
+    border: 2px solid var(--background-primary);
   }
 </style>
