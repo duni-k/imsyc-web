@@ -1,6 +1,5 @@
 <script lang="ts">
   import "../app.css"
-  import { base } from "$app/paths"
 
   import Flipcard from "$lib/Flipcard.svelte"
   import Link from "$lib/Link.svelte"
@@ -28,18 +27,19 @@
 
   onMount(() => {
     let carousel = document.getElementById("carousel")
+    if (carousel === null) {
+      return
+    }
 
     carousel.scrollLeft = carousel.scrollWidth / 2
 
     window.addEventListener("wheel", (e) => {
-      carousel?.scrollBy(e.deltaY, 0)
+      carousel.scrollBy(e.deltaY, 0)
 
-      if (carousel != null) {
-        if (carousel.scrollLeft >= 4175) {
-          carousel.scrollLeft = 1200
-        } else if (carousel.scrollLeft <= 0) {
-          carousel.scrollLeft = carousel.scrollWidth / 2
-        }
+      if (carousel.scrollLeft >= 4175) {
+        carousel.scrollLeft = 1200
+      } else if (carousel.scrollLeft <= 0) {
+        carousel.scrollLeft = carousel.scrollWidth / 2
       }
     })
   })
@@ -58,7 +58,7 @@
   <div class="nav-container">
     <nav class="navbar primary-palette">
       <div class="name">
-        <a href={base + "/"} style="">STELLA HSIAO</a>
+        <a href="/" style="">STELLA HSIAO</a>
       </div>
       <button
         class="workHandle"
@@ -77,9 +77,7 @@
       class="carousel-container{showMyWork ? '--show' : ''} secondary-palette"
     >
       <nav class="navbar secondary-palette">
-        <a class="name" href={base + "/"} on:click={myworkClickHandler}
-          >STELLA HSIAO</a
-        >
+        <a class="name" href="/" on:click={myworkClickHandler}>STELLA HSIAO</a>
         <button
           class="workHandle"
           on:click={myworkClickHandler}
@@ -116,12 +114,7 @@
               on:mouseenter={() => (currentItem = data)}
               role="listitem"
             >
-              <Flipcard
-                blur={true}
-                title={data.name}
-                {data}
-                click={myworkClickHandler}
-              />
+              <Flipcard blur={true} {data} click={myworkClickHandler} />
             </div>
           {/each}
         </div>

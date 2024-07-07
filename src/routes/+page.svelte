@@ -1,8 +1,6 @@
 <script>
   import workData from "../data/workData.json"
   import Flipcard from "$lib/Flipcard.svelte"
-
-  import { base } from "$app/paths"
 </script>
 
 <div class="landing primary-palette">
