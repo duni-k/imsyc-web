@@ -59,6 +59,29 @@
     animation-play-state: paused;
   }
 
+  @media only screen and (max-width: 767px) {
+    h2 {
+      text-align: start;
+    }
+
+    .carousel-container {
+      padding: 24px 0 24px 0;
+      height: 175px;
+    }
+    .carousel__inner {
+      display: flex;
+      gap: 14px;
+      height: 150px;
+    }
+
+    .carousel__outer {
+      margin: auto;
+      margin-left: var(--padding);
+      margin-right: var(--padding);
+      overflow: hidden;
+    }
+  }
+
   @keyframes -global-slide-3 {
     10% {
       transform: none;

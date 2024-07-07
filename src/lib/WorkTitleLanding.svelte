@@ -37,4 +37,23 @@
     width: 100%;
     object-fit: cover;
   }
+
+  @media only screen and (max-width: 767px) {
+    #company {
+      font-size: 24px;
+      padding-left: 15px;
+    }
+
+    #year,
+    #subtitle {
+      font-size: 10px;
+    }
+    #title {
+      height: 30vh;
+    }
+
+    #title-image {
+      height: 360px;
+    }
+  }
 </style>

@@ -44,6 +44,42 @@
     })
   })
 
+  // hiding scrollbar when scrolling down, showing it when
+  // scrolling up
+  let scrollY
+  let hideNav = false
+  let lastY = 0
+  let tolerance = 15
+  let offset = 100
+
+  function updateY(y) {
+    const dy = lastY - y
+    lastY = y
+    return hide(y, dy)
+  }
+
+  function hide(y, dy) {
+    // show if at the top of page
+    if (y < offset) {
+      return false
+    }
+
+    // don't change the state unless scroll delta
+    // is above a threshold
+    if (Math.abs(dy) <= tolerance) {
+      return hideNav
+    }
+
+    // if scrolling up, show
+    if (dy < 0) {
+      return true
+    }
+
+    // if scrolling down, hide
+    return false
+  }
+
+  $: hideNav = updateY(scrollY)
   $: inParams = showMyWork ? { duration: 0 } : { duration: 200, delay: 300 }
   $: outParams = showMyWork ? { duration: 0 } : { duration: 200 }
 </script>
@@ -52,10 +88,11 @@
   on:wheel|nonpassive={(e) => {
     if (showMyWork) e.preventDefault()
   }}
+  bind:scrollY
 />
 
 <body>
-  <div class="nav-container">
+  <div class="nav-container" class:hideNav>
     <nav class="navbar primary-palette">
       <div class="name">
         <a href="/" style="">STELLA HSIAO</a>
@@ -68,7 +105,9 @@
             ? "var(--padding);"
             : "calc(var(--padding) - var(--scrollbar-width));")}
       >
-        <Link strokeColor="var(--text-primary)">MY WORK</Link>
+        <Link strokeColor="var(--text-primary)"
+          ><span class="desktop-work-prefix">MY</span> WORK</Link
+        >
       </button>
     </nav>
 
@@ -149,7 +188,6 @@
     font-weight: bold;
     justify-content: space-between;
     background: transparent;
-    margin: 0;
     mix-blend-mode: difference;
   }
 
@@ -161,6 +199,7 @@
   }
 
   .workHandle {
+    padding-right: var(--padding);
     color: inherit;
     font-family: inherit;
     font-weight: inherit;
@@ -222,5 +261,27 @@
     top: 0;
     left: 0;
     transition: opacity;
+  }
+
+  .desktop-work-prefix {
+    display: inline-block;
+  }
+
+  @media only screen and (max-width: 767px) {
+    .workHandle,
+    .name {
+      font-size: 16px;
+    }
+    .desktop-work-prefix {
+      display: none;
+    }
+
+    .nav-container {
+      transition: transform 200ms linear;
+    }
+    .hideNav {
+      transform: translateY(-100px);
+      transition: transform 200ms linear;
+    }
   }
 </style>

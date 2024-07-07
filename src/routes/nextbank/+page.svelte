@@ -24,7 +24,7 @@
   <WorkTitleLanding
     year="2020"
     company="nextbank"
-    subtitle="UI&UX DESIGN / DESIGN SYSTEM / INTERACTION DESIGN"
+    subtitle="Pioneering mobile banking for Gen Z"
     image="/images/nextbank/nextbank-showcase.png"
   />
 
@@ -163,5 +163,17 @@
   }
   .video-bar--bot {
     bottom: 0px;
+  }
+
+  @media only screen and (max-width: 767px) {
+    #showcase-video {
+      height: 175px;
+    }
+    .video-bar--top,
+    .video-bar--bot {
+      width: 100%;
+      position: absolute;
+      height: 12px;
+    }
   }
 </style>
