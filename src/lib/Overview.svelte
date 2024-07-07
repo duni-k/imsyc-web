@@ -45,8 +45,9 @@
     }
   }
   #section-overview h2 {
-    font-family: "Avenir";
     font-weight: lighter;
+    font-family: "Montserrat";
+    font-weight: bold;
     font-size: 24px;
   }
 </style>
