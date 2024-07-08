@@ -41,7 +41,7 @@
   <div id="showcase-video">
     <div class="video-bar--top" />
     <!-- svelte-ignore a11y-media-has-caption -->
-    <video autoplay loop>
+    <video autoplay loop playsinline webkit-playsinline>
       <source src="/media/nextbank.mp4" type="video/mp4" />
     </video>
     <div class="video-bar--bot" />
