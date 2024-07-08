@@ -124,4 +124,20 @@
     border-radius: var(--border-radius);
     border: 2px solid var(--background-primary);
   }
+  
+  @media only screen and (max-width: 767px) {
+    #back p {
+      font-size: 14px;
+    }
+
+    #front #title {
+      top: 8px;
+      font-size: 16px;
+    }
+
+    #front #branch {
+      font-size: 14px;
+      bottom: 16px;
+    }
+  }
 </style>

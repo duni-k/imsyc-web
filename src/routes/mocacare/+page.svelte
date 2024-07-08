@@ -33,7 +33,7 @@
 
   <div id="showcase-video">
     <div>
-      <video autoplay loop muted>
+      <video autoplay loop muted playsinline webkit-playsinline>
         <source src="/media/mocacare.mp4" type="video/mp4" />
       </video>
       <button
@@ -89,6 +89,8 @@
     <video
       autoplay
       loop
+      playsinline
+      webkit-playsinline
       src="https://www.mocacare.com/mocaheart/assets/video/mocaheart_measure_video_demo.webm"
     />
   </div>
@@ -199,9 +201,7 @@
     top: 64px;
     right: 150px;
     background: transparent;
-    padding: 10px;
     border: none;
-    border-radius: 3px;
     font-size: 20px;
     cursor: pointer;
     transition: transform 0.2s;
@@ -213,5 +213,29 @@
 
   .dual {
     height: 918px;
+  }
+
+  
+  @media only screen and (max-width: 767px) {
+    #showcase-video {
+      height: 260px;
+    }
+    #showcase-video > div {
+      padding: 32px 48px 0px 48px;
+      position: relative;
+      width: calc(100% - 96px);
+      height: 200px;
+    }
+
+    #showcase-video > div > video {
+      width: 100%;
+    }
+
+    .mute-button {
+      position: absolute;
+      font-size: 14px;
+      top: 10px;
+      right: 10px;
+    }
   }
 </style>

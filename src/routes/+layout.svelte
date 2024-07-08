@@ -49,7 +49,7 @@
   let scrollY
   let hideNav = false
   let lastY = 0
-  let tolerance = 15
+  let tolerance = 0
   let offset = 100
 
   function updateY(y) {
@@ -100,7 +100,7 @@
       <button
         class="workHandle"
         on:click={myworkClickHandler}
-        style={"margin-right:" +
+        style={"padding-right:" +
           (data.pathname == "/"
             ? "var(--padding);"
             : "calc(var(--padding) - var(--scrollbar-width));")}
@@ -208,7 +208,7 @@
   .name {
     display: flex;
     align-items: center;
-    margin-left: var(--padding);
+    padding-left: var(--padding);
     transition: color 0.5s;
   }
   .name:hover {
@@ -217,7 +217,7 @@
 
   .carousel-container {
     position: fixed;
-    top: 100vh;
+    top: calc(100vh + 100px);
     height: 100vw;
     width: 100%;
     transition: transform 0.8s;
@@ -225,11 +225,11 @@
 
   .carousel-container--show {
     position: absolute;
-    top: 100vh;
+    top: 110vh;
     width: 100%;
     height: 100vh;
     transition: transform 0.6s;
-    transform: translateY(-100vh);
+    transform: translateY(-110vh);
     overflow: hidden;
   }
 
@@ -272,16 +272,29 @@
     .name {
       font-size: 16px;
     }
+
     .desktop-work-prefix {
       display: none;
     }
 
     .nav-container {
+      width: 100%;
       transition: transform 200ms linear;
     }
+
     .hideNav {
       transform: translateY(-100px);
       transition: transform 200ms linear;
+    }
+
+    .carousel__inner {
+      gap: 12px;
+    }
+
+    .carousel-item {
+      width: 250px;
+      height: 350px;
+      border-radius: var(--border-radius);
     }
   }
 </style>

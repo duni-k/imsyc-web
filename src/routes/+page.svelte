@@ -7,7 +7,7 @@
   <div class="motto">
     <h1>
       I CRAFT<br />
-      <span class="popout">HEARTFELT</span><br />
+      <span>HEARTFELT</span><br />
       EXPERIENCE
     </h1>
   </div>
@@ -69,7 +69,6 @@
     font-size: 48px;
     text-align: center;
     text-transform: uppercase;
-
     color: #1d3557;
   }
 
@@ -178,7 +177,7 @@
     }
   }
 
-  .popout {
+  .motto span {
     font-family: "Chango";
     font-size: 128px;
     color: var(--highlight-primary);
@@ -223,5 +222,52 @@
 
   .flipcard:hover {
     display: block;
+  }
+  
+  @media only screen and (max-width: 767px) {
+    .motto {
+      font-size: 16px;
+    }
+    .motto span {
+      font-size: 42px;
+    }
+
+    .footer {
+      flex-direction: column-reverse;
+    }
+
+    .highlights__container {
+      padding: 0;
+      flex-direction: column-reverse;
+      width: 100%;
+    }
+    .highlights {
+      justify-content: space-evenly;
+      height: 48px;
+      grid-template-columns: repeat(4, 48px);
+      gap: 7px;
+      padding-left: var(--padding);
+    }
+    .highlights__title {
+      padding-top: 40px;
+      padding-left: var(--padding);
+      text-align: center;
+    }
+
+    .footer-container__left {
+      width: calc(100vw - 2 * var(--padding));
+      padding-left: var(--padding);
+      padding-right: var(--padding);
+    }
+    .buttons {
+      width: 100%;
+      justify-content: space-between;
+      padding: 0;
+    }
+    .ext-link {
+      width: 16px;
+      height: 16px;
+      padding: 0;
+    }
   }
 </style>

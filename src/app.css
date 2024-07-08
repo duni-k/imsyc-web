@@ -13,6 +13,7 @@
   --highlight-primary: #e63946;
   --highlight-secondary: #fff;
   --inactive-extended: #686868;
+  --line-height: 40px;
   --navbar-height: 100px;
   --padding: 64px;
   --scrollbar-width: 12px;
@@ -66,7 +67,7 @@ main {
 
 p {
   font-family: "Montserrat";
-  line-height: normal;
+  line-height: var(--line-height);
   font-weight: lighter;
   font-size: 24px;
   text-align: justify;
@@ -108,7 +109,7 @@ h2 {
 
   &>img {
     width: 100vw;
-    object-fit: contain;
+    object-fit: scale-down;
   }
 }
 
@@ -130,8 +131,7 @@ h2 {
 }
 
 .summary {
-  line-height: 40px;
-  font-size: 24px;
+  line-height: var(--line-height);
   padding-left: var(--padding);
   padding-right: var(--padding);
   text-align: center;
@@ -158,7 +158,6 @@ h2 {
 
 .overview {
   display: flex;
-  line-height: 40px;
   max-width: 1098px;
 }
 
@@ -174,6 +173,7 @@ h2 {
 }
 
 .list {
+  flex-direction: column;
   font-family: "Montserrat";
   font-weight: lighter;
   font-size: 24px;
@@ -192,13 +192,14 @@ h2 {
 
   &>img {
     width: 100%;
-    object-fit: cover;
   }
 }
 
 @media only screen and (max-width: 767px) {
   :root {
     --padding: 16px;
+    --navbar-height: 75px;
+    --line-height: 17px;
   }
 
   .workpage-container {
@@ -212,22 +213,41 @@ h2 {
   }
 
   p {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .overview-headline {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .overview {
     display: flex;
-    line-height: 17px;
   }
 
   .overview-container-left,
   .overview-container-right {
     gap: 24px;
+  }
+
+  .dual {
+    flex-direction: column;
+    row-gap: 24px;
+
+    &>* {
+      width: 100%;
+    }
+  }
+
+  .list {
+    font-size: 14px;
+    list-style: inside;
+    list-style-type: trad-chinese-informal;
+    padding-bottom: 0;
+
+    &>li {
+      padding-bottom: 0;
+    }
   }
 }
 
