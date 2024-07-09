@@ -69,8 +69,8 @@
     }
     h2 {
       line-height: 17px;
-      font-family: "Avenir";
-      font-weight: lighter;
+      font-family: "Montserrat";
+      font-weight: bold;
       font-size: 12px;
     }
     p {

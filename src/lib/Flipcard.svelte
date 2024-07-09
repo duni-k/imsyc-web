@@ -52,7 +52,8 @@
     height: 100%;
     border-radius: var(--border-radius);
     backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+    /* important supposed fix for safari */
+    -webkit-backface-visibility: hidden !important;
     -moz-backface-visibility: hidden;
     /* backface fix for firefox */
     transform: rotate(0deg);
@@ -74,6 +75,8 @@
   }
 
   #front #title {
+    width: calc(100% - 2 * var(--padding));
+    padding-left: var(--padding);
     font-family: "Syncopate";
     font-weight: normal;
     top: 16px;

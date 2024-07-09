@@ -36,16 +36,16 @@
     window.addEventListener("wheel", (e) => {
       carousel.scrollBy(e.deltaY, 0)
 
-      if (carousel.scrollLeft >= 4175) {
-        carousel.scrollLeft = 1200
+      if (carousel.scrollLeft >= carousel.scrollWidth / 2) {
+        carousel.scrollLeft = 0
       } else if (carousel.scrollLeft <= 0) {
         carousel.scrollLeft = carousel.scrollWidth / 2
       }
     })
   })
 
-  // hiding scrollbar when scrolling down, showing it when
-  // scrolling up
+  // hiding scrollbar when scrolling down,
+  // showing it when scrolling up
   let scrollY
   let hideNav = false
   let lastY = 0
@@ -79,6 +79,8 @@
     return false
   }
 
+  $: transparentNavBar = data.pathname !== "/"
+  $: scrollBarMargin = data.pathname !== "/"
   $: hideNav = updateY(scrollY)
   $: inParams = showMyWork ? { duration: 0 } : { duration: 200, delay: 300 }
   $: outParams = showMyWork ? { duration: 0 } : { duration: 200 }
@@ -93,17 +95,14 @@
 
 <body>
   <div class="nav-container" class:hideNav>
-    <nav class="navbar primary-palette">
+    <nav class="navbar primary-palette" class:transparentNavBar>
       <div class="name">
         <a href="/" style="">STELLA HSIAO</a>
       </div>
       <button
         class="workHandle"
         on:click={myworkClickHandler}
-        style={"padding-right:" +
-          (data.pathname == "/"
-            ? "var(--padding);"
-            : "calc(var(--padding) - var(--scrollbar-width));")}
+        class:scrollBarMargin
       >
         <Link strokeColor="var(--text-primary)"
           ><span class="desktop-work-prefix">MY</span> WORK</Link
@@ -119,11 +118,9 @@
         <a class="name" href="/" on:click={myworkClickHandler}>STELLA HSIAO</a>
         <button
           class="workHandle"
+          class:scrollBarMargin
           on:click={myworkClickHandler}
-          style={"margin-right:" +
-            (data.pathname == "/"
-              ? "var(--padding);"
-              : "calc(var(--padding) - var(--scrollbar-width));")}
+          style="}"
         >
           <Link strokeColor="var(--text-secondary)">CLOSE</Link>
         </button>
@@ -138,16 +135,7 @@
       {/key}
       <div id="carousel">
         <div class="carousel__inner">
-          {#each workData as data (data)}
-            <div
-              class="carousel-item"
-              on:mouseenter={() => (currentItem = data)}
-              role="listitem"
-            >
-              <Flipcard blur={true} {data} click={myworkClickHandler} />
-            </div>
-          {/each}
-          {#each workData as data (data)}
+          {#each workData.concat(workData) as data}
             <div
               class="carousel-item"
               on:mouseenter={() => (currentItem = data)}
@@ -267,10 +255,18 @@
     display: inline-block;
   }
 
+  .scrollBarMargin {
+    margin-right: calc(var(--padding) - var(--scrollbar-width));
+  }
+
   @media only screen and (max-width: 767px) {
     .workHandle,
     .name {
       font-size: 16px;
+    }
+
+    .scrollBarMargin {
+      margin-right: var(--padding);
     }
 
     .desktop-work-prefix {
@@ -289,6 +285,10 @@
 
     .carousel__inner {
       gap: 12px;
+    }
+
+    .transparentNavBar {
+      background: rgba(255, 255, 255, 0.8);
     }
 
     .carousel-item {

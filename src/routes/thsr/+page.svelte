@@ -110,3 +110,11 @@
     duration={11}
   />
 </div>
+
+<style>
+  @media only screen and (max-width: 767px) {
+    .dual > img {
+      height: 200px;
+    }
+  }
+</style>

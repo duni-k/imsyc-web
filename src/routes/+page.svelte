@@ -149,8 +149,8 @@
   }
 
   .highlight:hover .thumbnail {
-    -webkit-filter: brighness(0.5) blur(1px);
-    filter: brightness(0.5) blur(1px);
+    -webkit-filter: brighness(0.5);
+    filter: brightness(0.5);
   }
 
   .arrow {
@@ -223,7 +223,7 @@
   .flipcard:hover {
     display: block;
   }
-  
+
   @media only screen and (max-width: 767px) {
     .motto {
       font-size: 16px;
@@ -233,41 +233,35 @@
     }
 
     .footer {
+      width: calc(100% - 2 * var(--padding));
+      height: 10%;
+      padding: 0 var(--padding) var(--navbar-height) var(--padding);
       flex-direction: column-reverse;
     }
 
     .highlights__container {
-      padding: 0;
-      flex-direction: column-reverse;
+      height: 100%;
       width: 100%;
-    }
-    .highlights {
-      justify-content: space-evenly;
-      height: 48px;
-      grid-template-columns: repeat(4, 48px);
-      gap: 7px;
-      padding-left: var(--padding);
-    }
-    .highlights__title {
-      padding-top: 40px;
-      padding-left: var(--padding);
-      text-align: center;
+      padding: 0;
     }
 
+    .highlights {
+      justify-content: center;
+      grid-template-columns: repeat(4, calc((100% - (3 * 8px)) / 4));
+      gap: calc(var(--padding) / 2);
+    }
+
+    .highlights__title {
+      display: none;
+    }
     .footer-container__left {
-      width: calc(100vw - 2 * var(--padding));
-      padding-left: var(--padding);
-      padding-right: var(--padding);
+      display: none;
     }
-    .buttons {
-      width: 100%;
-      justify-content: space-between;
-      padding: 0;
+    .highlight:hover .flipcard {
+      display: none;
     }
-    .ext-link {
-      width: 16px;
-      height: 16px;
-      padding: 0;
+    .highlight:hover .arrow {
+      display: none;
     }
   }
 </style>
