@@ -52,7 +52,8 @@
     height: 100%;
     border-radius: var(--border-radius);
     backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+    /* important supposed fix for safari */
+    -webkit-backface-visibility: hidden !important;
     -moz-backface-visibility: hidden;
     /* backface fix for firefox */
     transform: rotate(0deg);
@@ -74,6 +75,8 @@
   }
 
   #front #title {
+    width: calc(100% - 2 * var(--padding));
+    padding-left: var(--padding);
     font-family: "Syncopate";
     font-weight: normal;
     top: 16px;
@@ -124,7 +127,7 @@
     border-radius: var(--border-radius);
     border: 2px solid var(--background-primary);
   }
-  
+
   @media only screen and (max-width: 767px) {
     #back p {
       font-size: 14px;
