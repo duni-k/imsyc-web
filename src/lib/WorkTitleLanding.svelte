@@ -38,6 +38,13 @@
     object-fit: cover;
   }
 
+  @media only screen and (min-width: 767px) and (max-width: 1023px) {
+    #company {
+      font-size: 100px;
+      padding-left: 55px;
+    }
+  }
+
   @media only screen and (max-width: 767px) {
     #company {
       font-size: 24px;

@@ -224,6 +224,15 @@
     display: block;
   }
 
+  @media only screen and (min-width: 767px) and (max-width: 1023px) {
+    .motto {
+      font-size: 32px;
+    }
+    .motto span {
+      font-size: 88px;
+    }
+  }
+
   @media only screen and (max-width: 767px) {
     .motto {
       font-size: 16px;
@@ -247,8 +256,8 @@
 
     .highlights {
       justify-content: center;
-      grid-template-columns: repeat(4, calc((100% - (3 * 8px)) / 4));
-      gap: calc(var(--padding) / 2);
+      grid-template-columns: repeat(4, calc((80% - (3 * 8px)) / 4));
+      gap: calc(var(--padding));
     }
 
     .highlights__title {

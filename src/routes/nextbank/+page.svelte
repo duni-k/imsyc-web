@@ -42,7 +42,7 @@
     <div class="video-bar--top" />
     <!-- svelte-ignore a11y-media-has-caption -->
     <video autoplay loop playsinline webkit-playsinline>
-      <source src="/media/nextbank.mp4" type="video/mp4" />
+      <source src="/media/nextbank.webm" type="video/webm" />
     </video>
     <div class="video-bar--bot" />
   </div>

@@ -34,7 +34,7 @@
   <div id="showcase-video">
     <div>
       <video autoplay loop muted playsinline webkit-playsinline>
-        <source src="/media/mocacare.mp4" type="video/mp4" />
+        <source src="/media/mocacare.webm" type="video/webm" />
       </video>
       <button
         class="mute-button"

@@ -53,17 +53,19 @@
     font-weight: bold;
     font-size: 24px;
   }
-
-  @media only screen and (max-width: 767px) {
+  @media only screen and (max-width: 1023px) {
     #section-overview {
       flex-direction: column;
       height: fit-content;
     }
+
     #section-overview > div ~ div {
       padding-top: 24px;
       width: calc(100% - 2 * var(--padding));
     }
+  }
 
+  @media only screen and (max-width: 767px) {
     h1 {
       font-size: 14px;
     }
