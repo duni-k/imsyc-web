@@ -27,17 +27,15 @@
 <style>
   #section-overview {
     display: flex;
+    width: 100% - 2 * var(--padding);
     justify-content: space-between;
-    width: 100%;
     line-height: 40px;
     padding-left: var(--padding);
     padding-right: var(--padding);
-    & > div:first-child {
-      min-width: fit-content;
-    }
-    & > div ~ div {
-      width: 1098px;
-    }
+  }
+
+  #section-overview > div:last-child {
+      width: 60%;
   }
 
   p {
@@ -55,6 +53,7 @@
   }
   @media only screen and (max-width: 1023px) {
     #section-overview {
+      display: flex;
       flex-direction: column;
       height: fit-content;
     }

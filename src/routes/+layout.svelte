@@ -102,7 +102,6 @@
       <button
         class="workHandle"
         on:click={myworkClickHandler}
-        class:scrollBarMargin
       >
         <Link strokeColor="var(--text-primary)"
           ><span class="desktop-work-prefix">MY</span> WORK</Link
@@ -187,6 +186,7 @@
   }
 
   .workHandle {
+    text-align: end;
     padding-right: var(--padding);
     color: inherit;
     font-family: inherit;
@@ -263,10 +263,6 @@
     .workHandle,
     .name {
       font-size: 16px;
-    }
-
-    .scrollBarMargin {
-      margin-right: var(--padding);
     }
 
     .desktop-work-prefix {
