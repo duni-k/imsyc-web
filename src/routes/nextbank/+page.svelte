@@ -1,5 +1,5 @@
 <script lang="ts">
-  import WorkTitleLanding from "$lib/WorkTitleLanding.svelte";
+  import WorkTitleLanding from "$lib/WorkTitleLanding.svelte"
   import Overview from "$lib/Overview.svelte"
   import Carousel from "$lib/Carousel.svelte"
 
@@ -140,7 +140,7 @@
     </p>
   </div>
 
-  <enhanced:img src="/images/nextbank/nextbank-tail.png" alt="result showcase" />
+  <img src="/images/nextbank/nextbank-tail.png" alt="result showcase" />
 </div>
 
 <style>

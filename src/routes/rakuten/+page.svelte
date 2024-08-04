@@ -4,19 +4,19 @@
   import WorkTitleLanding from "$lib/WorkTitleLanding.svelte"
 
   let firstCarousel = [
-    { src: "/images/rakuten/rakuten-carousel1-1.png?enhanced", alt: "placeholder" },
-    { src: "/images/rakuten/rakuten-carousel1-2.png?enhanced", alt: "placeholder" },
-    { src: "/images/rakuten/rakuten-carousel1-3.png?enhanced", alt: "placeholder" }
+    { src: "/images/rakuten/rakuten-carousel1-1.png", alt: "placeholder" },
+    { src: "/images/rakuten/rakuten-carousel1-2.png", alt: "placeholder" },
+    { src: "/images/rakuten/rakuten-carousel1-3.png", alt: "placeholder" }
   ]
   let secondCarousel = [
-    { src: "/images/rakuten/rakuten-carousel2-1.png?enhanced", alt: "placeholder" },
-    { src: "/images/rakuten/rakuten-carousel2-2.png?enhanced", alt: "placeholder" },
-    { src: "/images/rakuten/rakuten-carousel2-3.png?enhanced", alt: "placeholder" }
+    { src: "/images/rakuten/rakuten-carousel2-1.png", alt: "placeholder" },
+    { src: "/images/rakuten/rakuten-carousel2-2.png", alt: "placeholder" },
+    { src: "/images/rakuten/rakuten-carousel2-3.png", alt: "placeholder" }
   ]
   let thirdCarousel = [
-    { src: "/images/rakuten/rakuten-carousel3-1.png?enhanced", alt: "placeholder" },
-    { src: "/images/rakuten/rakuten-carousel3-2.png?enhanced", alt: "placeholder" },
-    { src: "/images/rakuten/rakuten-carousel3-3.png?enhanced", alt: "placeholder" }
+    { src: "/images/rakuten/rakuten-carousel3-1.png", alt: "placeholder" },
+    { src: "/images/rakuten/rakuten-carousel3-2.png", alt: "placeholder" },
+    { src: "/images/rakuten/rakuten-carousel3-3.png", alt: "placeholder" }
   ]
 </script>
 
@@ -25,7 +25,7 @@
     year="2017"
     company="Rakuten"
     subtitle="The No.1 Japanese online marketplace in Taiwan"
-    image="/images/rakuten/rakuten-showcase.png?enhanced"
+    image="/images/rakuten/rakuten-showcase.png"
   />
 
   <Overview

@@ -20,7 +20,7 @@
       ).length}"
     >
       {#each images as { src, alt }}
-        <enhanced:img {src} {alt} />
+        <img {src} {alt} />
       {/each}
     </div>
   </div>

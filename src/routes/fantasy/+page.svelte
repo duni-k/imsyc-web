@@ -51,7 +51,7 @@
     </p>
   </div>
 
-  <enhanced:img src="/images/fantasy/fantasy-strategy.png" alt="strategy concept" />
+  <img src="/images/fantasy/fantasy-strategy.png" alt="strategy concept" />
 
   <h1 class="headline-left">the method</h1>
 
@@ -71,15 +71,13 @@
   </p>
 
   <div class="dual">
-    <enhanced:img
-      src="/images/fantasy/fantasy-dual--left.png?enhanced"
+    <img
+      src="/images/fantasy/fantasy-dual--left.png"
       style="grid-area: left;"
-      alt="worksample"
     />
-    <enhancedimg
-      src="/images/fantasy/fantasy-dual--right.png?enhanced"
+    <img
+      src="/images/fantasy/fantasy-dual--right.png"
       style="grid-area: right;"
-      alt="worksample"
     />
   </div>
 
@@ -107,7 +105,7 @@
     and user needs.
   </p>
 
-  <enhanced:img src="/images/fantasy/fantasy-brandvalue.png" alt="worksample"/>
+  <img src="/images/fantasy/fantasy-brandvalue.png" />
 
   <p class="overview" style="margin: auto;">
     In our second phase, ideation, I led a series of workshops to develop and
@@ -121,15 +119,13 @@
   </p>
 
   <div class="dual">
-    <enhanced:img
-      src="/images/fantasy/fantasy-dual2--left.png?enhanced"
+    <img
+      src="/images/fantasy/fantasy-dual2--left.png"
       style="grid-area: left;"
-      alt="worksample"
     />
-    <enhanced:img
-      src="/images/fantasy/fantasy-dual2--right.png?enhanced"
+    <img
+      src="/images/fantasy/fantasy-dual2--right.png"
       style="grid-area: right;"
-      alt="worksample"
     />
   </div>
 
@@ -150,15 +146,13 @@
   </p>
 
   <div class="dual">
-    <enhanced:img
-      src="/images/fantasy/fantasy-dual3--left.png?enhanced"
+    <img
+      src="/images/fantasy/fantasy-dual3--left.png"
       style="grid-area: left;"
-      alt="worksample"
     />
-    <enhanced:img
-      src="/images/fantasy/fantasy-dual3--right.png?enhanced"
+    <img
+      src="/images/fantasy/fantasy-dual3--right.png"
       style="grid-area: right;"
-      alt="worksample"
     />
   </div>
 

@@ -29,7 +29,7 @@
     }}
   />
 
-  <enhanced:img src="/images/umaji/umaji-interface.png" alt="interface example"/>
+  <img src="/images/umaji/umaji-interface.png" />
 
   <div class="overview-container-left">
     <h2 class="overview-headline">
@@ -96,7 +96,7 @@
     </ol>
   </div>
 
-  <enhanced:img src="/images/umaji/umaji-interface2.png" alt="interface example"/>
+  <img src="/images/umaji/umaji-interface2.png" />
 
   <div class="overview-container-left">
     <p class="overview">
@@ -124,7 +124,7 @@
     </p>
   </div>
 
-  <enhanced:img src="/images/umaji/umaji-objective.png" alt="worksample"/>
+  <img src="/images/umaji/umaji-objective.png" />
 
   <div class="overview-container-left" style="margin: auto;">
     <p class="overview">
@@ -140,7 +140,7 @@
     </p>
   </div>
   <div id="tail">
-    <enhanced:img src="/images/umaji/umaji-tail.png" alt="worksample"/>
-    <enhanced:img src="/images/umaji/umaji-tail2.png" alt="worksample"/>
+    <img src="/images/umaji/umaji-tail.png" />
+    <img src="/images/umaji/umaji-tail2.png" />
   </div>
 </div>
