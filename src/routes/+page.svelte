@@ -41,9 +41,9 @@
             "/images/" + data.href + "/" + data.href + "-thumbnail.png"}
           <li class="highlight">
             <a href={data.href} class="thumbnail-container">
-              <img class="thumbnail" src={thumbnail} alt={employer} />
+              <img class="thumbnail" src={thumbnail} alt="workhighlight thumbnail" />
               <!-- svelte-ignore a11y-missing-attribute -->
-              <img class="arrow" src="/images/thumbnail-arrow.svg" />
+              <img class="arrow" src="/images/thumbnail-arrow.svg" aria-hidden="true"/>
             </a>
             <div class="flipcard">
               <Flipcard {data} click={null} />

@@ -18,7 +18,8 @@
       <p>{data.role}</p>
       <p><br />{data.bread}</p>
       <p><br />{data.country}</p>
-      <img src="/images/card-corner.svg" />
+      <!-- svelte-ignore a11y-missing-attribute -->
+      <img src="/images/card-corner.svg" aria-hidden="true"/>
     </div>
   </a>
 </div>
