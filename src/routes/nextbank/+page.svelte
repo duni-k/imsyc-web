@@ -1,22 +1,22 @@
-<script lang="ts">
+<script>
   import WorkTitleLanding from "$lib/WorkTitleLanding.svelte"
   import Overview from "$lib/Overview.svelte"
   import Carousel from "$lib/Carousel.svelte"
 
   let firstCarousel = [
-    { src: "/images/nextbank/nextbank-carousel1-1.png", alt: "placeholder" },
-    { src: "/images/nextbank/nextbank-carousel1-2.png", alt: "placeholder" },
-    { src: "/images/nextbank/nextbank-carousel1-3.png", alt: "placeholder" },
-    { src: "/images/nextbank/nextbank-carousel1-4.png", alt: "placeholder" },
-    { src: "/images/nextbank/nextbank-carousel1-5.png", alt: "placeholder" }
+    { src: "/images/nextbank/nextbank-carousel1-1.png", alt: "worksample" },
+    { src: "/images/nextbank/nextbank-carousel1-2.png", alt: "worksample" },
+    { src: "/images/nextbank/nextbank-carousel1-3.png", alt: "worksample" },
+    { src: "/images/nextbank/nextbank-carousel1-4.png", alt: "worksample" },
+    { src: "/images/nextbank/nextbank-carousel1-5.png", alt: "worksample" }
   ]
 
   let secondCarousel = [
-    { src: "/images/nextbank/nextbank-carousel2-1.png", alt: "placeholder" },
-    { src: "/images/nextbank/nextbank-carousel2-2.png", alt: "placeholder" },
-    { src: "/images/nextbank/nextbank-carousel2-3.png", alt: "placeholder" },
-    { src: "/images/nextbank/nextbank-carousel2-4.png", alt: "placeholder" },
-    { src: "/images/nextbank/nextbank-carousel2-5.png", alt: "placeholder" }
+    { src: "/images/nextbank/nextbank-carousel2-1.png", alt: "worksample" },
+    { src: "/images/nextbank/nextbank-carousel2-2.png", alt: "worksample" },
+    { src: "/images/nextbank/nextbank-carousel2-3.png", alt: "worksample" },
+    { src: "/images/nextbank/nextbank-carousel2-4.png", alt: "worksample" },
+    { src: "/images/nextbank/nextbank-carousel2-5.png", alt: "worksample" }
   ]
 </script>
 

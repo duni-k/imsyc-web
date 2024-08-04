@@ -4,19 +4,19 @@
   import WorkTitleLanding from "$lib/WorkTitleLanding.svelte"
 
   let firstCarousel = [
-    { src: "/images/rakuten/rakuten-carousel1-1.png", alt: "placeholder" },
-    { src: "/images/rakuten/rakuten-carousel1-2.png", alt: "placeholder" },
-    { src: "/images/rakuten/rakuten-carousel1-3.png", alt: "placeholder" }
+    { src: "/images/rakuten/rakuten-carousel1-1.png", alt: "worksample" },
+    { src: "/images/rakuten/rakuten-carousel1-2.png", alt: "worksample" },
+    { src: "/images/rakuten/rakuten-carousel1-3.png", alt: "worksample" }
   ]
   let secondCarousel = [
-    { src: "/images/rakuten/rakuten-carousel2-1.png", alt: "placeholder" },
-    { src: "/images/rakuten/rakuten-carousel2-2.png", alt: "placeholder" },
-    { src: "/images/rakuten/rakuten-carousel2-3.png", alt: "placeholder" }
+    { src: "/images/rakuten/rakuten-carousel2-1.png", alt: "worksample" },
+    { src: "/images/rakuten/rakuten-carousel2-2.png", alt: "worksample" },
+    { src: "/images/rakuten/rakuten-carousel2-3.png", alt: "worksample" }
   ]
   let thirdCarousel = [
-    { src: "/images/rakuten/rakuten-carousel3-1.png", alt: "placeholder" },
-    { src: "/images/rakuten/rakuten-carousel3-2.png", alt: "placeholder" },
-    { src: "/images/rakuten/rakuten-carousel3-3.png", alt: "placeholder" }
+    { src: "/images/rakuten/rakuten-carousel3-1.png", alt: "worksample" },
+    { src: "/images/rakuten/rakuten-carousel3-2.png", alt: "worksample" },
+    { src: "/images/rakuten/rakuten-carousel3-3.png", alt: "worksample" }
   ]
 </script>
 

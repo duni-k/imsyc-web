@@ -4,15 +4,15 @@
   import WorkTitleLanding from "$lib/WorkTitleLanding.svelte"
 
   let firstCarousel = [
-    { src: "/images/thsr/thsr-carousel1-1.png", alt: "placeholder" },
-    { src: "/images/thsr/thsr-carousel1-2.png", alt: "placeholder" },
-    { src: "/images/thsr/thsr-carousel1-3.png", alt: "placeholder" }
+    { src: "/images/thsr/thsr-carousel1-1.png", alt: "worksample" },
+    { src: "/images/thsr/thsr-carousel1-2.png", alt: "worksample" },
+    { src: "/images/thsr/thsr-carousel1-3.png", alt: "worksample" }
   ]
   let secondCarousel = [
-    { src: "/images/thsr/thsr-carousel2-1.png", alt: "placeholder" },
-    { src: "/images/thsr/thsr-carousel2-2.png", alt: "placeholder" },
-    { src: "/images/thsr/thsr-carousel2-3.png", alt: "placeholder" },
-    { src: "/images/thsr/thsr-carousel2-4.png", alt: "placeholder" }
+    { src: "/images/thsr/thsr-carousel2-1.png", alt: "worksample" },
+    { src: "/images/thsr/thsr-carousel2-2.png", alt: "worksample" },
+    { src: "/images/thsr/thsr-carousel2-3.png", alt: "worksample" },
+    { src: "/images/thsr/thsr-carousel2-4.png", alt: "worksample" }
   ]
 </script>
 
@@ -35,8 +35,8 @@
   />
 
   <div class="dual">
-    <img src="/images/thsr/thsr-dual--left.png" />
-    <img src="/images/thsr/thsr-dual--right.png" />
+    <img src="/images/thsr/thsr-dual--left.png" alt="worksample"/>
+    <img src="/images/thsr/thsr-dual--right.png" alt="worksample"/>
   </div>
 
   <h1 class="headline-left">persona & journey</h1>

@@ -4,11 +4,11 @@
   import Carousel from "$lib/Carousel.svelte"
 
   let carouselImages = [
-    { src: "/images/fantasy/fantasy-carousel1-1.png", alt: "placeholder" },
-    { src: "/images/fantasy/fantasy-carousel1-2.png", alt: "placeholder" },
-    { src: "/images/fantasy/fantasy-carousel1-3.png", alt: "placeholder" },
-    { src: "/images/fantasy/fantasy-carousel1-4.png", alt: "placeholder" },
-    { src: "/images/fantasy/fantasy-carousel1-5.png", alt: "placeholder" }
+    { src: "/images/fantasy/fantasy-carousel1-1.png", alt: "worksample" },
+    { src: "/images/fantasy/fantasy-carousel1-2.png", alt: "worksample" },
+    { src: "/images/fantasy/fantasy-carousel1-3.png", alt: "worksample" },
+    { src: "/images/fantasy/fantasy-carousel1-4.png", alt: "worksample" },
+    { src: "/images/fantasy/fantasy-carousel1-5.png", alt: "worksample" }
   ]
 </script>
 
@@ -74,10 +74,12 @@
     <img
       src="/images/fantasy/fantasy-dual--left.png"
       style="grid-area: left;"
+      alt="work sample"
     />
     <img
       src="/images/fantasy/fantasy-dual--right.png"
       style="grid-area: right;"
+      alt="work sample"
     />
   </div>
 
@@ -105,7 +107,7 @@
     and user needs.
   </p>
 
-  <img src="/images/fantasy/fantasy-brandvalue.png" />
+  <img src="/images/fantasy/fantasy-brandvalue.png" alt="brandvalue"/>
 
   <p class="overview" style="margin: auto;">
     In our second phase, ideation, I led a series of workshops to develop and
@@ -122,14 +124,16 @@
     <img
       src="/images/fantasy/fantasy-dual2--left.png"
       style="grid-area: left;"
+      alt="work sample"
     />
     <img
       src="/images/fantasy/fantasy-dual2--right.png"
       style="grid-area: right;"
+      alt="work sample"
     />
   </div>
 
-  <p class="overview" style="margin: auto;">
+  <p class="overview" style="margin: auto; padding: 0 var(--padding) 0 var(--padding);">
     We then generated a wide range of ideas for features and interactions
     through brainstorming, sketching, and other ideation techniques. Rapid
     prototyping allowed us to test these ideas with real users, iteratively
@@ -137,7 +141,10 @@
     with the Honor team to ensure our concepts aligned with their strategic
     goals and brand vision. Regular check-ins and reviews kept everyone on the
     same page and ensured our ideas were feasible and aligned with the project
-    timeline. By the end of this phase, we had high-fidelity prototypes
+    timeline.
+    <br/>
+    <br/>
+    By the end of this phase, we had high-fidelity prototypes
     showcasing key features of the new Honor operating system, along with
     detailed design specifications and guidelines for a consistent,
     user-friendly final product. As the lead experience expert, I facilitated
@@ -149,10 +156,12 @@
     <img
       src="/images/fantasy/fantasy-dual3--left.png"
       style="grid-area: left;"
+      alt="work sample"
     />
     <img
       src="/images/fantasy/fantasy-dual3--right.png"
       style="grid-area: right;"
+      alt="work sample"
     />
   </div>
 

@@ -27,14 +27,11 @@
 
   onMount(() => {
     let carousel = document.getElementById("carousel")
-    if (carousel === null) {
-      return
-    }
 
     carousel.scrollLeft = carousel.scrollWidth / 2
 
     window.addEventListener("wheel", (e) => {
-      carousel.scrollBy(e.deltaY, 0)
+        carousel.scrollBy(e.deltaY, 0);
 
       if (carousel.scrollLeft >= carousel.scrollWidth / 2) {
         carousel.scrollLeft = 0
@@ -87,63 +84,62 @@
 </script>
 
 <svelte:window
-  on:wheel|nonpassive={(e) => {
-    if (showMyWork) e.preventDefault()
-  }}
+  on:dragover|nonpassive={(e) => {if (showMyWork) e.preventDefault()}}
+  on:touchemove|nonpassive={(e) => {if (showMyWork) e.preventDefault()}}
+  on:drag|nonpassive={(e) => {if (showMyWork) e.preventDefault()}}
+  on:wheel|nonpassive={(e) => {if (showMyWork) e.preventDefault()}}
   bind:scrollY
 />
 
 <body>
-  <div class="nav-container" class:hideNav>
-    <nav class="navbar primary-palette" class:transparentNavBar>
-      <div class="name">
-        <a href="/" style="">STELLA HSIAO</a>
-      </div>
-      <button
-        class="workHandle"
-        on:click={myworkClickHandler}
+  <nav class="navbar secondary-palette" class:transparentNavBar class:hideNav>
+    <div class="name">
+      <a href="/" style="">STELLA HSIAO</a>
+    </div>
+    <button
+      class="workHandle"
+      on:click={myworkClickHandler}
+    >
+      <Link strokeColor="var(--text-primary)"
+        ><span class="desktop-work-prefix">MY</span> WORK</Link
       >
-        <Link strokeColor="var(--text-primary)"
-          ><span class="desktop-work-prefix">MY</span> WORK</Link
-        >
-      </button>
-    </nav>
+    </button>
+  </nav>
 
     <!-- absolute position -->
-    <div
-      class="carousel-container{showMyWork ? '--show' : ''} secondary-palette"
-    >
-      <nav class="navbar secondary-palette">
-        <a class="name" href="/" on:click={myworkClickHandler}>STELLA HSIAO</a>
-        <button
-          class="workHandle"
-          class:scrollBarMargin
-          on:click={myworkClickHandler}
-          style="}"
-        >
-          <Link strokeColor="var(--text-secondary)">CLOSE</Link>
-        </button>
-      </nav>
-      {#key carouselBackground}
-        <img
-          class="carousel-background"
-          src={carouselBackground}
-          alt="carousel background"
-          transition:fade={{ duration: 600 }}
-        />
-      {/key}
-      <div id="carousel">
-        <div class="carousel__inner">
-          {#each workData.concat(workData) as data}
-            <div
-              class="carousel-item"
-              on:mouseenter={() => (currentItem = data)}
-              role="listitem"
-            >
-              <Flipcard blur={true} {data} click={myworkClickHandler} />
-            </div>
-          {/each}
-        </div>
+  <div
+    class="carousel-container{showMyWork ? '--show' : ''} secondary-palette"
+  >
+    <nav class="navbar--alt">
+      <a class="name" href="/" on:click={myworkClickHandler}>STELLA HSIAO</a>
+      <button
+        class="workHandle"
+        class:scrollBarMargin
+        on:click={myworkClickHandler}
+        style="}"
+      >
+        <Link strokeColor="var(--text-secondary)">CLOSE</Link>
+      </button>
+    </nav>
+    {#key carouselBackground}
+      <img
+        class="carousel-background"
+        src={carouselBackground}
+        alt="carousel background"
+        transition:fade={{ duration: 600 }}
+      />
+    {/key}
+    <div id="carousel">
+      <div class="carousel__inner">
+        {#each workData.concat(workData) as data}
+          <div
+            class="carousel-item"
+            on:mouseenter={() => (currentItem = data)}
+            role="listitem"
+          >
+            <Flipcard blur={true} {data} click={myworkClickHandler} />
+          </div>
+        {/each}
       </div>
     </div>
   </div>
@@ -158,15 +154,15 @@
 <style>
   #page-content {
     position: relative;
-    z-index: 1;
-  }
-  .nav-container {
-    position: fixed;
-    z-index: 2;
-    width: 100%;
   }
 
   .navbar {
+    position: fixed;
+  }
+
+  .navbar,
+  .navbar--alt {
+    z-index: 98;
     width: 100%;
     height: var(--navbar-height);
     display: flex;
@@ -182,6 +178,7 @@
   .name {
     color: inherit;
     display: inline-block;
+    mix-blend-mode: difference;
     font-size: 24px;
   }
 
@@ -203,6 +200,11 @@
     color: var(--highlight-primary);
   }
 
+  .carousel-container,
+  .carousel-container--show {
+    z-index: 99;
+  }
+
   .carousel-container {
     position: fixed;
     top: calc(100vh + 100px);
@@ -217,7 +219,7 @@
     width: 100%;
     height: 100vh;
     transition: transform 0.6s;
-    transform: translateY(-110vh);
+    transform: translate3d(0, -110vh, 0);
     overflow: hidden;
   }
 
@@ -275,7 +277,7 @@
     }
 
     .hideNav {
-      transform: translateY(-100px);
+      transform: translate3d(0,-100px,0);
       transition: transform 200ms linear;
     }
 

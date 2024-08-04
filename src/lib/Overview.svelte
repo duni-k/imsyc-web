@@ -58,9 +58,9 @@
       height: fit-content;
     }
 
-    #section-overview > div ~ div {
+    #section-overview > div:last-child {
       padding-top: 24px;
-      width: calc(100% - 2 * var(--padding));
+      width: 100%;
     }
   }
 
