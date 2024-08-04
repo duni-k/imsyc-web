@@ -84,7 +84,7 @@
     </p>
   </div>
   <div class="dual">
-    <img src="/images/mocacare/mocacare-dual--left.png" />
+    <enhanced:img src="/images/mocacare/mocacare-dual--left.png" alt="worksample"/>
     <!-- svelte-ignore a11y-media-has-caption -->
     <video
       autoplay
@@ -142,7 +142,7 @@
     </p>
   </div>
 
-  <img src="/images/mocacare/mocacare-personas.png" />
+  <enhanced:img src="/images/mocacare/mocacare-personas.png" alt="personas"/>
 
   <h1 class="headline-right">the solution</h1>
   <p class="summary">
@@ -171,10 +171,10 @@
     routines.
   </p>
   <div id="tail">
-    <img src="/images/mocacare/mocacare-tail.png" />
-    <img src="/images/mocacare/mocacare-tail2.png" />
-    <img src="/images/mocacare/mocacare-tail3.png" />
-    <img src="/images/mocacare/mocacare-tail4.png" />
+    <enhanced:img src="/images/mocacare/mocacare-tail.png" alt="worksample"/>
+    <enhanced:img src="/images/mocacare/mocacare-tail2.png" alt="worksample" />
+    <enhanced:img src="/images/mocacare/mocacare-tail3.png" alt="worksample" />
+    <enhanced:img src="/images/mocacare/mocacare-tail4.png" alt="worksample" />
   </div>
 </div>
 

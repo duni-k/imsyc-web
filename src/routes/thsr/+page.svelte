@@ -35,8 +35,8 @@
   />
 
   <div class="dual">
-    <img src="/images/thsr/thsr-dual--left.png" />
-    <img src="/images/thsr/thsr-dual--right.png" />
+    <enhanced:img src="/images/thsr/thsr-dual--left.png" alt="worksample"/>
+    <enhanced:img src="/images/thsr/thsr-dual--right.png" alt="worksample"/>
   </div>
 
   <h1 class="headline-left">persona & journey</h1>

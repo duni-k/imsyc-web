@@ -22,11 +22,11 @@
   />
 
   <div class="dual">
-    <img
+    <enhanced:img
       src="/images/cobinhood/cobinhood-dual--left.png"
       style="grid-area: left;"
     />
-    <img
+    <enhanced:img
       src="/images/cobinhood/cobinhood-dual--right.png"
       style="grid-area: right;"
     />
@@ -69,7 +69,7 @@
     </p>
   </div>
 
-  <img src="/images/cobinhood/cobinhood-personas.png" />
+  <enhanced:img src="/images/cobinhood/cobinhood-personas.png" />
 
   <div class="overview-container-left">
     <p class="overview">
@@ -91,7 +91,7 @@
     </p>
   </div>
 
-  <img src="/images/cobinhood/cobinhood-personas2.png" />
+  <enhanced:img src="/images/cobinhood/cobinhood-personas2.png" />
 
   <h1 class="headline-left">the result</h1>
 
@@ -115,5 +115,5 @@
     comfortable and engaging.
   </p>
 
-  <img src="/images/cobinhood/cobinhood-tail.png" />
+  <enhanced:img src="/images/cobinhood/cobinhood-tail.png" />
 </div>
