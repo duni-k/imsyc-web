@@ -93,9 +93,7 @@
 
 <body>
   <nav class="navbar secondary-palette" class:transparentNavBar class:hideNav>
-    <div class="name">
-      <a href="/" style="">STELLA HSIAO</a>
-    </div>
+    <a class="name" href="/" style="">STELLA HSIAO</a>
     <button
       class="workHandle"
       on:click={myworkClickHandler}
@@ -178,7 +176,6 @@
   .name {
     color: inherit;
     display: inline-block;
-    mix-blend-mode: difference;
     font-size: 24px;
   }
 
@@ -193,8 +190,8 @@
   .name {
     display: flex;
     align-items: center;
-    padding-left: var(--padding);
     transition: color 0.5s;
+    padding-left: var(--padding);
   }
   .name:hover {
     color: var(--highlight-primary);
@@ -214,7 +211,7 @@
   }
 
   .carousel-container--show {
-    position: absolute;
+    position: fixed;
     top: 110vh;
     width: 100%;
     height: 100vh;
@@ -269,11 +266,6 @@
 
     .desktop-work-prefix {
       display: none;
-    }
-
-    .nav-container {
-      width: 100%;
-      transition: transform 200ms linear;
     }
 
     .hideNav {

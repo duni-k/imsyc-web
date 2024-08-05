@@ -25,10 +25,12 @@
     <img
       src="/images/cobinhood/cobinhood-dual--left.png"
       style="grid-area: left;"
+      alt="work sample"
     />
     <img
       src="/images/cobinhood/cobinhood-dual--right.png"
       style="grid-area: right;"
+      alt="work sample"
     />
   </div>
 

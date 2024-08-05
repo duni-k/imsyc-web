@@ -12,7 +12,6 @@
     </h1>
   </div>
 
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="footer">
     <div class="footer-container__left">
       <div class="buttons">
