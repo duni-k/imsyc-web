@@ -29,7 +29,7 @@
   #company {
     padding-left: 44px;
     font-family: "Syncopate";
-    font-size: 200px;
+    font-size: 20rem;
   }
 
   #title-image {
@@ -40,20 +40,20 @@
 
   @media only screen and (min-width: 767px) and (max-width: 1023px) {
     #company {
-      font-size: 100px;
+      font-size: 10rem;
       padding-left: 55px;
     }
   }
 
   @media only screen and (max-width: 767px) {
     #company {
-      font-size: 24px;
+      font-size: 2.4rem;
       padding-left: 15px;
     }
 
     #year,
     #subtitle {
-      font-size: 10px;
+      font-size: 1rem;
     }
     #title {
       height: 30vh;

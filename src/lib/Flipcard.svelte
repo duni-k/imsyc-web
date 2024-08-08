@@ -80,14 +80,14 @@
     padding-left: var(--padding);
     font-family: "Syncopate";
     font-weight: normal;
-    top: 16px;
-    font-size: 24px;
+    top: 1.6rem;
+    font-size: 2.4rem;
   }
 
   #front #branch {
     font-weight: bold;
-    font-size: 16px;
-    bottom: 16px;
+    font-size: 1.6rem;
+    bottom: 1.6rem;
   }
 
   #back {
@@ -103,7 +103,7 @@
   }
 
   #back p {
-    font-size: 16px;
+    font-size: 1.6rem;
     line-height: 150%;
     text-align: left;
     padding-left: 16px;
@@ -131,17 +131,17 @@
   
   @media only screen and (max-width: 767px) {
     #back p {
-      font-size: 14px;
+      font-size: 1.4rem;
     }
 
     #front #title {
-      top: 8px;
-      font-size: 16px;
+      top: 0.8rem;
+      font-size: 1.6rem;
     }
 
     #front #branch {
-      font-size: 14px;
-      bottom: 16px;
+      font-size: 1.4rem;
+      bottom: 1.6rem;
     }
   }
 </style>

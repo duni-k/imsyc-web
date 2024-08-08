@@ -1,5 +1,6 @@
 :root {
   font-family: Montserrat, Arial, sans-serif;
+  font-size: 62.5%;
   text-rendering: optimizeLegibility;
   cursor: default;
   scroll-behavior: smooth;
@@ -69,7 +70,7 @@ p {
   font-family: "Montserrat";
   line-height: var(--line-height);
   font-weight: lighter;
-  font-size: 24px;
+  font-size: 2.4rem;
   text-align: justify;
   text-indent: 0;
 }
@@ -118,7 +119,7 @@ h2 {
   padding-left: var(--padding);
   padding-right: var(--padding);
   font-family: "Syncopate";
-  font-size: 80px;
+  font-size: 8rem;
   text-transform: uppercase;
 }
 
@@ -153,7 +154,7 @@ h2 {
 
 .overview-headline {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 1.8rem;
 }
 
 .overview {
@@ -176,7 +177,7 @@ h2 {
   flex-direction: column;
   font-family: "Montserrat";
   font-weight: lighter;
-  font-size: 24px;
+  font-size: 2.4rem;
   list-style: inside;
   list-style-type: trad-chinese-informal;
   padding-bottom: 16px;
@@ -208,17 +209,17 @@ h2 {
 
   .headline-right,
   .headline-left {
-    font-size: 24px;
+    font-size: 2.4rem;
     text-align: start;
   }
 
   p {
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 
   .overview-headline {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 1.6rem;
   }
 
   .overview {
@@ -240,7 +241,7 @@ h2 {
   }
 
   .list {
-    font-size: 14px;
+    font-size: 1.4rem;
     list-style: inside;
     list-style-type: trad-chinese-informal;
     padding-bottom: 0;

@@ -202,7 +202,7 @@
     right: 150px;
     background: transparent;
     border: none;
-    font-size: 20px;
+    font-size: 2rem;
     cursor: pointer;
     transition: transform 0.2s;
   }
@@ -233,7 +233,7 @@
 
     .mute-button {
       position: absolute;
-      font-size: 14px;
+      font-size: 1.4rem;
       top: 10px;
       right: 10px;
     }

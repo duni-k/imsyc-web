@@ -49,7 +49,7 @@
   h2 {
     font-family: "Montserrat";
     font-weight: bold;
-    font-size: 24px;
+    font-size: 2.4rem;
   }
   @media only screen and (max-width: 1023px) {
     #section-overview {
@@ -66,16 +66,16 @@
 
   @media only screen and (max-width: 767px) {
     h1 {
-      font-size: 14px;
+      font-size: 1.4rem;
     }
     h2 {
-      line-height: 17px;
+      line-height: 1.7rem;
       font-family: "Montserrat";
       font-weight: bold;
-      font-size: 12px;
+      font-size: 1.2rem;
     }
     p {
-      line-height: 17px;
+      line-height: 1.7rem;
       text-align: justify;
     }
   }

@@ -64,7 +64,7 @@
   .motto {
     margin: auto;
     font-weight: 700;
-    font-size: 48px;
+    font-size: 4.8rem;
     text-align: center;
     text-transform: uppercase;
     color: #1d3557;
@@ -111,7 +111,7 @@
 
   .highlights__title {
     font-family: "Syncopate";
-    font-size: 24px;
+    font-size: 2.4rem;
     font-weight: bold;
     padding-bottom: 19px;
     text-align: end;
@@ -177,7 +177,7 @@
 
   .motto span {
     font-family: "Chango";
-    font-size: 128px;
+    font-size: 12.8rem;
     color: var(--highlight-primary);
   }
 
@@ -224,19 +224,19 @@
 
   @media only screen and (min-width: 767px) and (max-width: 1023px) {
     .motto {
-      font-size: 32px;
+      font-size: 3.2rem;
     }
     .motto span {
-      font-size: 88px;
+      font-size: 8.8rem;
     }
   }
 
   @media only screen and (max-width: 767px) {
     .motto {
-      font-size: 16px;
+      font-size: 1.6rem;
     }
     .motto span {
-      font-size: 42px;
+      font-size: 4.2rem;
     }
 
     .footer {
