@@ -277,10 +277,6 @@
       gap: 12px;
     }
 
-    .transparentNavBar {
-      background: rgba(255, 255, 255, 0.8);
-    }
-
     .carousel-item {
       width: 250px;
       height: 350px;

@@ -41,8 +41,7 @@
           <li class="highlight">
             <a href={data.href} class="thumbnail-container">
               <img class="thumbnail" src={thumbnail} alt="workhighlight thumbnail" />
-              <!-- svelte-ignore a11y-missing-attribute -->
-              <img class="arrow" src="/images/thumbnail-arrow.svg" aria-hidden="true"/>
+              <img class="arrow" src="/images/thumbnail-arrow.svg" alt=""/>
             </a>
             <div class="flipcard">
               <Flipcard {data} click={null} />
