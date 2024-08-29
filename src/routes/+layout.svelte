@@ -1,8 +1,7 @@
 <script>
   import "../app.css"
 
-  import Flipcard from "$lib/Flipcard.svelte"
-  import Link from "$lib/Link.svelte"
+  import { Flipcard, Link } from "$lib/index.js"
   import workData from "../data/workData.json"
 
   import { onMount } from "svelte"
