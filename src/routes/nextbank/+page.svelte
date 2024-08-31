@@ -1,7 +1,5 @@
 <script>
-  import WorkTitleLanding from "$lib/WorkTitleLanding.svelte"
-  import Overview from "$lib/Overview.svelte"
-  import Carousel from "$lib/Carousel.svelte"
+  import { Accordion, Carousel, Overview, WorkTitleLanding} from "$lib/index.js"
 
   let firstCarousel = [
     { src: "/images/nextbank/nextbank-carousel1-1.png", alt: "worksample" },
@@ -17,6 +15,30 @@
     { src: "/images/nextbank/nextbank-carousel2-3.png", alt: "worksample" },
     { src: "/images/nextbank/nextbank-carousel2-4.png", alt: "worksample" },
     { src: "/images/nextbank/nextbank-carousel2-5.png", alt: "worksample" }
+  const accordionData = [
+        {
+          header: "challenge",
+          details: `Designing this project came with three major challenges. First, <b>managing stakeholders</b> was a significant hurdle—convincing a management team deeply rooted in traditional banking to embrace
+                    the innovative concept of a neobank required a fundamental mindset shift.
+                    Second, the project was plagued by <b>vague requirements</b>, with only a
+                    directive for a \"futuristic\" design in yellow and grey, leaving the
+                    team to interpret and visualise an undefined concept. Finally, the
+                    <b>tight three-month deadline</b> added immense pressure, demanding a flawless
+                    execution while ensuring the project's momentum continued even after my
+                    planned departure for higher education.`
+        },
+        {
+          header: "strategy",
+          details: `Full engagement was my key to establishing effective feedback loops across
+                    the company. I aimed to create a culture where every member had a voice in
+                    advocating for the customer, driving a collaborative effort towards a user-
+                    centric solution.<br/><br/>
+                    To navigate the challenge of a newly formed design team, we embraced design 
+                    sprints to run in a fast, transparent, and user-focused way.<br/><br/>
+                    With my departure looming in three months, I proposed a plan focused on
+                    clarity: tackle a challenging yet achievable project by refreshing the
+                    interaction experience and visual design system.`
+        }
   ]
 </script>
 
@@ -47,44 +69,10 @@
     <div class="video-bar--bot" />
   </div>
 
-  <h1 class="headline-right">the challenge</h1>
-  <div class="overview-container-left">
-    <h2 class="overview-headline">vague requirements</h2>
-    <p class="overview">
-      The project had vague requirements, with management only specifying a
-      “futuristic” design with yellow and grey as the desired colours. This lack
-      of specificity made it challenging to design a product that met their
-      expectations, while also ensuring our customers have a similar perception.
-      How to define “futuristic” and make it visually receivable?
-    </p>
-    <h2 class="overview-headline">Stakeholders</h2>
-    <p class="overview">
-      Managing stakeholders was another significant challenge. Most of the
-      management team came from traditional banking backgrounds, which meant
-      that they were accustomed to the traditional way of banking. This made it
-      challenging to sell the concept of a neobank, which required a fundamental
-      shift in how banking services were offered. What are the strategies to
-      build internal buy-in and create a highly adaptable and user-friendly
-      product?
-    </p>
-    <h2 class="overview-headline">unknown competition</h2>
-    <p class="overview">
-      We had to contend with two other neobanks (LINE bank & Rakuten bank)
-      preparing to launch at a similar time, creating intense competition and
-      uncertainty about the market landscape. This made it challenging to design
-      a unique product that would stand out in the crowded market. How can we
-      create a unique neobank product that attracts customers in a crowded and
-      uncertain market?
-    </p>
-    <h2 class="overview-headline">urgent deadline</h2>
-    <p class="overview">
-      The project had a tight timeline of only three months, which put immense
-      pressure on the team to deliver a top-notch product. Adding to the
-      challenge was the fact that I planned to pursue higher education, leaving
-      limited time to design and implement the project. How to ensure the
-      project was completed on time and maintain the team's development momentum
-      even after my departure?
-    </p>
+  <div class="section-container">
+    <div class="accordion-container">
+      <Accordion items={accordionData} />
+    </div>
   </div>
 
   <Carousel
@@ -93,51 +81,12 @@
     images={firstCarousel}
   />
 
-  <h1 class="headline-left">the strategy</h1>
-  <div class="overview-container-right">
-    <h2 class="overview-headline">Total transparency</h2>
-    <p class="overview">
-      It's essential to foster transparency within the team, especially at the
-      management level, in terms of product development and user feedback. This
-      approach ensures that everyone, including managers, is on the same page,
-      understands the user's needs, and is committed to delivering a
-      high-quality product that meets those needs.
-    </p>
-    <h2 class="overview-headline">Fully engaged</h2>
-    <p class="overview">
-      Engagement enables the entire company to establish effective feedback
-      loops, and ensure that everyone has a voice in championing the customer's
-      needs. My goal was to cultivate a culture of user-centric problem-solving,
-      where every member could contribute and collaborate towards delivering a
-      desired user experience.
-    </p>
-  </div>
-
   <Carousel
     title="competitor review"
     backgroundColor={"#222222"}
     images={secondCarousel}
   />
 
-  <div class="overview-container-left">
-    <h2 class="overview-headline">Simple process</h2>
-    <p class="overview">
-      As the design team was both new to the company and new to each other, we
-      sought an efficient process that required minimal training and reduced the
-      potential for misunderstandings. After some consideration, I suggested
-      implementing a series of design sprints to address our needs. This
-      approach proved to be swift, transparent, and consistently prioritised the
-      user experience.
-    </p>
-    <h2 class="overview-headline">Clarity</h2>
-    <p class="overview">
-      Given my impending departure in three months, I proposed focusing on a
-      challenging but achievable project within that timeframe. We chose to
-      refresh the interaction experience and visual design system to enhance the
-      company's brand perception, while leaving secondary service processes
-      untouched, such as a process for applying loans, terminating an account,
-      etc.
-    </p>
   </div>
 
   <img src="/images/nextbank/nextbank-tail.png" alt="result showcase" />
