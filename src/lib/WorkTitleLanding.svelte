@@ -63,9 +63,5 @@
     #title {
       height: 30vh;
     }
-
-    #title-image {
-      height: 360px;
-    }
   }
 </style>
