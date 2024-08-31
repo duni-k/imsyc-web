@@ -3,14 +3,14 @@
   import Overview from "$lib/Overview.svelte"
 </script>
 
-<div class="workpage-container extended-palette">
-  <WorkTitleLanding
-    year="2018"
-    company="cobinhood"
-    subtitle="Unleashing the imagination of personal finance"
-    image="/images/cobinhood/cobinhood-showcase.png"
-  />
+<WorkTitleLanding
+  year="2018"
+  company="cobinhood"
+  subtitle="Unleashing the imagination of personal finance"
+  image="/images/cobinhood/cobinhood-showcase.png"
+/>
 
+<div class="workpage-container extended-palette">
   <Overview
     content={{
       domains: ["Experience design", "Service design"],

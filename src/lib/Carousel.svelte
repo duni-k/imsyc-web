@@ -1,15 +1,15 @@
 <script>
   export let title
   export let images
-  export let backgroundColor = "#222222"
+  export let backgroundColor = "var(--background-seondary)"
   export let duration = 12
-  export let color = "#fff"
+  export let color = "var(--text-secondary)"
 </script>
 
 <div
   class="carousel-container"
   style:color
-  style="background-color: {backgroundColor};"
+  style:backgroundColor
 >
   <div class="carousel__outer">
     <h2>{title}</h2>
@@ -35,7 +35,6 @@
 
   .carousel-container {
     width: 100vw;
-    padding: 128px 0 128px 0;
     height: 484px;
     position: relative;
     overflow: hidden;
@@ -65,7 +64,6 @@
     }
 
     .carousel-container {
-      padding: 24px 0 24px 0;
       height: 175px;
     }
     .carousel__inner {
@@ -76,8 +74,6 @@
 
     .carousel__outer {
       margin: auto;
-      margin-left: var(--padding);
-      margin-right: var(--padding);
       overflow: hidden;
     }
   }

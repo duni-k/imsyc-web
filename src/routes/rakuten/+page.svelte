@@ -20,14 +20,14 @@
   ]
 </script>
 
-<div class="workpage-container">
-  <WorkTitleLanding
-    year="2017"
-    company="Rakuten"
-    subtitle="The No.1 Japanese online marketplace in Taiwan"
-    image="/images/rakuten/rakuten-showcase.png"
-  />
+<WorkTitleLanding
+  year="2017"
+  company="Rakuten"
+  subtitle="The No.1 Japanese online marketplace in Taiwan"
+  image="/images/rakuten/rakuten-showcase.png"
+/>
 
+<div class="workpage-container">
   <Overview
     content={{
       domains: ["Design thinking implementation", "Idea lab"],

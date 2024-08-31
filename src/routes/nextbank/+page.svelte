@@ -1,20 +1,22 @@
 <script>
   import { Accordion, Carousel, Overview, WorkTitleLanding} from "$lib/index.js"
 
-  let firstCarousel = [
-    { src: "/images/nextbank/nextbank-carousel1-1.png", alt: "worksample" },
-    { src: "/images/nextbank/nextbank-carousel1-2.png", alt: "worksample" },
-    { src: "/images/nextbank/nextbank-carousel1-3.png", alt: "worksample" },
-    { src: "/images/nextbank/nextbank-carousel1-4.png", alt: "worksample" },
-    { src: "/images/nextbank/nextbank-carousel1-5.png", alt: "worksample" }
+  const firstCarousel = [
+    { src: "/images/nextbank/nextbank-carousel1-1.png", alt: "competitor review" },
+    { src: "/images/nextbank/nextbank-carousel1-2.png", alt: "competitor review" },
+    { src: "/images/nextbank/nextbank-carousel1-3.png", alt: "competitor review" },
+    { src: "/images/nextbank/nextbank-carousel1-4.png", alt: "competitor review" },
+    { src: "/images/nextbank/nextbank-carousel1-5.png", alt: "competitor review" }
   ]
 
-  let secondCarousel = [
-    { src: "/images/nextbank/nextbank-carousel2-1.png", alt: "worksample" },
-    { src: "/images/nextbank/nextbank-carousel2-2.png", alt: "worksample" },
-    { src: "/images/nextbank/nextbank-carousel2-3.png", alt: "worksample" },
-    { src: "/images/nextbank/nextbank-carousel2-4.png", alt: "worksample" },
-    { src: "/images/nextbank/nextbank-carousel2-5.png", alt: "worksample" }
+  const secondCarousel = [
+    { src: "/images/nextbank/nextbank-carousel2-1.png", alt: "iterations" },
+    { src: "/images/nextbank/nextbank-carousel2-2.png", alt: "iterations" },
+    { src: "/images/nextbank/nextbank-carousel2-3.png", alt: "iterations" },
+    { src: "/images/nextbank/nextbank-carousel2-4.png", alt: "iterations" },
+    { src: "/images/nextbank/nextbank-carousel2-5.png", alt: "iterations" }
+  ]
+
   const accordionData = [
         {
           header: "challenge",
@@ -42,14 +44,14 @@
   ]
 </script>
 
-<div class="workpage-container extended-palette">
-  <WorkTitleLanding
-    year="2020"
-    company="nextbank"
-    subtitle="Pioneering mobile banking for Gen Z"
-    image="/images/nextbank/nextbank-showcase.png"
-  />
+<WorkTitleLanding
+  year="2020"
+  company="nextbank"
+  subtitle="Pioneering mobile banking for Gen Z"
+  image="/images/nextbank/nextbank-showcase.png"
+/>
 
+<div class="workpage-container secondary-palette">
   <Overview
     content={{
       domains: ["Design principle", "Design system", "UI/UX", "Branding"],
@@ -61,12 +63,10 @@
   />
 
   <div id="showcase-video">
-    <div class="video-bar--top" />
     <!-- svelte-ignore a11y-media-has-caption -->
     <video autoplay loop playsinline webkit-playsinline>
-      <source src="/media/nextbank.webm" type="video/webm" />
+      <source src="/media/nextbank.webm" type="video/mp4" />
     </video>
-    <div class="video-bar--bot" />
   </div>
 
   <div class="section-container">
@@ -77,22 +77,45 @@
 
   <Carousel
     title="competitor review"
-    backgroundColor={"#222222"}
     images={firstCarousel}
   />
 
   <Carousel
-    title="competitor review"
-    backgroundColor={"#222222"}
+    title="iterations"
     images={secondCarousel}
   />
 
+  <div class="dual">
+    <img src="/images/nextbank/nextbank-dual-left.png" alt="result showcase"/>
+    <img src="/images/nextbank/nextbank-dual-right.png" alt="result showcase"/>
   </div>
+
+  <h1 class="headline-right" style="text-align: center;">the result</h1>
+  <p class="summary">
+    The design principles of the app focus on four core values.
+    Reliability is emphasized by the selective use of yellow, the brand's energetic color, to highlight crucial elements without creating an overly playful look.
+    Innovation and intrigue are achieved through a frameless, seamless interaction design, with services readily accessible via drag-and-drop without page transitions or loading times.
+    To ensure customers feel in control of their finances, the app prominently displays personal assets, income, outcomes, and recent transactions on the homepage, with user-friendly infographics for asset management.
+    Lastly, empathy and companionship are prioritized by providing easy access to customer service through an AI chatbot or help desk, ensuring a supportive user experience throughout the app.
+  </p>
+  <p class="summary">
+    Overall, my experience at NEXTBANK was very rewarding.
+    It was my first time leading a design team and doing a design sprint, and I also had to act as a 'kind-of' product manager.
+    I wrote all the specifications, communicated with the engineers, controlled the schedule, and did stakeholder management.
+    I learned a lot from this project and am grateful for the opportunity to be involved in product development for a cool brand.
+  </p>
+  <p class="summary">
+    If you are interested in NEXTBANK, check here: https://www.nextbank.com.tw/
+  </p>
 
   <img src="/images/nextbank/nextbank-tail.png" alt="result showcase" />
 </div>
 
 <style>
+  .accordion-container {
+    grid-column: 4 / 8;
+  }
+
   #showcase-video {
     position: relative;
     width: 100%;
@@ -100,29 +123,13 @@
     & > video {
       width: 100%;
       height: 100%;
-      background-color: #222222;
+      background-color: var(--background-secondary);
     }
-  }
-  .video-bar--top,
-  .video-bar--bot {
-    width: 100%;
-    position: absolute;
-    height: 55px;
-    background-color: #222222;
-  }
-  .video-bar--bot {
-    bottom: 0px;
   }
 
   @media only screen and (max-width: 767px) {
     #showcase-video {
       height: 175px;
-    }
-    .video-bar--top,
-    .video-bar--bot {
-      width: 100%;
-      position: absolute;
-      height: 12px;
     }
   }
 </style>

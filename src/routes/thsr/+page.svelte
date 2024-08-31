@@ -16,13 +16,14 @@
   ]
 </script>
 
-<div class="workpage-container">
-  <WorkTitleLanding
-    year="2020"
-    company="thsrail"
-    subtitle="Increasing time table accessibility"
-    image="/images/thsr/thsr-showcase.png"
-  />
+<WorkTitleLanding
+  year="2020"
+  company="thsrail"
+  subtitle="Increasing time table accessibility"
+  image="/images/thsr/thsr-showcase.png"
+/>
+
+<div class="workpage-container extended-palette">
   <Overview
     content={{
       domains: ["Accessibility assessment", "Experience design", "Research"],

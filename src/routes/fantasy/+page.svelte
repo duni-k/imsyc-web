@@ -12,14 +12,14 @@
   ]
 </script>
 
-<div class="workpage-container extended-palette">
-  <WorkTitleLanding
-    year="2021"
-    company="fantasy"
-    subtitle="Creating a premium digital experience"
-    image="/images/fantasy/fantasy-showcase.png"
-  />
+<WorkTitleLanding
+  year="2021"
+  company="fantasy"
+  subtitle="Creating a premium digital experience"
+  image="/images/fantasy/fantasy-showcase.png"
+/>
 
+<div class="workpage-container extended-palette">
   <Overview
     content={{
       domains: [

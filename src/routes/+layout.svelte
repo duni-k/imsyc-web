@@ -90,7 +90,7 @@
   bind:scrollY
 />
 
-<body>
+<body class=secondary-palette>
   <nav class="navbar secondary-palette" class:transparentNavBar class:hideNav>
     <a class="name" href="/" style="">STELLA HSIAO</a>
     <button

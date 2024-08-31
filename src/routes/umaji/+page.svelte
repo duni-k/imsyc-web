@@ -12,13 +12,14 @@
   ]
 </script>
 
-<div class="workpage-container">
-  <WorkTitleLanding
-    year="2020"
-    company="umaji"
-    subtitle="UI&UX design / design system / interaction design"
-    image="/images/umaji/umaji-showcase.png"
-  />
+<WorkTitleLanding
+  year="2020"
+  company="umaji"
+  subtitle="UI&UX design / design system / interaction design"
+  image="/images/umaji/umaji-showcase.png"
+/>
+
+<div class="workpage-container extended-palette">
   <Overview
     content={{
       domains: ["Experience design", "Research", "Service design"],

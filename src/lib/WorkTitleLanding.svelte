@@ -10,6 +10,7 @@
 
 <img id="title-image" src={image} alt="{company} highlight" />
 
+
 <style>
   #title {
     display: flex;
@@ -19,6 +20,7 @@
     font-weight: bold;
     height: 85vh;
     text-transform: uppercase;
+    padding-bottom: var(--padding);
   }
 
   #year,
@@ -33,14 +35,17 @@
   }
 
   #title-image {
-    height: 100%;
+    z-index: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   @media only screen and (min-width: 767px) and (max-width: 1023px) {
     #company {
-      font-size: 10rem;
+      font-size: 6rem;
       padding-left: 55px;
     }
   }

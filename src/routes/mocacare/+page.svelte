@@ -3,19 +3,18 @@
 
   import Overview from "$lib/Overview.svelte"
   import WorkTitleLanding from "$lib/WorkTitleLanding.svelte"
-  import { onMount } from "svelte"
 
   let muted = true
 </script>
 
-<div class="workpage-container">
-  <WorkTitleLanding
-    year="2017"
-    company="MOCACARE"
-    subtitle="Next generation hypertension care"
-    image="/images/mocacare/mocacare-showcase.png"
-  />
+<WorkTitleLanding
+  year="2017"
+  company="MOCACARE"
+  subtitle="Next generation hypertension care"
+  image="/images/mocacare/mocacare-showcase.png"
+/>
 
+<div class="workpage-container extended-palette">
   <Overview
     content={{
       domains: [
@@ -84,7 +83,7 @@
     </p>
   </div>
   <div class="dual">
-    <img src="/images/mocacare/mocacare-dual--left.png" />
+    <img src="/images/mocacare/mocacare-dual--left.png" alt="hypertension meter device"/>
     <!-- svelte-ignore a11y-media-has-caption -->
     <video
       autoplay
@@ -142,7 +141,7 @@
     </p>
   </div>
 
-  <img src="/images/mocacare/mocacare-personas.png" />
+  <img src="/images/mocacare/mocacare-personas.png" alt="personas"/>
 
   <h1 class="headline-right">the solution</h1>
   <p class="summary">
@@ -171,10 +170,10 @@
     routines.
   </p>
   <div id="tail">
-    <img src="/images/mocacare/mocacare-tail.png" />
-    <img src="/images/mocacare/mocacare-tail2.png" />
-    <img src="/images/mocacare/mocacare-tail3.png" />
-    <img src="/images/mocacare/mocacare-tail4.png" />
+    <img src="/images/mocacare/mocacare-tail.png" alt="design result"/>
+    <img src="/images/mocacare/mocacare-tail2.png" alt="design result" />
+    <img src="/images/mocacare/mocacare-tail3.png" alt="design result" />
+    <img src="/images/mocacare/mocacare-tail4.png" alt="design result" />
   </div>
 </div>
 
@@ -198,8 +197,8 @@
 
   .mute-button {
     position: absolute;
-    top: 64px;
-    right: 150px;
+    top: 10px;
+    right: 0;
     background: transparent;
     border: none;
     font-size: 2rem;

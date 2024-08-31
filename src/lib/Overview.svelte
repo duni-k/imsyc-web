@@ -3,8 +3,8 @@
   export let minHeight = 353
 </script>
 
-<div id="section-overview" style="min-height: {minHeight}px;">
-  <div>
+<div class="section-container" style="min-height: {minHeight}px;">
+  <div class="domain">
     <h1>My domain</h1>
     <h2>
       <br class="separator" />
@@ -13,7 +13,7 @@
       {/each}
     </h2>
   </div>
-  <div>
+  <div class="overview">
     <h1>OVERVIEW</h1>
     {#each content.bread as paragraph}
       <p>
@@ -25,17 +25,17 @@
 </div>
 
 <style>
-  #section-overview {
-    display: flex;
-    width: 100% - 2 * var(--padding);
-    justify-content: space-between;
-    line-height: 40px;
-    padding-left: var(--padding);
-    padding-right: var(--padding);
+  .section-container {
+    margin-top: var(--padding);
+  }
+  .domain {
+    grid-column: 1 / 3;
   }
 
-  #section-overview > div:last-child {
-      width: 60%;
+  .overview {
+    display: flex;
+    flex-direction: column;
+    grid-column: 4 / 9;
   }
 
   p {
@@ -51,14 +51,15 @@
     font-weight: bold;
     font-size: 2.4rem;
   }
+
   @media only screen and (max-width: 1023px) {
-    #section-overview {
+    .section-container {
       display: flex;
       flex-direction: column;
       height: fit-content;
     }
 
-    #section-overview > div:last-child {
+    .section-container > div:last-child {
       padding-top: 24px;
       width: 100%;
     }
