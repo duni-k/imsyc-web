@@ -75,7 +75,6 @@
     return false
   }
 
-  $: transparentNavBar = data.pathname !== "/"
   $: scrollBarMargin = data.pathname !== "/"
   $: hideNav = updateY(scrollY)
   $: inParams = showMyWork ? { duration: 0 } : { duration: 200, delay: 300 }
@@ -90,8 +89,8 @@
   bind:scrollY
 />
 
-<body class=secondary-palette>
-  <nav class="navbar secondary-palette" class:transparentNavBar class:hideNav>
+<nav class=secondary-palette>
+  <nav class="navbar" class:hideNav>
     <a class="name" href="/" style="">STELLA HSIAO</a>
     <button
       class="workHandle"
@@ -105,7 +104,7 @@
 
     <!-- absolute position -->
   <div
-    class="carousel-container{showMyWork ? '--show' : ''} secondary-palette"
+    class="carousel-container{showMyWork ? '--show' : ''}"
   >
     <nav class="navbar--alt">
       <a class="name" href="/" on:click={myworkClickHandler}>STELLA HSIAO</a>
@@ -146,11 +145,12 @@
       <slot />
     </div>
   {/key}
-</body>
+</nav>
 
 <style>
   #page-content {
     position: relative;
+    width: 100%;
   }
 
   .navbar {
@@ -169,6 +169,9 @@
     justify-content: space-between;
     background: transparent;
     mix-blend-mode: difference;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
   }
 
   .workHandle,

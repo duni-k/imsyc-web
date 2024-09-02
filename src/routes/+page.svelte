@@ -110,7 +110,7 @@
   }
 
   .highlights__title {
-    font-family: "Syncopate";
+    color: var(--text-primary);
     font-size: 2.4rem;
     font-weight: bold;
     padding-bottom: 19px;
@@ -258,15 +258,9 @@
       gap: calc(var(--padding));
     }
 
-    .highlights__title {
-      display: none;
-    }
-    .footer-container__left {
-      display: none;
-    }
-    .highlight:hover .flipcard {
-      display: none;
-    }
+    .highlights__title,
+    .footer-container__left,
+    .highlight:hover .flipcard,
     .highlight:hover .arrow {
       display: none;
     }
