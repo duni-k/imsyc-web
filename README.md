@@ -1,1 +1,1 @@
-Portfolio website for wifey. Hosted at <imsyc.fyi>. Bit of a WiP.
+Portfolio website for wifey. Hosted at [imsyc.fyi](https://imsyc.fyi). Bit of a WiP.
