@@ -1,6 +1,6 @@
 <script>
   import { slide } from "svelte/transition"
-  import { sine, cubicInOut } from "svelte/easing"
+  import { sineIn, cubicInOut } from "svelte/easing"
 
   export let width
   width = `${width}px`;
@@ -32,7 +32,7 @@
     <div
       class="details"
       style:width
-      in:slide={{delay: 0, duration: 1200, easing: sine, axis: "y" }}
+      in:slide={{delay: 0, duration: 800, easing: sineIn, axis: "y" }}
       out:slide={{delay: 100, duration: 300, easing: cubicInOut, axis: "y" }}
     >
       <slot name="details"></slot>
@@ -84,6 +84,10 @@
 		text-align: left;
     font-family: Montserrat;
     font-size: 1.5rem;
+	}
+
+	.header .text {
+	  grid-column: 2 / 4;
 	}
 
 	.details-container {
