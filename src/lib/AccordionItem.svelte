@@ -1,6 +1,6 @@
 <script>
   import { slide } from "svelte/transition"
-  import { quintOut, cubicInOut } from "svelte/easing"
+  import { sine, cubicInOut } from "svelte/easing"
 
   export let width
   width = `${width}px`;
@@ -32,7 +32,7 @@
     <div
       class="details"
       style:width
-      in:slide={{delay: 0, duration: 800, easing: quintOut, axis: "y" }}
+      in:slide={{delay: 0, duration: 1200, easing: sine, axis: "y" }}
       out:slide={{delay: 100, duration: 300, easing: cubicInOut, axis: "y" }}
     >
       <slot name="details"></slot>
