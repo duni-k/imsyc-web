@@ -57,7 +57,7 @@
   .accordion-button-open,
   .accordion-button-close {
     position: absolute;
-    right: 0;
+    right: 24px;
     width: 29px;
     height: 29px;
     object-fit: contain;
@@ -70,6 +70,7 @@
   }
 
   .header {
+    padding-left: 24px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     color: var(--text-secondary);
@@ -91,6 +92,7 @@
 	}
 
 	.details-container {
+	  padding-left: 24px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 	}
