@@ -5,7 +5,7 @@
   import workData from "../data/workData.json"
 
   import { onMount } from "svelte"
-  import { fade } from "svelte/transition"
+  import { fade, slide } from "svelte/transition"
 
   let showMyWork = false
   let currentItem = getRandomWorkItem()
@@ -77,8 +77,8 @@
 
   $: scrollBarMargin = data.pathname !== "/"
   $: hideNav = updateY(scrollY)
-  $: inParams = showMyWork ? { duration: 0 } : { duration: 200, delay: 300 }
-  $: outParams = showMyWork ? { duration: 0 } : { duration: 200 }
+  $: inParams = showMyWork ? {axis: "y", duration: 0 } : {axis: "x", duration: 200, delay: 300 }
+  $: outParams = showMyWork ? {axis: "y", duration: 0 } : {axis: "x", duration: 200 }
 </script>
 
 <svelte:window
@@ -139,13 +139,13 @@
       </div>
     </div>
   </div>
-
-  {#key data.pathname}
-    <div id="page-content" in:fade={inParams} out:fade={outParams}>
-      <slot />
-    </div>
-  {/key}
 </nav>
+
+{#key data.pathname}
+  <div id="page-content" in:slide={inParams} out:slide={outParams}>
+    <slot />
+  </div>
+{/key}
 
 <style>
   #page-content {
