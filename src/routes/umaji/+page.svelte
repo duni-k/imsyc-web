@@ -1,36 +1,25 @@
-<script>
-  import Carousel from "$lib/Carousel.svelte"
-  import Overview from "$lib/Overview.svelte"
-  import WorkTitleLanding from "$lib/WorkTitleLanding.svelte"
-
-  let carouselImages = [
-    { src: "/images/umaji/umaji-carousel1-1.png", alt: "placeholder" },
-    { src: "/images/umaji/umaji-carousel1-2.png", alt: "placeholder" },
-    { src: "/images/umaji/umaji-carousel1-3.png", alt: "placeholder" },
-    { src: "/images/umaji/umaji-carousel1-4.png", alt: "placeholder" },
-    { src: "/images/umaji/umaji-carousel1-5.png", alt: "placeholder" }
-  ]
-</script>
-
-<WorkTitleLanding
-  year="2020"
-  company="umaji"
-  subtitle="UI&UX design / design system / interaction design"
-  image="/images/umaji/umaji-showcase.png"
-/>
-
 <div class="workpage-container extended-palette">
-  <Overview
-    content={{
-      domains: ["Experience design", "Research", "Service design"],
-      bread: [
-        "The Ministry of Transportation and Communications (MOTC) is a cabinet-level governmental body in Taiwan. In 2020, MOTC launched a project to integrate the online services of Taiwan's public transit systems, including Taiwan High Speed Rail, Taiwan Railways Administration, and Taiwan Bus. Previously, each transportation system operated its own website, but this initiative aimed to consolidate them into a single platform, offering users a seamless experience for their daily commutes.",
-        "Despite the integration efforts, a gap persisted between users' needs and the existing solutions. As a UX researcher, I conducted a series of studies to uncover users' pain points and improve the overall experience of scheduling trips in Taiwan."
-      ]
-    }}
-  />
+  <h1 class="headline-left">umaji</h1>
+  <p class="summary">
+    The Ministry of Transportation and Communications (MOTC) is a cabinet-level
+    governmental body in Taiwan. In 2020, MOTC launched a project to integrate
+    the online services of Taiwan's public transit systems, including Taiwan
+    High Speed Rail, Taiwan Railways Administration, and Taiwan Bus. Previously,
+    each transportation system operated its own website, but this initiative
+    aimed to consolidate them into a single platform, offering users a seamless
+    experience for their daily commutes.
+  </p>
+  <p class="summary">
+    Despite the integration efforts, a gap persisted between users' needs and
+    the existing solutions. As a UX researcher, I conducted a series of studies
+    to uncover users' pain points and improve the overall experience of
+    scheduling trips in Taiwan.
+  </p>
 
-  <img src="/images/umaji/umaji-interface.png" />
+  <img
+    src="/images/umaji/umaji-interface.png"
+    alt="Screenshot of umaji interface"
+  />
 
   <div class="overview-container-left">
     <h2 class="overview-headline">
@@ -49,13 +38,6 @@
       of these personas had different needs and experiences while travelling.
     </p>
   </div>
-
-  <Carousel
-    images={carouselImages}
-    backgroundColor="#fff"
-    color="var(--text-extended)"
-    title="persona overview"
-  />
 
   <div class="overview-container-right">
     <h2 class="overview-headline">Define the user, define the problem</h2>
@@ -97,7 +79,10 @@
     </ol>
   </div>
 
-  <img src="/images/umaji/umaji-interface2.png" />
+  <img
+    src="/images/umaji/umaji-interface2.png"
+    alt="Screenshot of umaji interface 2"
+  />
 
   <div class="overview-container-left">
     <p class="overview">
@@ -125,7 +110,10 @@
     </p>
   </div>
 
-  <img src="/images/umaji/umaji-objective.png" />
+  <img
+    src="/images/umaji/umaji-objective.png"
+    alt="umaji project objectives illustration"
+  />
 
   <div class="overview-container-left" style="margin: auto;">
     <p class="overview">
@@ -141,7 +129,13 @@
     </p>
   </div>
   <div id="tail">
-    <img src="/images/umaji/umaji-tail.png" />
-    <img src="/images/umaji/umaji-tail2.png" />
+    <img
+      src="/images/umaji/umaji-tail.png"
+      alt="umaji project tail graphic 1"
+    />
+    <img
+      src="/images/umaji/umaji-tail2.png"
+      alt="umaji project tail graphic 2"
+    />
   </div>
 </div>

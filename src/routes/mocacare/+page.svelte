@@ -1,34 +1,22 @@
 <script>
   import "@fortawesome/fontawesome-free/css/all.min.css"
 
-  import Overview from "$lib/Overview.svelte"
-  import WorkTitleLanding from "$lib/WorkTitleLanding.svelte"
-
   let muted = $state(true)
 </script>
 
-<WorkTitleLanding
-  year="2017"
-  company="MOCACARE"
-  subtitle="Next generation hypertension care"
-  image="/images/mocacare/mocacare-showcase.png"
-/>
-
 <div class="workpage-container extended-palette">
-  <Overview
-    content={{
-      domains: [
-        "Service design",
-        "Experience design",
-        "Workshopping",
-        "Research"
-      ],
-      bread: [
-        "MOCACARE was aimed to improve the experience when treating hypertension. Our product was a new type of blood pressure monitor, however, since we hadn't received an FDA license, that constrained us from showing blood pressure and claimed as a medical device.",
-        "This project co-operated with doctors, nurses, and nutritionists. Our goal was to find out how can we assist hypertension patients to control their blood pressure without telling them their blood pressure."
-      ]
-    }}
-  />
+  <h1 class="headline-left">mocacare</h1>
+  <p class="summary">
+    MOCACARE was aimed to improve the experience when treating hypertension. Our
+    product was a new type of blood pressure monitor, however, since we hadn't
+    received an FDA license, that constrained us from showing blood pressure and
+    claimed as a medical device.
+  </p>
+  <p class="summary">
+    This project co-operated with doctors, nurses, and nutritionists. Our goal
+    was to find out how can we assist hypertension patients to control their
+    blood pressure without telling them their blood pressure.
+  </p>
 
   <div id="showcase-video">
     <div>
@@ -37,6 +25,7 @@
       </video>
       <button
         class="mute-button"
+        aria-label={muted ? "Unmute video" : "Mute video"}
         onclick={() => {
           muted = !muted
           document.querySelector("video").muted =
@@ -83,15 +72,17 @@
     </p>
   </div>
   <div class="dual">
-    <img src="/images/mocacare/mocacare-dual--left.png" alt="hypertension meter device"/>
-    <!-- svelte-ignore a11y_media_has_caption -->
+    <img
+      src="/images/mocacare/mocacare-dual--left.png"
+      alt="hypertension meter device"
+    />
     <video
       autoplay
       loop
       playsinline
       webkit-playsinline
       src="https://www.mocacare.com/mocaheart/assets/video/mocaheart_measure_video_demo.webm"
-></video>
+    ></video>
   </div>
   <div class="overview-container-left">
     <h2 class="overview-headline">Data management</h2>
@@ -141,7 +132,7 @@
     </p>
   </div>
 
-  <img src="/images/mocacare/mocacare-personas.png" alt="personas"/>
+  <img src="/images/mocacare/mocacare-personas.png" alt="personas" />
 
   <h1 class="headline-right">the solution</h1>
   <p class="summary">
@@ -170,7 +161,7 @@
     routines.
   </p>
   <div id="tail">
-    <img src="/images/mocacare/mocacare-tail.png" alt="design result"/>
+    <img src="/images/mocacare/mocacare-tail.png" alt="design result" />
     <img src="/images/mocacare/mocacare-tail2.png" alt="design result" />
     <img src="/images/mocacare/mocacare-tail3.png" alt="design result" />
     <img src="/images/mocacare/mocacare-tail4.png" alt="design result" />
@@ -214,7 +205,6 @@
     height: 918px;
   }
 
-  
   @media only screen and (max-width: 767px) {
     #showcase-video {
       height: 260px;

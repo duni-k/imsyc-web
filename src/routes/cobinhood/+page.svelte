@@ -1,40 +1,18 @@
-<script>
-  import WorkTitleLanding from "$lib/WorkTitleLanding.svelte"
-  import Overview from "$lib/Overview.svelte"
-</script>
-
-<WorkTitleLanding
-  year="2018"
-  company="cobinhood"
-  subtitle="Unleashing the imagination of personal finance"
-  image="/images/cobinhood/cobinhood-showcase.png"
-/>
-
 <div class="workpage-container extended-palette">
-  <Overview
-    content={{
-      domains: ["Experience design", "Service design"],
-      bread: [
-        "In 2018, COBINHOOD exchange was once ranked global top 8 and profited from its ICO service. However, bitcoin's value suddenly dropped and brought the entire market into depression.",
-        "The company needed a new profitable business strategy to get through the bear market."
-      ]
-    }}
-  />
+  <h1 class="headline-left">cobinhood</h1>
+  <p class="summary">
+    In 2018, COBINHOOD exchange was once ranked global top 8 and profited from
+    its ICO service. However, bitcoin's value suddenly dropped and brought the
+    entire market into depression. The company needed a new profitable business
+    strategy to get through the bear market.
+  </p>
 
   <div class="dual">
-    <img
-      src="/images/cobinhood/cobinhood-dual--left.png"
-      style="grid-area: left;"
-      alt="work sample"
-    />
-    <img
-      src="/images/cobinhood/cobinhood-dual--right.png"
-      style="grid-area: right;"
-      alt="work sample"
-    />
+    <img src="/images/cobinhood/cobinhood-dual--left.png" alt="work sample" />
+    <img src="/images/cobinhood/cobinhood-dual--right.png" alt="work sample" />
   </div>
 
-  <h1 class="headline-left" style="margin:auto">know before you jump</h1>
+  <h1 class="headline-left">know before you jump</h1>
   <div class="overview-container-left" style="margin: auto;">
     <p class="overview" style="padding-bottom: 16px;">
       Through data analysis, I made three significant findings about user
@@ -71,7 +49,7 @@
     </p>
   </div>
 
-  <img src="/images/cobinhood/cobinhood-personas.png" />
+  <img src="/images/cobinhood/cobinhood-personas.png" alt="personas" />
 
   <div class="overview-container-left">
     <p class="overview">
@@ -93,7 +71,7 @@
     </p>
   </div>
 
-  <img src="/images/cobinhood/cobinhood-personas2.png" />
+  <img src="/images/cobinhood/cobinhood-personas2.png" alt="personas 2" />
 
   <h1 class="headline-left">the result</h1>
 
@@ -117,5 +95,5 @@
     comfortable and engaging.
   </p>
 
-  <img src="/images/cobinhood/cobinhood-tail.png" />
+  <img src="/images/cobinhood/cobinhood-tail.png" alt="result" />
 </div>

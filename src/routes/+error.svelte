@@ -1,6 +1,6 @@
 <script>
-  import "../app.css";
-  import { page } from "$app/state";
+  import "../app.css"
+  import { page } from "$app/state"
 </script>
 
 <div class="container primary-palette">
@@ -13,7 +13,7 @@
 <style>
   .container {
     display: flex;
-    height: 100vh; /* Or whatever */
+    height: 100vh;
   }
 
   .error-msg {
