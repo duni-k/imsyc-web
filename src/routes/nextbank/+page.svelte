@@ -63,7 +63,7 @@
   />
 
   <div id="showcase-video">
-    <!-- svelte-ignore a11y-media-has-caption -->
+    <!-- svelte-ignore a11y_media_has_caption -->
     <video autoplay loop playsinline webkit-playsinline>
       <source src="/media/nextbank.webm" type="video/mp4" />
     </video>

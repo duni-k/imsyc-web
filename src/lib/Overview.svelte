@@ -1,6 +1,12 @@
 <script>
-  export let content
-  export let minHeight = 353
+  /**
+   * @typedef {Object} Props
+   * @property {any} content
+   * @property {number} [minHeight]
+   */
+
+  /** @type {Props} */
+  let { content, minHeight = 353 } = $props();
 </script>
 
 <div class="section-container" style="min-height: {minHeight}px;">

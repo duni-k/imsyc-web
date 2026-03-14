@@ -4,7 +4,7 @@
   import Overview from "$lib/Overview.svelte"
   import WorkTitleLanding from "$lib/WorkTitleLanding.svelte"
 
-  let muted = true
+  let muted = $state(true)
 </script>
 
 <WorkTitleLanding
@@ -37,13 +37,13 @@
       </video>
       <button
         class="mute-button"
-        on:click={() => {
+        onclick={() => {
           muted = !muted
           document.querySelector("video").muted =
             !document.querySelector("video").muted
         }}
       >
-        <i class="fas {muted ? 'fa-volume-xmark' : 'fa-volume-high'}" />
+        <i class="fas {muted ? 'fa-volume-xmark' : 'fa-volume-high'}"></i>
       </button>
     </div>
   </div>
@@ -84,14 +84,14 @@
   </div>
   <div class="dual">
     <img src="/images/mocacare/mocacare-dual--left.png" alt="hypertension meter device"/>
-    <!-- svelte-ignore a11y-media-has-caption -->
+    <!-- svelte-ignore a11y_media_has_caption -->
     <video
       autoplay
       loop
       playsinline
       webkit-playsinline
       src="https://www.mocacare.com/mocaheart/assets/video/mocaheart_measure_video_demo.webm"
-    />
+></video>
   </div>
   <div class="overview-container-left">
     <h2 class="overview-headline">Data management</h2>

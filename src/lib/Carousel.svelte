@@ -1,9 +1,21 @@
 <script>
-  export let title
-  export let images
-  export let backgroundColor = "var(--background-seondary)"
-  export let duration = 12
-  export let color = "var(--text-secondary)"
+  /**
+   * @typedef {Object} Props
+   * @property {any} title
+   * @property {any} images
+   * @property {string} [backgroundColor]
+   * @property {number} [duration]
+   * @property {string} [color]
+   */
+
+  /** @type {Props} */
+  let {
+    title,
+    images,
+    backgroundColor = "var(--background-seondary)",
+    duration = 12,
+    color = "var(--text-secondary)"
+  } = $props();
 </script>
 
 <div

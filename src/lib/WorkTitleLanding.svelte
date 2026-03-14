@@ -1,5 +1,10 @@
 <script>
-  export let year, company, subtitle, image
+  let {
+    year,
+    company,
+    subtitle,
+    image
+  } = $props();
 </script>
 
 <div id="title" class="extended-palette">

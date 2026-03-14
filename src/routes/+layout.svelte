@@ -1,4 +1,6 @@
 <script>
+  import { run, nonpassive } from 'svelte/legacy';
+
   import "../app.css"
 
   import { Flipcard, Link } from "$lib/index.js"
@@ -7,10 +9,10 @@
   import { onMount } from "svelte"
   import { fade, slide } from "svelte/transition"
 
-  let showMyWork = false
-  let currentItem = getRandomWorkItem()
+  let showMyWork = $state(false)
+  let currentItem = $state(getRandomWorkItem())
 
-  export let data
+  let { data, children } = $props();
 
   function getRandomWorkItem() {
     return Object.values(workData)[Math.floor(Math.random() * workData.length)]
@@ -21,8 +23,8 @@
     currentItem = getRandomWorkItem()
   }
 
-  $: carouselBackground =
-    "/images/" + currentItem.href + "/" + currentItem.href + "-showcase.png"
+  let carouselBackground =
+    $derived("/images/" + currentItem.href + "/" + currentItem.href + "-showcase.png")
 
   onMount(() => {
     let carousel = document.getElementById("carousel")
@@ -42,8 +44,8 @@
 
   // hiding scrollbar when scrolling down,
   // showing it when scrolling up
-  let scrollY
-  let hideNav = false
+  let scrollY = $state()
+  let hideNav = $state(false)
   let lastY = 0
   let tolerance = 0
   let offset = 100
@@ -75,17 +77,19 @@
     return false
   }
 
-  $: scrollBarMargin = data.pathname !== "/"
-  $: hideNav = updateY(scrollY)
-  $: inParams = showMyWork ? {axis: "y", duration: 0 } : {axis: "x", duration: 200, delay: 300 }
-  $: outParams = showMyWork ? {axis: "y", duration: 0 } : {axis: "x", duration: 200 }
+  let scrollBarMargin = $derived(data.pathname !== "/")
+  run(() => {
+    hideNav = updateY(scrollY)
+  });
+  let inParams = $derived(showMyWork ? {axis: "y", duration: 0 } : {axis: "x", duration: 200, delay: 300 })
+  let outParams = $derived(showMyWork ? {axis: "y", duration: 0 } : {axis: "x", duration: 200 })
 </script>
 
 <svelte:window
-  on:dragover|nonpassive={(e) => {if (showMyWork) e.preventDefault()}}
-  on:touchemove|nonpassive={(e) => {if (showMyWork) e.preventDefault()}}
-  on:drag|nonpassive={(e) => {if (showMyWork) e.preventDefault()}}
-  on:wheel|nonpassive={(e) => {if (showMyWork) e.preventDefault()}}
+  use:nonpassive={['dragover', () => (e) => {if (showMyWork) e.preventDefault()}]}
+  use:nonpassive={['touchemove', () => (e) => {if (showMyWork) e.preventDefault()}]}
+  use:nonpassive={['drag', () => (e) => {if (showMyWork) e.preventDefault()}]}
+  use:nonpassive={['wheel', () => (e) => {if (showMyWork) e.preventDefault()}]}
   bind:scrollY
 />
 
@@ -94,7 +98,7 @@
     <a class="name" href="/" style="">STELLA HSIAO</a>
     <button
       class="workHandle"
-      on:click={myworkClickHandler}
+      onclick={myworkClickHandler}
     >
       <Link strokeColor="var(--text-primary)"
         ><span class="desktop-work-prefix">MY</span> WORK</Link
@@ -107,11 +111,11 @@
     class="carousel-container{showMyWork ? '--show' : ''}"
   >
     <nav class="navbar--alt">
-      <a class="name" href="/" on:click={myworkClickHandler}>STELLA HSIAO</a>
+      <a class="name" href="/" onclick={myworkClickHandler}>STELLA HSIAO</a>
       <button
         class="workHandle"
         class:scrollBarMargin
-        on:click={myworkClickHandler}
+        onclick={myworkClickHandler}
         style="}"
       >
         <Link strokeColor="var(--text-secondary)">CLOSE</Link>
@@ -130,7 +134,7 @@
         {#each workData.concat(workData) as data}
           <div
             class="carousel-item"
-            on:mouseenter={() => (currentItem = data)}
+            onmouseenter={() => (currentItem = data)}
             role="listitem"
           >
             <Flipcard blur={true} {data} click={myworkClickHandler} />
@@ -143,7 +147,7 @@
 
 {#key data.pathname}
   <div id="page-content" in:slide={inParams} out:slide={outParams}>
-    <slot />
+    {@render children?.()}
   </div>
 {/key}
 

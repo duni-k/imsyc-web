@@ -1,13 +1,18 @@
 <script>
-  export let strokeColor;
+  
   /**
-  / @type string | null
-  */
-  export let href = null;
+   * @typedef {Object} Props
+   * @property {any} strokeColor
+   * @property {any} [href] - / @type string | null
+   * @property {import('svelte').Snippet} [children]
+   */
+
+  /** @type {Props} */
+  let { strokeColor, href = null, children } = $props();
 </script>
 
 <a {href} class="wave-link" style="--stroke-color: {strokeColor}">
-  <span><slot /></span>
+  <span>{@render children?.()}</span>
   <svg
     class="link__graphic link__graphic--slide"
     width="300%"
