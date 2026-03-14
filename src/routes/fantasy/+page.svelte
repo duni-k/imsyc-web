@@ -1,52 +1,31 @@
-<script>
-  import Overview from "$lib/Overview.svelte"
-  import WorkTitleLanding from "$lib/WorkTitleLanding.svelte"
-  import Carousel from "$lib/Carousel.svelte"
-
-  let carouselImages = [
-    { src: "/images/fantasy/fantasy-carousel1-1.png", alt: "worksample" },
-    { src: "/images/fantasy/fantasy-carousel1-2.png", alt: "worksample" },
-    { src: "/images/fantasy/fantasy-carousel1-3.png", alt: "worksample" },
-    { src: "/images/fantasy/fantasy-carousel1-4.png", alt: "worksample" },
-    { src: "/images/fantasy/fantasy-carousel1-5.png", alt: "worksample" }
-  ]
-</script>
-
-<WorkTitleLanding
-  year="2021"
-  company="fantasy"
-  subtitle="Creating a premium digital experience"
-  image="/images/fantasy/fantasy-showcase.png"
-/>
-
 <div class="workpage-container extended-palette">
-  <Overview
-    content={{
-      domains: [
-        "Landscape analysis",
-        "Experience design",
-        "Design principle",
-        "Branding"
-      ],
-      bread: [
-        "During my service at Fantasy, I held the position of lead experience expert on a brand revamp project with Honor, a Huawei-owned portfolio brand. In this role, I oversaw critical aspects of the project, such as user research, market research, design trend analysis, strategic roadmapping, and user experience design, with a particular focus on the operating system.",
-        "To ensure the success of the project, I led a team of UX experts from across the US and UK, collaborating with the local team in China to develop the new operating system we were planning. I also conducted workshops to support our Chinese client in understanding and adopting our approach."
-      ]
-    }}
-  />
+  <h1 class="headline-left">fantasy</h1>
+  <p class="summary">
+    During my service at Fantasy, I held the position of lead experience expert
+    on a brand revamp project with Honor, a Huawei-owned portfolio brand. In
+    this role, I oversaw critical aspects of the project, such as user research,
+    market research, design trend analysis, strategic roadmapping, and user
+    experience design, with a particular focus on the operating system.
+  </p>
+  <p class="summary">
+    To ensure the success of the project, I led a team of UX experts from across
+    the US and UK, collaborating with the local team in China to develop the new
+    operating system we were planning. I also conducted workshops to support our
+    Chinese client in understanding and adopting our approach.
+  </p>
 
   <h1 class="headline-right">the client</h1>
   <div class="overview-container-right">
     <h2 class="overview-headline">Honor</h2>
     <p class="overview">
-      Honor" used to be a sub-brand of Huawei but due to the US trade ban, it
-      had to be sold off to a new company. As a result, the brand was facing the
+      Honor used to be a sub-brand of Huawei but due to the US trade ban, it had
+      to be sold off to a new company. As a result, the brand was facing the
       challenge of rebuilding its recognition and reputation in the market as an
       independent brand. With many established players in the smartphone market,
       Honor needed to find a unique value proposition that can differentiate it
       from its competitors and establish a strong market position.
-      <br /><br /> As a consulting agency, our objective was not only to provide
-      a design solution but also to aid the brand in fostering a sustainable culture
+      <br /><br /> As a consulting agency, our objective was not only to provide a
+      design solution but also to aid the brand in fostering a sustainable culture
       that can facilitate Honor's long-term brand development.
     </p>
   </div>
@@ -71,16 +50,8 @@
   </p>
 
   <div class="dual">
-    <img
-      src="/images/fantasy/fantasy-dual--left.png"
-      style="grid-area: left;"
-      alt="work sample"
-    />
-    <img
-      src="/images/fantasy/fantasy-dual--right.png"
-      style="grid-area: right;"
-      alt="work sample"
-    />
+    <img src="/images/fantasy/fantasy-dual--left.png" alt="work sample" />
+    <img src="/images/fantasy/fantasy-dual--right.png" alt="work sample" />
   </div>
 
   <p class="summary">
@@ -95,19 +66,18 @@
     10 scenarios and 15 visual hero apps to deliver Honor's new brand identity.
     <br /><br />
     Additionally, we evaluated brand awareness for Honor and its competitors, examining
-    communication strategies, tone of voice, visual assets, and corporate social
-    responsibility across various media. An online survey with over 1,200 respondents
-    measured customer perceptions of brand values. Using these insights, we conducted
-    three workshops with Honor's stakeholders, involving management, marketing, design,
-    and development teams, to craft a brand that resonated with both customers and
-    stakeholders. I was responsible for constructing research methods, defining goals,
-    consolidating data, facilitating workshops, and client communication. Ultimately,
-    we delivered over 500 slides and held more than 10 workshops, providing valuable
-    insights that guided the project's direction and ensured alignment with client
-    and user needs.
+    communication strategies, tone of voice, visual assets, and corporate social responsibility
+    across various media. An online survey with over 1,200 respondents measured customer
+    perceptions of brand values. Using these insights, we conducted three workshops
+    with Honor's stakeholders, involving management, marketing, design, and development
+    teams, to craft a brand that resonated with both customers and stakeholders. I
+    was responsible for constructing research methods, defining goals, consolidating
+    data, facilitating workshops, and client communication. Ultimately, we delivered
+    over 500 slides and held more than 10 workshops, providing valuable insights that
+    guided the project's direction and ensured alignment with client and user needs.
   </p>
 
-  <img src="/images/fantasy/fantasy-brandvalue.png" alt="brandvalue"/>
+  <img src="/images/fantasy/fantasy-brandvalue.png" alt="brandvalue" />
 
   <p class="overview" style="margin: auto;">
     In our second phase, ideation, I led a series of workshops to develop and
@@ -121,19 +91,14 @@
   </p>
 
   <div class="dual">
-    <img
-      src="/images/fantasy/fantasy-dual2--left.png"
-      style="grid-area: left;"
-      alt="work sample"
-    />
-    <img
-      src="/images/fantasy/fantasy-dual2--right.png"
-      style="grid-area: right;"
-      alt="work sample"
-    />
+    <img src="/images/fantasy/fantasy-dual2--left.png" alt="work sample" />
+    <img src="/images/fantasy/fantasy-dual2--right.png" alt="work sample" />
   </div>
 
-  <p class="overview" style="margin: auto; padding: 0 var(--padding) 0 var(--padding);">
+  <p
+    class="overview"
+    style="margin: auto; padding: 0 var(--padding) 0 var(--padding);"
+  >
     We then generated a wide range of ideas for features and interactions
     through brainstorming, sketching, and other ideation techniques. Rapid
     prototyping allowed us to test these ideas with real users, iteratively
@@ -142,27 +107,19 @@
     goals and brand vision. Regular check-ins and reviews kept everyone on the
     same page and ensured our ideas were feasible and aligned with the project
     timeline.
-    <br/>
-    <br/>
-    By the end of this phase, we had high-fidelity prototypes
-    showcasing key features of the new Honor operating system, along with
-    detailed design specifications and guidelines for a consistent,
-    user-friendly final product. As the lead experience expert, I facilitated
-    the ideation workshops, user testing sessions, and client communications,
-    ensuring our prototypes were both visually appealing and easy to use.
+    <br />
+    <br />
+    By the end of this phase, we had high-fidelity prototypes showcasing key features
+    of the new Honor operating system, along with detailed design specifications and
+    guidelines for a consistent, user-friendly final product. As the lead experience
+    expert, I facilitated the ideation workshops, user testing sessions, and client
+    communications, ensuring our prototypes were both visually appealing and easy
+    to use.
   </p>
 
   <div class="dual">
-    <img
-      src="/images/fantasy/fantasy-dual3--left.png"
-      style="grid-area: left;"
-      alt="work sample"
-    />
-    <img
-      src="/images/fantasy/fantasy-dual3--right.png"
-      style="grid-area: right;"
-      alt="work sample"
-    />
+    <img src="/images/fantasy/fantasy-dual3--left.png" alt="work sample" />
+    <img src="/images/fantasy/fantasy-dual3--right.png" alt="work sample" />
   </div>
 
   <h1 class="headline-left">the result</h1>
@@ -179,13 +136,4 @@
       audience.
     </p>
   </div>
-
-  <Carousel
-    title="concept design"
-    backgroundColor={"#222222"}
-    images={carouselImages}
-  />
 </div>
-
-<style>
-</style>
