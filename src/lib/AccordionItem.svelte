@@ -2,21 +2,36 @@
   import { slide } from "svelte/transition"
   import { sineIn, cubicInOut } from "svelte/easing"
 
-  export let width
   width = `${width}px`;
 
-  export let open = false
+  /**
+   * @typedef {Object} Props
+   * @property {any} width
+   * @property {boolean} [open]
+   * @property {import('svelte').Snippet} [number]
+   * @property {import('svelte').Snippet} [header]
+   * @property {import('svelte').Snippet} [details]
+   */
+
+  /** @type {Props} */
+  let {
+    width = $bindable(),
+    open = $bindable(false),
+    number,
+    header,
+    details
+  } = $props();
 </script>
 
 <div class="accordion" style:width>
   <button
-    on:click={() => (open = !open)}>
+    onclick={() => (open = !open)}>
     <div class="header">
       <div class="bullet">
-        <slot name="number"></slot>
+        {@render number?.()}
       </div>
       <div class="text">
-        <slot name="header"></slot>
+        {@render header?.()}
       </div>
 
       <img
@@ -35,7 +50,7 @@
       in:slide={{delay: 0, duration: 800, easing: sineIn, axis: "y" }}
       out:slide={{delay: 100, duration: 300, easing: cubicInOut, axis: "y" }}
     >
-      <slot name="details"></slot>
+      {@render details?.()}
     </div>
   </div>
 {/if}

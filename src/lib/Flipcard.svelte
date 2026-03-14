@@ -1,14 +1,20 @@
 <script>
-  export let click
-  export let data
-  export let blur = false
+  /**
+   * @typedef {Object} Props
+   * @property {any} click
+   * @property {any} data
+   * @property {boolean} [blur]
+   */
+
+  /** @type {Props} */
+  let { click, data, blur = false } = $props();
 
   let flipCardImage = "/images/" + data.href + "/" + data.href + "-flipcard.png"
 </script>
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div class="card">
-  <a class="card-inner" href={data.href} on:click={click}>
+  <a class="card-inner" href={data.href} onclick={click}>
     <div id="front">
       <p id="title" class="special-text">{data.name}</p>
       <p id="branch">{data.branch}</p>
@@ -18,7 +24,7 @@
       <p>{data.role}</p>
       <p><br />{data.bread}</p>
       <p><br />{data.country}</p>
-      <!-- svelte-ignore a11y-missing-attribute -->
+      <!-- svelte-ignore a11y_missing_attribute -->
       <img src="/images/card-corner.svg" aria-hidden="true"/>
     </div>
   </a>

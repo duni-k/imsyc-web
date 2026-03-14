@@ -1,12 +1,12 @@
 <script>
   import "../app.css";
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
 </script>
 
 <div class="container primary-palette">
   <div class="error-msg">
     <h1>Looks like something went wrong handling your request :(</h1>
-    <p>Error message: {$page.status} {$page.error.message}</p>
+    <p>Error message: {page.status} {page.error.message}</p>
   </div>
 </div>
 
