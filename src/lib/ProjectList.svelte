@@ -39,10 +39,62 @@
       active = workData.find((p) => p.href === slug) ?? null
     }
 
+    let snapTimeout: ReturnType<typeof setTimeout>
+    let scrollVelocity = 0
+    let scrollRaf = 0
+    let isScrolling = false
+    const SNAP_DELAY = 200
+    const SNAP_DURATION = 600
+    const FRICTION = 0.95
+
+    const snapToNearest = () => {
+      const cardHeight = listEl.clientHeight
+      const scrollPos = listEl.scrollTop
+      const nearest = Math.round(scrollPos / cardHeight) * cardHeight
+
+      if (Math.abs(scrollPos - nearest) < 5) return
+
+      const start = scrollPos
+      const distance = nearest - start
+      const startTime = performance.now()
+
+      const animate = (now: number) => {
+        if (isScrolling) return
+        const elapsed = now - startTime
+        const t = Math.min(elapsed / SNAP_DURATION, 1)
+        const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+        listEl.scrollTop = start + distance * ease
+        if (t < 1) requestAnimationFrame(animate)
+      }
+
+      requestAnimationFrame(animate)
+    }
+
+    const scheduleSnap = () => {
+      clearTimeout(snapTimeout)
+      snapTimeout = setTimeout(snapToNearest, SNAP_DELAY)
+    }
+
+    const smoothScroll = () => {
+      listEl.scrollTop += scrollVelocity
+      scrollVelocity *= FRICTION
+      if (Math.abs(scrollVelocity) > 0.5) {
+        scrollRaf = requestAnimationFrame(smoothScroll)
+      } else {
+        scrollVelocity = 0
+        isScrolling = false
+        scheduleSnap()
+      }
+    }
+
     const onWheel = (e: WheelEvent) => {
       if (!active && listEl) {
         e.preventDefault()
-        listEl.scrollBy({ top: e.deltaY * 12 })
+        scrollVelocity += e.deltaY * 0.8
+        isScrolling = true
+        clearTimeout(snapTimeout)
+        cancelAnimationFrame(scrollRaf)
+        scrollRaf = requestAnimationFrame(smoothScroll)
       }
     }
 
@@ -50,6 +102,8 @@
     listEl.addEventListener("wheel", onWheel, { passive: false })
 
     return () => {
+      clearTimeout(snapTimeout)
+      cancelAnimationFrame(scrollRaf)
       window.removeEventListener("popstate", onPopState)
       listEl.removeEventListener("wheel", onWheel)
     }
@@ -77,10 +131,8 @@
   .list {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100dvh;
     overflow-y: auto;
-    scroll-snap-type: y proximity;
-    scroll-behavior: smooth;
   }
 
   .card-slot {

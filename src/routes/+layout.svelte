@@ -168,11 +168,6 @@
     font-size: 4rem;
   }
 
-  .nav-btn:hover {
-    transition: color 0.5s;
-    color: var(--text-secondary);
-  }
-
   .name {
     font-family: "Technor";
     font-weight: 900;
@@ -237,7 +232,7 @@
     justify-self: right;
     font-family: "Satoshi";
     font-weight: 400;
-    font-size: 2rem;
+    font-size: var(--font-menu);
     opacity: 0;
     animation: fadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
@@ -255,7 +250,7 @@
     justify-content: space-between;
     align-items: baseline;
     font-family: "Satoshi";
-    font-size: 2rem;
+    font-size: var(--font-menu);
     color: var(--text-secondary);
     text-decoration: none;
     transition: opacity 0.2s;
@@ -278,7 +273,7 @@
 
   .menu-footer {
     position: absolute;
-    width: 100vh;
+    width: 100%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -316,21 +311,16 @@
   @media only screen and (max-width: 768px) {
     .menu-content {
       padding: 0 16px;
-      gap: 32px;
+      gap: var(--gap-menu);
     }
 
     .bio {
-      font-size: 1.4rem;
       text-align: center;
     }
 
     .projects {
       min-width: auto;
       width: 100%;
-    }
-
-    .project-item {
-      font-size: 1.6rem;
     }
   }
 
@@ -340,13 +330,6 @@
     }
     to {
       opacity: 1;
-    }
-  }
-
-  @keyframes fadeSlideIn {
-    to {
-      opacity: 1;
-      transform: translateY(0);
     }
   }
 

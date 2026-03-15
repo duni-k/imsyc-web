@@ -22,6 +22,13 @@
   --text-extended: #2f2e2e;
   --text-primary: #303d3a;
   --text-secondary: #e6e2df;
+  --font-display: 10rem;
+  --font-heading: 4rem;
+  --font-card: 3.8rem;
+  --font-body: 2.5rem;
+  --font-menu: 2rem;
+  --font-label: 1.2rem;
+  --gap-menu: 64px;
 }
 
 * {
@@ -67,9 +74,16 @@ h2 {
 
 @media only screen and (max-width: 767px) {
   :root {
-    --padding: 16px;
-    --navbar-height: 75px;
-    --line-height: 17px;
+    --padding: 8px;
+    --navbar-height: 50px;
+    --line-height: 16px;
+    --font-display: 4rem;
+    --font-heading: 2.4rem;
+    --font-card: 2.5rem;
+    --font-body: 1.2rem;
+    --font-menu: 1.4rem;
+    --font-label: 1rem;
+    --gap-menu: 32px;
   }
 }
 
