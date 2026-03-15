@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte"
 
   let { text, baseDelay = 0, staggerDelay = 30 } = $props()
 
   const chars = $derived(text.split(""))
-  let el
+  let el: HTMLSpanElement
   let visible = $state(false)
 
   onMount(() => {

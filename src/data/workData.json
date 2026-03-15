@@ -4,28 +4,38 @@
     "href": "hm",
     "country": "Sweden",
     "industry": "Fashion",
-    "index": "01"
+    "index": "01",
+    "description": "Transforming H&M to a premium fashion brand.",
+    "role": "Permanent in-house designer",
+    "tags": ["UIUX", "UX Research"]
   },
   {
     "name": "Nextbank",
     "href": "nextbank",
     "country": "Taiwan",
     "industry": "Finance",
-    "index": "02"
+    "index": "02",
+    "description": "NEXTBANK is a Taiwanese neobank that sought to create a novel financial service experience.",
+    "role": "Permanent in-house designer",
+    "tags": ["UIUX", "Design System", "Animation & Motion design"]
   },
   {
     "name": "Honor Flow UI",
     "href": "honor",
     "country": "UK",
-    "industry": "Mobile OS",
-    "index": "03"
+    "index": "03",
+    "description": "Redefined a unique value proposition and support Honor in establishing a sustainable brand culture for long-term growth.",
+    "role": "Contract designer",
+    "tags": ["UIUX", "Branding", "Market Analysis"]
   },
   {
     "name": "Cobinhood",
     "href": "cobinhood",
-    "role": "UX Design",
     "country": "Taiwan",
     "industry": "Blockchain",
-    "index": "04"
+    "index": "04",
+    "description": "CONBINHOOD was the leading cryptocurrency trading platform in Taiwan and won the 2018 Red Dot Design Award.",
+    "role": "Permanent in-house designer",
+    "tags": ["UIUX", "Research", "Market Analysis"]
   }
 ]

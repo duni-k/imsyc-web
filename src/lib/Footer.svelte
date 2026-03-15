@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte"
   import LetterReveal from "$lib/LetterReveal.svelte"
 
-  let { baseDelay = 0, background, foreground } = $props()
+  let { baseDelay = 0, background = "var(--background-primary)", foreground = "var(--text-primary)" } = $props()
 
-  let footer
+  let footer: HTMLElement
   let visible = $state(false)
 
   onMount(() => {
@@ -42,7 +42,7 @@
     <LetterReveal
       text="Stella Hsiao"
       baseDelay={baseDelay + 300}
-      staggerDelay="60"
+      staggerDelay={60}
     />
   </div>
 </footer>
