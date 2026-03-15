@@ -1,10 +1,21 @@
-<script>
+<script lang="ts">
   import "../app.css"
+  import { onNavigate } from "$app/navigation"
   import workData from "../data/workData.json"
   import Footer from "$lib/Footer.svelte"
   import LetterReveal from "$lib/LetterReveal.svelte"
 
   let { children } = $props()
+
+  onNavigate((navigation) => {
+    if (!document.startViewTransition) return
+    return new Promise((resolve) => {
+      document.startViewTransition(async () => {
+        resolve()
+        await navigation.complete
+      })
+    })
+  })
 
   const PROJECT_STEP = 80
   const STAGGER = 30

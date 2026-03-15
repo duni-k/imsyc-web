@@ -1,44 +1,51 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte"
   import LetterReveal from "$lib/LetterReveal.svelte"
 
-  let { img, index, name } = $props()
+  let { img, index, name, href } = $props()
 
   let flipped = $derived(index % 2 === 0)
-  let card
+  let card: HTMLAnchorElement
   let imgY = $state(0)
 
   onMount(() => {
+    const scroller = card.closest(".list") ?? window
     const onScroll = () => {
       const rect = card.getBoundingClientRect()
       const offset = rect.top + rect.height / 2 - window.innerHeight / 2
       imgY = -offset * 0.3
     }
 
-    window.addEventListener("scroll", onScroll, { passive: true })
+    scroller.addEventListener("scroll", onScroll, { passive: true })
     onScroll()
-    return () => window.removeEventListener("scroll", onScroll)
+    return () => scroller.removeEventListener("scroll", onScroll)
   })
 </script>
 
-<div class="card" class:flipped bind:this={card}>
-  <div class="img-container">
+<a class="card" class:flipped bind:this={card} href="/{href}">
+  <div class="img-container" style="view-transition-name: project-img-{href}">
     <img src={img} alt={name} style="transform: translateY({imgY}px)" />
   </div>
-  <div class="info">
+  <div class="info" style="view-transition-name: project-info-{href}">
     <span class="index"><LetterReveal text={String(index)} /></span>
     <span class="name"
       ><LetterReveal text={name} baseDelay={String(index).length * 30} /></span
     >
   </div>
-</div>
+</a>
 
 <style>
+  a.card {
+    display: block;
+    text-decoration: none;
+  }
+
   .card {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    height: 100vh;
     flex-shrink: 0;
+    scroll-snap-align: start;
     background-color: var(--background-primary);
     overflow: hidden;
   }

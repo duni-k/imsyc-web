@@ -3,13 +3,14 @@
   text-rendering: optimizeLegibility;
   font-size: 62.5%;
   cursor: default;
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
   caret-color: transparent;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: none;
   --background-primary: #fff;
   --background-secondary: #000;
+  --background-extended: #e6e2df;
   --border-radius: 8px;
   --highlight-primary: #e63946;
   --highlight-secondary: #fff;
@@ -66,6 +67,12 @@ h2 {
     --navbar-height: 75px;
     --line-height: 17px;
   }
+}
+
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @font-face {
