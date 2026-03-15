@@ -1,21 +1,21 @@
 <script lang="ts">
   import "../app.css"
-  import { onNavigate } from "$app/navigation"
+  import { page } from "$app/state"
   import workData from "../data/workData.json"
   import Footer from "$lib/Footer.svelte"
   import LetterReveal from "$lib/LetterReveal.svelte"
 
   let { children } = $props()
 
-  onNavigate((navigation) => {
-    if (!document.startViewTransition) return
-    return new Promise((resolve) => {
-      document.startViewTransition(async () => {
-        resolve()
-        await navigation.complete
-      })
-    })
-  })
+  let cursorX = $state(0)
+  let cursorY = $state(0)
+  let overLink = $state(false)
+
+  function onMouseMove(e: MouseEvent) {
+    cursorX = e.clientX
+    cursorY = e.clientY
+    overLink = (e.target as HTMLElement).closest("a") !== null
+  }
 
   const PROJECT_STEP = 80
   const STAGGER = 30
@@ -44,6 +44,22 @@
       menuState = "idle"
     }
   }
+
+  let touchStartX = 0
+  let touchStartY = 0
+
+  function onTouchStart(e: TouchEvent) {
+    touchStartX = e.touches[0].clientX
+    touchStartY = e.touches[0].clientY
+  }
+
+  function onTouchEnd(e: TouchEvent) {
+    const dx = e.changedTouches[0].clientX - touchStartX
+    const dy = e.changedTouches[0].clientY - touchStartY
+    const swipedUp = dy < -80 && Math.abs(dy) > Math.abs(dx)
+    const swipedRight = dx > 80 && Math.abs(dx) > Math.abs(dy)
+    if (swipedUp || swipedRight) closeMenu()
+  }
 </script>
 
 <nav class="navbar">
@@ -65,7 +81,23 @@
     class:sweep-stay={menuState === "open"}
     class:sweep-out={menuState === "sweeping-out"}
     onanimationend={onSweepEnd}
+    onmousemove={onMouseMove}
+    ontouchstart={onTouchStart}
+    ontouchend={onTouchEnd}
+    onclick={closeMenu}
+    onkeydown={(e) => e.key === "Escape" && closeMenu()}
+    role="button"
+    tabindex="-1"
   >
+    <div
+      class="custom-cursor"
+      class:hidden={overLink}
+      style="left: {cursorX}px; top: {cursorY}px"
+    >
+      <span class="cursor-x">✕</span>
+      <span class="cursor-label">close</span>
+    </div>
+
     {#if menuState === "open"}
       <div class="menu">
         <div class="menu-content">
@@ -76,7 +108,10 @@
               <a
                 href="/{project.href}"
                 class="project-item"
-                onclick={closeMenu}
+                onclick={(e) => {
+                  e.stopPropagation()
+                  closeMenu()
+                }}
               >
                 <span class="year">
                   <LetterReveal
@@ -94,14 +129,6 @@
               </a>
             {/each}
           </div>
-
-          <button
-            class="close"
-            onclick={closeMenu}
-            style="nav-btn animation-delay: {listEndDelay + 50}ms"
-          >
-            CLOSE
-          </button>
         </div>
 
         <div class="menu-footer">
@@ -116,7 +143,9 @@
   </div>
 {/if}
 
-{@render children?.()}
+{#key page.url.pathname}
+  {@render children?.()}
+{/key}
 
 <style>
   .navbar {
@@ -139,10 +168,9 @@
     font-size: 4rem;
   }
 
-  .nav-btn:hover,
-  .close:hover {
+  .nav-btn:hover {
     transition: color 0.5s;
-    color: var(--highlight-primary);
+    color: var(--text-secondary);
   }
 
   .name {
@@ -164,6 +192,15 @@
     padding-top: calc(var(--navbar-height) + var(--padding));
     background-color: var(--background-secondary);
     will-change: transform;
+    cursor: none;
+  }
+
+  .sweep :global(a) {
+    cursor: pointer;
+  }
+
+  .custom-cursor.hidden {
+    opacity: 0;
   }
 
   .sweep-in {
@@ -195,11 +232,12 @@
   }
 
   .bio {
-    max-width: 30vh;
+    max-width: 40vh;
     text-align: right;
     justify-self: right;
     font-family: "Satoshi";
     font-weight: 400;
+    font-size: 2rem;
     opacity: 0;
     animation: fadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
@@ -238,7 +276,7 @@
     display: inline-flex;
   }
 
-.menu-footer {
+  .menu-footer {
     position: absolute;
     width: 100vh;
     bottom: 0;
@@ -247,17 +285,32 @@
     padding: 0 var(--padding) var(--padding);
   }
 
-  .close {
+  .custom-cursor {
+    position: fixed;
+    z-index: 60;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transform: translate(-50%, -50%);
+  }
+
+  .cursor-x {
     font-family: "Satoshi";
-    font-size: 1.6rem;
-    font-weight: 900;
+    font-size: 2.4rem;
+    font-weight: 300;
     color: var(--text-secondary);
-    cursor: pointer;
-    margin-top: calc(var(--padding) / 2);
-    align-self: flex-end;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    line-height: 1;
+  }
+
+  .cursor-label {
+    font-family: "Satoshi";
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.6;
   }
 
   @media only screen and (max-width: 768px) {
@@ -279,11 +332,6 @@
     .project-item {
       font-size: 1.6rem;
     }
-
-    .close {
-      bottom: 16px;
-      left: 16px;
-    }
   }
 
   @keyframes fadeIn {
@@ -302,7 +350,7 @@
     }
   }
 
-@keyframes sweepDown {
+  @keyframes sweepDown {
     from {
       transform: translateY(-100%);
     }

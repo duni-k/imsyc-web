@@ -32,6 +32,7 @@
 <style>
   .letter-reveal {
     display: inline-flex;
+    flex-wrap: wrap;
   }
 
   .letter-wrap {
