@@ -1,73 +1,31 @@
 [
   {
-    "name": "Nextbank",
-    "isHighlight": true,
-    "year": 2020,
-    "bread": "Established the core design value, interaction guidelines and shipped the product within three months.",
-    "href": "nextbank",
-    "role": "UI/UX & Branding",
-    "country": "Taiwan",
-    "branch": "Finance"
+    "name": "H&M",
+    "href": "hm",
+    "country": "Sweden",
+    "industry": "Fashion",
+    "index": "01"
   },
   {
-    "name": "Fantasy",
-    "isHighlight": true,
-    "year": 2021,
-    "bread": "A consultant project that aimed to Rebrand and rebuild the whole operating system across devices.",
-    "href": "fantasy",
-    "role": "UX design",
+    "name": "Nextbank",
+    "href": "nextbank",
+    "country": "Taiwan",
+    "industry": "Finance",
+    "index": "02"
+  },
+  {
+    "name": "Honor Flow UI",
+    "href": "honor",
     "country": "UK",
-    "branch": "Mobile OS"
+    "industry": "Mobile OS",
+    "index": "03"
   },
   {
     "name": "Cobinhood",
-    "isHighlight": true,
-    "year": 2018,
-    "bread": "Created the number one rated zero-fee cryptocurrency exchange and won the Red Dot design award in 2018.",
     "href": "cobinhood",
     "role": "UX Design",
     "country": "Taiwan",
-    "branch": "Blockchain"
-  },
-  {
-    "name": "MOCACARE",
-    "isHighlight": true,
-    "year": 2016,
-    "bread": "Created a new generation hypertension meter to help patients control their blood pressure.",
-    "href": "mocacare",
-    "role": "UX design & research",
-    "branch": "Healthcare",
-    "country": "Taiwan"    
-  },
-  {
-    "name": "Taiwan High Speed Rail",
-    "isHighlight": false,
-    "year": 2019,
-    "bread": "A research project which produced passenger journey and traveller personas to highlight the pain points from the passengers and redesign opportunities.",
-    "branch": "Transportation",
-    "role": "UX research",
-    "href": "thsr",
-    "country": "Taiwan"
-  },
-  {
-    "name": "Rakuten",
-    "isHighlight": false,
-    "year": 2017,
-    "bread": "Established the first UX forum at Rakuten International that delivered user experience knowledge, workshops and introduced research methods.",
-    "href": "rakuten",
-    "branch": "Marketplace",
-    "role": "UX WoW implementation",
-    "country": "Taiwan"
-  },
-  {
-    "name": "Umaji",
-    "isHighlight": false,
-    "year": 2020,
-    "bread": "A service design project that helps the commuter find their best route and book all the tickets in one place.",
-    "href": "umaji",
-    "branch": "Transportation",
-    "role": "UX design",
-    "country": "Taiwan"
+    "industry": "Blockchain",
+    "index": "04"
   }
 ]
-
