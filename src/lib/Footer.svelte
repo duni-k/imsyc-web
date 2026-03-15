@@ -97,7 +97,7 @@
 
   .footer-name {
     font-family: "Technor";
-    font-size: 10rem;
+    font-size: var(--font-display);
     font-weight: 900;
     line-height: 1;
     margin-top: 8px;
@@ -105,9 +105,4 @@
     display: inline-flex;
   }
 
-  @media only screen and (max-width: 767px) {
-    .footer-name {
-      font-size: 4rem;
-    }
-  }
 </style>

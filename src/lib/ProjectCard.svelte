@@ -56,22 +56,16 @@
     const onScroll = () => {
       const rect = el.getBoundingClientRect()
       const offset = rect.top + rect.height / 2 - window.innerHeight / 2
-      imgY = -offset * 0.3
+      imgY = -offset * 0.5
     }
 
-    const onWheel = (e: WheelEvent) => {
-      if (!active || !contentEl) return
-
-      if (!contentEl.contains(e.target as Node)) {
-        contentEl.scrollBy({ top: e.deltaY * 2 })
-      }
-
+    const handleOverscroll = (delta: number) => {
+      if (!contentEl) return
       const atBottom =
         contentEl.scrollTop + contentEl.clientHeight >=
         contentEl.scrollHeight - 2
-
-      if (atBottom && e.deltaY > 0) {
-        overscroll += e.deltaY
+      if (atBottom && delta > 0) {
+        overscroll += delta
         if (overscroll > 2000) {
           overscroll = 0
           onclose?.()
@@ -79,6 +73,14 @@
       } else {
         overscroll = 0
       }
+    }
+
+    const onWheel = (e: WheelEvent) => {
+      if (!active || !contentEl) return
+      if (!contentEl.contains(e.target as Node)) {
+        contentEl.scrollBy({ top: e.deltaY * 2 })
+      }
+      handleOverscroll(e.deltaY)
     }
 
     let lastTouchY = 0
@@ -91,20 +93,7 @@
       if (!active || !contentEl) return
       const dy = lastTouchY - e.touches[0].clientY
       lastTouchY = e.touches[0].clientY
-
-      const atBottom =
-        contentEl.scrollTop + contentEl.clientHeight >=
-        contentEl.scrollHeight - 2
-
-      if (atBottom && dy > 0) {
-        overscroll += dy * 3
-        if (overscroll > 2000) {
-          overscroll = 0
-          onclose?.()
-        }
-      } else {
-        overscroll = 0
-      }
+      handleOverscroll(dy * 3)
     }
 
     scroller.addEventListener("scroll", onScroll, { passive: true })
@@ -114,6 +103,7 @@
     onScroll()
 
     return () => {
+      cancelAnimationFrame(rafId)
       scroller.removeEventListener("scroll", onScroll)
       window.removeEventListener("wheel", onWheel)
       window.removeEventListener("touchstart", onTouchStart)
@@ -149,6 +139,10 @@
           <img {src} alt={project.name} />
         {/if}
       {/each}
+      <div class="pull-hint">
+        <span class="pull-bar"></span>
+        <span class="pull-text">swipe to close</span>
+      </div>
     {/if}
   </div>
 
@@ -220,11 +214,10 @@
   .project {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     flex-shrink: 0;
     overflow: hidden;
     cursor: pointer;
-    scroll-snap-align: start;
     background-color: var(--background-primary);
     transition: background-color 0.5s ease;
   }
@@ -244,7 +237,7 @@
 
   .active .img-side {
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     overflow-y: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
@@ -264,7 +257,7 @@
   }
 
   .active .hero {
-    height: 100vh;
+    height: 100dvh;
   }
 
   .active .img-side img:not(.hero),
@@ -298,7 +291,7 @@
 
   .active .info-side {
     position: static;
-    height: 100vh;
+    height: 100dvh;
     flex-direction: column;
     justify-content: space-between;
     padding: calc(var(--padding) / 2);
@@ -310,7 +303,7 @@
   .card-index,
   .card-name {
     font-family: "Satoshi";
-    font-size: 3.8rem;
+    font-size: var(--font-card);
     font-weight: 900;
     display: inline-flex;
   }
@@ -325,7 +318,7 @@
   .detail-name,
   .detail-index {
     font-family: "Satoshi";
-    font-size: 4rem;
+    font-size: var(--font-heading);
     font-weight: 900;
     line-height: 1;
     text-transform: uppercase;
@@ -333,7 +326,7 @@
 
   .description {
     font-family: "Satoshi";
-    font-size: 2.5rem;
+    font-size: var(--font-body);
     font-weight: 500;
     line-height: 1.6;
     max-width: 480px;
@@ -354,14 +347,14 @@
   .tag,
   .role {
     font-family: "Satoshi";
-    font-size: 1.2rem;
+    font-size: var(--font-label);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
 
   .divider {
-    font-size: 1.2rem;
+    font-size: var(--font-label);
     opacity: 0.3;
   }
 
@@ -407,6 +400,10 @@
     align-self: flex-end;
   }
 
+  .pull-hint {
+    display: none;
+  }
+
   @media only screen and (max-width: 768px) {
     .project {
       aspect-ratio: 3 / 4;
@@ -430,23 +427,20 @@
       justify-content: space-between;
     }
 
-    .flipped .img-side {
-      right: auto;
+    .flipped:not(.active) .img-side {
       position: absolute;
       top: 0;
+      right: auto;
+      left: 0;
     }
 
-    .flipped .info-side {
+    .flipped:not(.active) .info-side {
+      position: absolute;
+      bottom: 16px;
       left: 16px;
       right: 16px;
-      bottom: 16px;
       flex-direction: row;
       align-items: baseline;
-    }
-
-    .card-index,
-    .card-name {
-      font-size: 2.5rem;
     }
 
     .project.active {
@@ -486,23 +480,12 @@
       flex-direction: row;
     }
 
-    .detail-name,
-    .detail-index {
-      font-size: 2.4rem;
-    }
-
     .description {
-      font-size: 1.6rem;
       line-height: 1.4;
     }
 
-    .tag,
-    .role {
-      font-size: 1rem;
-    }
-
     .back {
-      font-size: 1.4rem;
+      display: none;
     }
 
     .flipped.active .img-side,
@@ -516,6 +499,31 @@
 
     .flipped.active .header {
       flex-direction: row;
+    }
+
+    .pull-hint {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 24px 0 32px;
+      opacity: 0.4;
+    }
+
+    .pull-bar {
+      width: 40px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--text-primary);
+    }
+
+    .pull-text {
+      font-family: "Satoshi";
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-primary);
     }
   }
 </style>
