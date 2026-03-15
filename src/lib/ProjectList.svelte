@@ -23,11 +23,6 @@
   function close() {
     active = null
     history.pushState({}, "", "/")
-    // kill scroll momentum by briefly disabling overflow
-    listEl.style.overflow = "hidden"
-    requestAnimationFrame(() => {
-      listEl.style.overflow = ""
-    })
   }
 
   onMount(() => {

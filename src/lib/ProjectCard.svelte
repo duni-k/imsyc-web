@@ -54,7 +54,6 @@
     const scroller = el.closest(".list") ?? window
 
     const onScroll = () => {
-      if (active) return
       const rect = el.getBoundingClientRect()
       const offset = rect.top + rect.height / 2 - window.innerHeight / 2
       imgY = -offset * 0.3
@@ -134,10 +133,15 @@
   onkeydown={(e) => e.key === "Enter" && !active && onopen?.()}
 >
   <div class="img-side" bind:this={contentEl}>
-    <img class="hero" src={hero} alt={project.name} />
+    <img
+      class="hero"
+      src={hero}
+      alt={project.name}
+      style="transform: translateY({imgY}px)"
+    />
     {#if active}
       {#each project.content as src}
-        {#if src.endsWith(".webm") || src.endsWith(".mp4")}
+        {#if src.endsWith(".webm")}
           <div class="video-wrap">
             <video {src} autoplay loop muted playsinline></video>
           </div>
