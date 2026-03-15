@@ -7,7 +7,12 @@
     "index": "01",
     "description": "Transforming H&M to a premium fashion brand.",
     "role": "Permanent in-house designer",
-    "tags": ["UIUX", "UX Research"]
+    "tags": ["UIUX", "UX Research"],
+    "content": [
+      "/content/hm/hm_video.webm",
+      "/content/hm/hm_video_01.webm",
+      "/content/hm/hm_video_02.webm"
+    ]
   },
   {
     "name": "Nextbank",
@@ -17,7 +22,13 @@
     "index": "02",
     "description": "NEXTBANK is a Taiwanese neobank that sought to create a novel financial service experience.",
     "role": "Permanent in-house designer",
-    "tags": ["UIUX", "Design System", "Animation & Motion design"]
+    "tags": ["UIUX", "Design System", "Animation & Motion design"],
+    "content": [
+      "/content/nextbank/nb_01.png",
+      "/content/nextbank/nb_02.png",
+      "/content/nextbank/nb_03.png",
+      "/content/nextbank/nb_video.mov"
+    ]
   },
   {
     "name": "Honor Flow UI",
@@ -26,7 +37,13 @@
     "index": "03",
     "description": "Redefined a unique value proposition and support Honor in establishing a sustainable brand culture for long-term growth.",
     "role": "Contract designer",
-    "tags": ["UIUX", "Branding", "Market Analysis"]
+    "tags": ["UIUX", "Branding", "Market Analysis"],
+    "content": [
+      "/content/honor/h_02.png",
+      "/content/honor/h_03.png",
+      "/content/honor/h_04.png",
+      "/content/honor/h_05.png"
+    ]
   },
   {
     "name": "Cobinhood",
@@ -36,6 +53,11 @@
     "index": "04",
     "description": "CONBINHOOD was the leading cryptocurrency trading platform in Taiwan and won the 2018 Red Dot Design Award.",
     "role": "Permanent in-house designer",
-    "tags": ["UIUX", "Research", "Market Analysis"]
+    "tags": ["UIUX", "Research", "Market Analysis"],
+    "content": [
+      "/content/cobinhood/cb_01.png",
+      "/content/cobinhood/cb_02.png",
+      "/content/cobinhood/cb_03.png"
+    ]
   }
 ]

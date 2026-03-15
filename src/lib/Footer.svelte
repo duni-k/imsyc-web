@@ -2,7 +2,11 @@
   import { onMount } from "svelte"
   import LetterReveal from "$lib/LetterReveal.svelte"
 
-  let { baseDelay = 0, background = "var(--background-primary)", foreground = "var(--text-primary)" } = $props()
+  let {
+    baseDelay = 0,
+    background = "var(--background-primary)",
+    foreground = "var(--text-primary)"
+  } = $props()
 
   let footer: HTMLElement
   let visible = $state(false)
@@ -21,7 +25,7 @@
 
 <footer bind:this={footer} style="--bg: {background}; --fg: {foreground}">
   <a
-    href="https://linkedin.com"
+    href="https://linkedin.com/stellahsiaoyuchen"
     class="footer-link"
     class:visible
     style="transition-delay: {baseDelay + 100}ms"
@@ -30,7 +34,7 @@
     <span class="underline"></span>
   </a>
   <a
-    href="mailto:stella@example.com"
+    href="mailto:imsyc1992@gmail.com"
     class="footer-link"
     class:visible
     style="transition-delay: {baseDelay + 200}ms"
@@ -56,7 +60,6 @@
     font-family: "Satoshi";
     background-color: var(--bg);
     color: var(--fg);
-    padding: var(--padding);
   }
 
   .footer-link {
@@ -94,11 +97,17 @@
 
   .footer-name {
     font-family: "Technor";
-    font-size: 15rem;
+    font-size: 10rem;
     font-weight: 900;
     line-height: 1;
     margin-top: 8px;
     width: 100%;
     display: inline-flex;
+  }
+
+  @media only screen and (max-width: 767px) {
+    .footer-name {
+      font-size: 4rem;
+    }
   }
 </style>
