@@ -2,6 +2,7 @@
   import { onMount } from "svelte"
   import workData from "../data/workData.json"
   import ProjectCard from "$lib/ProjectCard.svelte"
+  import { introDone } from "$lib/introStore"
 
   let { initialSlug = "" } = $props<{ initialSlug?: string }>()
 
@@ -9,6 +10,7 @@
 
   let active: Project | null = $state(null)
   let listEl: HTMLDivElement
+  let introPhase: "pending" | "scrolling" | "done" = $state("pending")
 
   // svelte-ignore state_referenced_locally
   if (initialSlug) {
@@ -88,6 +90,10 @@
     }
 
     const onWheel = (e: WheelEvent) => {
+      if (introPhase !== "done") {
+        e.preventDefault()
+        return
+      }
       if (!active && listEl) {
         e.preventDefault()
         scrollVelocity += e.deltaY * 0.8
@@ -101,6 +107,48 @@
     window.addEventListener("popstate", onPopState)
     listEl.addEventListener("wheel", onWheel, { passive: false })
 
+    // Intro scroll animation
+    const skipIntro =
+      !!active ||
+      !!initialSlug ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    if (skipIntro) {
+      introPhase = "done"
+      introDone.set(true)
+    } else {
+      const totalScroll = listEl.scrollHeight - listEl.clientHeight
+      listEl.scrollTop = totalScroll
+      listEl.style.opacity = "0"
+
+      requestAnimationFrame(() => {
+        listEl.style.opacity = "1"
+        introPhase = "scrolling"
+
+        const INTRO_DURATION = 1800
+        const startTime = performance.now()
+        const startScroll = totalScroll
+
+        const animateIntro = (now: number) => {
+          const elapsed = now - startTime
+          const t = Math.min(elapsed / INTRO_DURATION, 1)
+          // cubic ease-out: fast start, gentle deceleration
+          const ease = 1 - Math.pow(1 - t, 3)
+          listEl.scrollTop = startScroll * (1 - ease)
+
+          if (t < 1) {
+            requestAnimationFrame(animateIntro)
+          } else {
+            listEl.scrollTop = 0
+            introPhase = "done"
+            introDone.set(true)
+          }
+        }
+
+        requestAnimationFrame(animateIntro)
+      })
+    }
+
     return () => {
       clearTimeout(snapTimeout)
       cancelAnimationFrame(scrollRaf)
@@ -110,7 +158,7 @@
   })
 </script>
 
-<div class="list" bind:this={listEl}>
+<div class="list" class:intro-blocking={introPhase !== "done"} bind:this={listEl}>
   {#each workData as data}
     <div
       class="card-slot"
@@ -133,6 +181,10 @@
     flex-direction: column;
     height: 100dvh;
     overflow-y: auto;
+  }
+
+  .list.intro-blocking {
+    pointer-events: none;
   }
 
   .card-slot {

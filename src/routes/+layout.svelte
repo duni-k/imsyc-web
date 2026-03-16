@@ -4,6 +4,7 @@
   import workData from "../data/workData.json"
   import Footer from "$lib/Footer.svelte"
   import LetterReveal from "$lib/LetterReveal.svelte"
+  import { introDone } from "$lib/introStore"
 
   let { children } = $props()
 
@@ -62,7 +63,7 @@
   }
 </script>
 
-<nav class="navbar">
+<nav class="navbar" class:navbar-visible={$introDone}>
   <button
     class="nav-btn name"
     onclick={menuState === "idle" ? openMenu : closeMenu}
@@ -160,6 +161,16 @@
     background: transparent;
     mix-blend-mode: difference;
     box-sizing: border-box;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition:
+      opacity 500ms ease,
+      transform 500ms ease;
+  }
+
+  .navbar.navbar-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .nav-btn {
