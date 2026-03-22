@@ -209,7 +209,7 @@
   }
 
   @media only screen and (max-width: 500px) {
-    .list {
+    .list:not(.intro-blocking) {
       scroll-snap-type: y mandatory;
     }
 

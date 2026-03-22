@@ -66,8 +66,11 @@
 <nav class="navbar" class:navbar-visible={$introDone}>
   <button
     class="nav-btn name"
-    onclick={menuState === "idle" ? openMenu : closeMenu}
-    >SH<span style="color: var(--highlight-primary)">.</span></button
+    onclick={() => {
+      if (menuState !== "idle") closeMenu()
+      history.pushState({}, "", "/")
+      window.dispatchEvent(new PopStateEvent("popstate"))
+    }}>SH<span style="color: var(--highlight-primary)">.</span></button
   >
   <button
     class="nav-btn menu-text"
