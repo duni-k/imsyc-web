@@ -26,7 +26,7 @@
 
   let flipped = $derived(parseInt(project.index) % 2 === 0)
   let hero = $derived(`/hero_images/${project.href}_hero.png`)
-  let contentItems = $derived([...project.content, hero])
+  let contentItems = $derived(project.content)
   let el: HTMLElement
   let imgY = $state(0)
   let contentEl: HTMLDivElement | undefined = $state(undefined)
@@ -140,6 +140,7 @@
           <img {src} alt={project.name} />
         {/if}
       {/each}
+      <img class="hero hero-end" src={hero} alt={project.name} />
       <div
         class="scroll-hint"
         style="background: linear-gradient(to right, var(--background-primary) {smoothProgress *
@@ -475,21 +476,12 @@
       box-sizing: border-box;
     }
 
-    .active .hero {
-      min-height: 100%;
-      object-fit: fit;
-    }
-
     .active .content img:not(.hero) {
-      object-fit: fit;
+      height: auto;
     }
 
     .active .video-wrap {
-      background: none;
-    }
-
-    .active .video-wrap video {
-      object-fit: cover;
+      height: auto;
     }
 
     .active .info {
