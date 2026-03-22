@@ -157,7 +157,7 @@
     padding-top: var(--padding);
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     background: transparent;
     mix-blend-mode: difference;
     box-sizing: border-box;
@@ -176,7 +176,7 @@
   .nav-btn {
     color: var(--text-secondary);
     cursor: pointer;
-    font-size: 4rem;
+    font-size: 3rem;
   }
 
   .name {
@@ -323,6 +323,10 @@
     .menu-content {
       padding: 0 16px;
       gap: var(--gap-menu);
+    }
+
+    .nav-btn {
+      font-size: var(--font-navbar);
     }
 
     .bio {

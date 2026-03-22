@@ -26,6 +26,7 @@
 
   let flipped = $derived(parseInt(project.index) % 2 === 0)
   let hero = $derived(`/hero_images/${project.href}_hero.png`)
+  let contentItems = $derived([...project.content, hero])
   let el: HTMLElement
   let imgY = $state(0)
   let contentEl: HTMLDivElement | undefined = $state(undefined)
@@ -66,7 +67,7 @@
         contentEl.scrollHeight - 2
       if (atBottom && delta > 0) {
         overscroll += delta
-        if (overscroll > 2000) {
+        if (overscroll > 1500) {
           overscroll = 0
           onclose?.()
         }
@@ -122,7 +123,7 @@
   onclick={() => !active && onopen?.()}
   onkeydown={(e) => e.key === "Enter" && !active && onopen?.()}
 >
-  <div class="img-side" bind:this={contentEl}>
+  <div class="content" bind:this={contentEl}>
     <img
       class="hero"
       src={hero}
@@ -130,7 +131,7 @@
       style="transform: translateY({imgY}px)"
     />
     {#if active}
-      {#each project.content as src}
+      {#each contentItems as src}
         {#if src.endsWith(".webm")}
           <div class="video-wrap">
             <video {src} autoplay loop muted playsinline></video>
@@ -139,14 +140,22 @@
           <img {src} alt={project.name} />
         {/if}
       {/each}
-      <div class="pull-hint">
-        <span class="pull-bar"></span>
-        <span class="pull-text">swipe to close</span>
+      <div
+        class="scroll-hint"
+        style="background: linear-gradient(to right, var(--background-primary) {smoothProgress *
+          100}%, var(--text-primary) {smoothProgress * 100}%)"
+      >
+        <span
+          class="scroll-text"
+          style="color: {smoothProgress > 0.5
+            ? 'var(--text-primary)'
+            : 'var(--background-primary)'}">Scroll to close</span
+        >
       </div>
     {/if}
   </div>
 
-  <div class="info-side">
+  <div class="info">
     {#if active}
       <div class="header">
         <h1 class="detail-name"><LetterReveal text={project.name} /></h1>
@@ -229,13 +238,13 @@
     background-color: var(--background-extended);
   }
 
-  .img-side {
+  .content {
     width: 50%;
     height: 100%;
     overflow: hidden;
   }
 
-  .active .img-side {
+  .active .content {
     width: 100%;
     height: 100dvh;
     overflow-y: auto;
@@ -243,7 +252,7 @@
     scrollbar-width: none;
   }
 
-  .active .img-side::-webkit-scrollbar {
+  .active .content::-webkit-scrollbar {
     display: none;
   }
 
@@ -260,7 +269,7 @@
     height: 100dvh;
   }
 
-  .active .img-side img:not(.hero),
+  .active .content img:not(.hero),
   .active .video-wrap {
     width: 100%;
     object-fit: contain;
@@ -273,7 +282,7 @@
     object-fit: contain;
   }
 
-  .info-side {
+  .info {
     position: absolute;
     bottom: 32px;
     left: calc(50% + 16px);
@@ -289,7 +298,7 @@
       bottom 0.5s ease;
   }
 
-  .active .info-side {
+  .active .info {
     position: static;
     height: 100dvh;
     flex-direction: column;
@@ -371,23 +380,23 @@
       color 0.3s ease;
   }
 
-  .flipped .img-side {
+  .flipped .content {
     position: absolute;
     right: 0;
   }
 
-  .flipped .info-side {
+  .flipped .info {
     left: 0;
     right: 50%;
     flex-direction: row-reverse;
   }
 
-  .flipped.active .img-side {
+  .flipped.active .content {
     position: static;
     order: 2;
   }
 
-  .flipped.active .info-side {
+  .flipped.active .info {
     order: 1;
     flex-direction: column;
   }
@@ -400,47 +409,52 @@
     align-self: flex-end;
   }
 
-  .pull-hint {
+  .scroll-hint {
     display: none;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 500px) {
     .project {
       aspect-ratio: 3 / 4;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--background-extended);
     }
 
-    .img-side {
+    .content {
       width: 100%;
-      height: 60%;
-      position: absolute;
-      top: 0;
+      height: 50%;
+      position: static;
+      order: 1;
+      transition:
+        height 0.6s ease,
+        padding 0.6s ease;
     }
 
-    .info-side {
-      position: absolute;
-      bottom: 16px;
-      left: 16px;
-      right: 16px;
-      padding: 0;
-      flex-direction: row;
-      align-items: baseline;
+    .info {
+      position: static;
+      height: 50%;
+      padding: var(--padding);
+      flex-direction: row-reverse;
       justify-content: space-between;
+      align-items: flex-end;
+      box-sizing: border-box;
     }
 
-    .flipped:not(.active) .img-side {
-      position: absolute;
-      top: 0;
+    .info .description {
+      padding-bottom: var(--padding);
+    }
+
+    .flipped .content {
+      position: static;
       right: auto;
-      left: 0;
     }
 
-    .flipped:not(.active) .info-side {
-      position: absolute;
-      bottom: 16px;
-      left: 16px;
-      right: 16px;
-      flex-direction: row;
-      align-items: baseline;
+    .flipped .info {
+      position: static;
+      left: auto;
+      right: auto;
+      flex-direction: row-reverse;
     }
 
     .project.active {
@@ -450,34 +464,51 @@
       aspect-ratio: unset;
     }
 
-    .active .img-side {
+    .active .content {
       position: static;
-      height: 75%;
+      height: 50%;
       overflow-y: auto;
       flex-shrink: 0;
+      order: 1;
+      padding-left: var(--padding);
+      padding-right: var(--padding);
+      box-sizing: border-box;
     }
 
     .active .hero {
-      height: auto;
+      min-height: 100%;
+      object-fit: fit;
     }
 
-    .active .img-side img:not(.hero),
+    .active .content img:not(.hero) {
+      min-height: 100%;
+      object-fit: fit;
+    }
+
     .active .video-wrap {
-      height: auto;
+      background: none;
     }
 
-    .active .info-side {
+    .active .video-wrap video {
+      object-fit: cover;
+    }
+
+    .active .info {
       position: static;
-      height: 25%;
+      height: 50%;
       padding: var(--padding);
-      padding-top: calc(var(--padding) + var(--navbar-height));
-      order: -1;
+      padding-top: calc(var(--navbar-height) + var(--padding));
       overflow: hidden;
       box-sizing: border-box;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-end;
+      gap: 16px;
     }
 
     .active .header {
       flex-direction: row;
+      order: 3;
     }
 
     .description {
@@ -488,42 +519,22 @@
       display: none;
     }
 
-    .flipped.active .img-side,
-    .flipped.active .info-side {
-      order: unset;
-    }
-
-    .flipped.active .info-side {
-      order: -1;
-    }
-
-    .flipped.active .header {
-      flex-direction: row;
-    }
-
-    .pull-hint {
+    .scroll-hint {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 8px;
-      padding: 24px 0 32px;
-      opacity: 0.4;
+      justify-content: center;
+      padding: 12px 0;
+      width: 100vw;
+      margin-left: calc(-1 * var(--padding));
+      transition: background 0.3s ease;
     }
 
-    .pull-bar {
-      width: 40px;
-      height: 4px;
-      border-radius: 2px;
-      background: var(--text-primary);
-    }
-
-    .pull-text {
+    .scroll-text {
       font-family: "Satoshi";
       font-size: 0.8rem;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-primary);
+      letter-spacing: 0.06em;
+      transition: color 0.3s ease;
     }
   }
 </style>

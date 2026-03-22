@@ -158,7 +158,11 @@
   })
 </script>
 
-<div class="list" class:intro-blocking={introPhase !== "done"} bind:this={listEl}>
+<div
+  class="list"
+  class:intro-blocking={introPhase !== "done"}
+  bind:this={listEl}
+>
   {#each workData as data}
     <div
       class="card-slot"
