@@ -5,8 +5,10 @@
   let {
     project,
     active = false,
+    closing = false,
     onopen,
-    onclose
+    onclose,
+    onclosedone
   } = $props<{
     project: {
       name: string
@@ -20,8 +22,10 @@
       industry?: string
     }
     active?: boolean
+    closing?: boolean
     onopen?: () => void
     onclose?: () => void
+    onclosedone?: () => void
   }>()
 
   let flipped = $derived(parseInt(project.index) % 2 === 0)
@@ -54,14 +58,17 @@
   onMount(() => {
     const scroller = el.closest(".list") ?? window
 
+    const isMobile = window.innerWidth <= 500
+    const parallaxFactor = isMobile ? 0.15 : 0.5
+
     const onScroll = () => {
       const rect = el.getBoundingClientRect()
       const offset = rect.top + rect.height / 2 - window.innerHeight / 2
-      imgY = -offset * 0.5
+      imgY = -offset * parallaxFactor
     }
 
     const handleOverscroll = (delta: number) => {
-      if (!contentEl) return
+      if (!contentEl || closing) return
       const atBottom =
         contentEl.scrollTop + contentEl.clientHeight >=
         contentEl.scrollHeight - 2
@@ -69,6 +76,8 @@
         overscroll += delta
         if (overscroll > 1500) {
           overscroll = 0
+          smoothProgress = 0
+          cancelAnimationFrame(rafId)
           onclose?.()
         }
       } else {
@@ -77,7 +86,7 @@
     }
 
     const onWheel = (e: WheelEvent) => {
-      if (!active || !contentEl) return
+      if (!active || !contentEl || closing) return
       if (!contentEl.contains(e.target as Node)) {
         contentEl.scrollBy({ top: e.deltaY * 2 })
       }
@@ -91,7 +100,7 @@
     }
 
     const onTouchMove = (e: TouchEvent) => {
-      if (!active || !contentEl) return
+      if (!active || !contentEl || closing) return
       const dy = lastTouchY - e.touches[0].clientY
       lastTouchY = e.touches[0].clientY
       handleOverscroll(dy * 3)
@@ -116,6 +125,7 @@
 <div
   class="project"
   class:active
+  class:closing
   class:flipped
   bind:this={el}
   role="button"

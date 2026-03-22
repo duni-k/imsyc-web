@@ -9,6 +9,7 @@
   type Project = (typeof workData)[number]
 
   let active: Project | null = $state(null)
+  let closing = $state(false)
   let listEl: HTMLDivElement
   let introPhase: "pending" | "scrolling" | "done" = $state("pending")
 
@@ -23,8 +24,19 @@
   }
 
   function close() {
-    active = null
+    closing = true
     history.pushState({}, "", "/")
+    requestAnimationFrame(() => {
+      active = null
+      // Block scroll after closing
+      listEl.style.pointerEvents = "none"
+      listEl.style.overflow = "hidden"
+      setTimeout(() => {
+        closing = false
+        listEl.style.pointerEvents = ""
+        listEl.style.overflow = ""
+      }, 600)
+    })
   }
 
   onMount(() => {
@@ -125,7 +137,7 @@
         listEl.style.opacity = "1"
         introPhase = "scrolling"
 
-        const INTRO_DURATION = 1800
+        const INTRO_DURATION = 3500
         const startTime = performance.now()
         const startScroll = totalScroll
 
@@ -167,11 +179,12 @@
     <div
       class="card-slot"
       class:is-active={active?.href === data.href}
-      class:is-hidden={active !== null && active.href !== data.href}
+      class:is-hidden={active !== null && !closing && active.href !== data.href}
     >
       <ProjectCard
         project={data}
         active={active?.href === data.href}
+        {closing}
         onopen={() => open(data)}
         onclose={close}
       />
@@ -193,6 +206,16 @@
 
   .card-slot {
     flex-shrink: 0;
+  }
+
+  @media only screen and (max-width: 500px) {
+    .list {
+      scroll-snap-type: y mandatory;
+    }
+
+    .card-slot {
+      scroll-snap-align: start;
+    }
   }
 
   .card-slot.is-active {
