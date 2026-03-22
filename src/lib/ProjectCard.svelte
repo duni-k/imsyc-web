@@ -481,7 +481,6 @@
     }
 
     .active .content img:not(.hero) {
-      min-height: 100%;
       object-fit: fit;
     }
 
