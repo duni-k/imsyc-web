@@ -8,37 +8,94 @@
 
   type Project = (typeof workData)[number]
 
-  let active: Project | null = $state(null)
+  // the list is rendered several times over and scrolling starts in the
+  // middle copy; when the position drifts into the outer copies it is
+  // shifted back by whole copy-heights (identical content, so the jump is
+  // invisible), which makes the list cycle endlessly in both directions
+  const COPIES = 5
+  const MID_COPY = Math.floor(COPIES / 2)
+  const N = workData.length
+  const loopData: Project[] = Array.from({ length: COPIES }, () =>
+    workData
+  ).flat()
+
+  let activeIdx: number | null = $state(null)
   let closing = $state(false)
   let listEl: HTMLDivElement
 
+  let active = $derived(activeIdx === null ? null : loopData[activeIdx])
+
   // svelte-ignore state_referenced_locally
   if (initialSlug) {
-    active = workData.find((p) => p.href === initialSlug) ?? null
+    const i = workData.findIndex((p) => p.href === initialSlug)
+    if (i !== -1) activeIdx = MID_COPY * N + i
   }
 
   const CLOSE_DURATION = 600
 
-  function open(project: Project) {
+  // correcting scrollTop while a drag, fling or snap animation is running
+  // fights the browser, which keeps re-asserting its own position — that
+  // fight renders as a violent spasm. So the correction only ever runs
+  // once scrolling has been idle for a beat; the extra copies provide the
+  // runway that makes waiting safe.
+  function recenter() {
+    const copyHeight = listEl.scrollHeight / COPIES
+    const cardHeight = copyHeight / N
+    // band edges sit mid-card so they never coincide with a card edge,
+    // where sub-pixel jitter would re-trigger the jump endlessly
+    const low = (Math.round(N * (MID_COPY - 0.5)) - 0.5) * cardHeight
+    const high = 2 * MID_COPY * copyHeight - low
+    const top = listEl.scrollTop
+    if (top >= low && top <= high) return
+    const offset = ((top % copyHeight) + copyHeight) % copyHeight
+    let target = MID_COPY * copyHeight + offset
+    if (target > high) target -= copyHeight
+    listEl.scrollTo({ top: target, behavior: "instant" })
+    listEl.dispatchEvent(new CustomEvent("recentered"))
+  }
+
+  let touchActive = false
+  let settleTimer: ReturnType<typeof setTimeout> | undefined
+
+  function scheduleRecenter() {
+    clearTimeout(settleTimer)
+    settleTimer = setTimeout(() => {
+      if (!touchActive) recenter()
+    }, 150)
+  }
+
+  function onTouchStart() {
+    touchActive = true
+    clearTimeout(settleTimer)
+  }
+
+  function onTouchEnd(e: TouchEvent) {
+    if (e.touches.length > 0) return
+    touchActive = false
+    scheduleRecenter()
+  }
+
+  function open(idx: number) {
     if (closing) return
-    active = project
-    history.pushState({ slug: project.href }, "", `/${project.href}`)
+    activeIdx = idx
+    const slug = loopData[idx].href
+    history.pushState({ slug }, "", `/${slug}`)
   }
 
   // keeps the card mounted as a fixed overlay while the open-transition CSS
   // plays in reverse, then hands it back to the list aligned to its slot
   function animateClose() {
-    if (closing || !active) return
-    const href = active.href
+    if (closing || activeIdx === null) return
+    const idx = activeIdx
     closing = true
     listEl.style.overflow = "hidden"
     setTimeout(async () => {
-      active = null
+      activeIdx = null
       closing = false
       await tick()
-      const idx = workData.findIndex((p) => p.href === href)
       const slot = listEl.children[idx] as HTMLElement | undefined
       slot?.scrollIntoView({ block: "start", behavior: "instant" })
+      recenter()
       listEl.style.overflow = ""
     }, CLOSE_DURATION)
   }
@@ -50,47 +107,61 @@
   }
 
   onMount(() => {
-    if (!active) {
+    if (activeIdx === null) {
       const path = window.location.pathname.slice(1)
       if (path) {
-        const match = workData.find((p) => p.href === path)
-        if (match) active = match
+        const i = workData.findIndex((p) => p.href === path)
+        if (i !== -1) activeIdx = MID_COPY * N + i
       }
     }
 
+    listEl.scrollTo({
+      top: (listEl.scrollHeight / COPIES) * MID_COPY,
+      behavior: "instant"
+    })
+
     const onPopState = () => {
       const slug = window.location.pathname.slice(1)
-      const match = workData.find((p) => p.href === slug) ?? null
-      if (!match && active) {
-        animateClose()
-      } else {
-        active = match
+      const i = workData.findIndex((p) => p.href === slug)
+      if (i === -1) {
+        if (activeIdx !== null) animateClose()
+      } else if (active?.href !== slug) {
+        activeIdx = MID_COPY * N + i
       }
     }
 
     window.addEventListener("popstate", onPopState)
+    listEl.addEventListener("scroll", scheduleRecenter, { passive: true })
+    listEl.addEventListener("touchstart", onTouchStart, { passive: true })
+    listEl.addEventListener("touchend", onTouchEnd, { passive: true })
+    listEl.addEventListener("touchcancel", onTouchEnd, { passive: true })
 
     introDone.set(true)
 
     return () => {
+      clearTimeout(settleTimer)
       window.removeEventListener("popstate", onPopState)
+      listEl.removeEventListener("scroll", scheduleRecenter)
+      listEl.removeEventListener("touchstart", onTouchStart)
+      listEl.removeEventListener("touchend", onTouchEnd)
+      listEl.removeEventListener("touchcancel", onTouchEnd)
     }
   })
 </script>
 
 <div class="list" bind:this={listEl}>
-  {#each workData as data, i}
+  {#each loopData as data, i (i)}
     <div
       class="card-slot"
-      class:is-active={active?.href === data.href}
-      class:is-hidden={active !== null && !closing && active.href !== data.href}
+      class:is-active={activeIdx === i}
+      class:is-hidden={activeIdx !== null && !closing && activeIdx !== i}
     >
       <ProjectCard
         project={data}
-        eager={i === 0}
-        active={active?.href === data.href}
+        eager={i % N === 0}
+        active={activeIdx === i}
         {closing}
-        onopen={() => open(data)}
+        onopen={() => open(i)}
         onclose={close}
       />
     </div>
@@ -104,6 +175,12 @@
     height: 100dvh;
     overflow-y: auto;
     scroll-snap-type: y mandatory;
+    /* the list cycles endlessly, so a scrollbar position is meaningless */
+    scrollbar-width: none;
+  }
+
+  .list::-webkit-scrollbar {
+    display: none;
   }
 
   .card-slot {
@@ -120,5 +197,14 @@
 
   .card-slot.is-hidden {
     visibility: hidden;
+  }
+
+  /* on mobile the cards are shorter than the viewport (3/4 aspect), and
+     mandatory snapping with snap points denser than the viewport is what
+     caused the jumpy scrolling — so snapping is desktop-only */
+  @media only screen and (max-width: 500px) {
+    .list {
+      scroll-snap-type: none;
+    }
   }
 </style>

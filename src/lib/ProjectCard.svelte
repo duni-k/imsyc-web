@@ -140,9 +140,14 @@
     )
     io.observe(el)
 
+    // after a recenter teleport the clone now in the viewport hasn't had
+    // its observer fire yet — refresh the parallax before the next paint
+    scroller.addEventListener("recentered", onScroll)
+
     return () => {
       io.disconnect()
       scroller.removeEventListener("scroll", onScroll)
+      scroller.removeEventListener("recentered", onScroll)
     }
   })
 </script>
@@ -253,12 +258,16 @@
       >
     {:else}
       <span class="card-index"
-        ><LetterReveal text={String(project.index)} /></span
+        ><LetterReveal
+          text={String(project.index)}
+          group="card-index-{project.href}"
+        /></span
       >
       <span class="card-name">
         <LetterReveal
           text={project.name}
           baseDelay={String(project.index).length * 30}
+          group="card-name-{project.href}"
         />
       </span>
     {/if}
