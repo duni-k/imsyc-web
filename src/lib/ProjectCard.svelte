@@ -80,6 +80,7 @@
     }
 
     const onTouchStart = () => {
+      stopMomentum()
       touchActive = true
       clearTimeout(settleTimeout)
     }
@@ -93,8 +94,59 @@
       // forward wheel from the info pane to the scrollable content,
       // and stop it from scroll-chaining to the list behind the card
       if (content.contains(e.target as Node)) return
+      stopMomentum()
       e.preventDefault()
       content.scrollTop += e.deltaY
+    }
+
+    // touch counterpart of onWheel: the info pane has touch-action: none,
+    // so drags starting there fire touch events without any native scroll —
+    // translate them into content scrolls, with synthetic momentum since
+    // native inertia can't be delegated to another element
+    let dragY = 0
+    let dragT = 0
+    let velocity = 0
+    let momentumRaf = 0
+
+    function stopMomentum() {
+      cancelAnimationFrame(momentumRaf)
+    }
+
+    const onInfoTouchStart = (e: TouchEvent) => {
+      stopMomentum()
+      if (content.contains(e.target as Node)) return
+      touchActive = true
+      clearTimeout(settleTimeout)
+      dragY = e.touches[0].clientY
+      dragT = performance.now()
+      velocity = 0
+    }
+
+    const onInfoTouchMove = (e: TouchEvent) => {
+      if (!touchActive || content.contains(e.target as Node)) return
+      const y = e.touches[0].clientY
+      const now = performance.now()
+      const dy = dragY - y
+      content.scrollTop += dy
+      const dt = now - dragT
+      if (dt > 0) velocity = 0.8 * (dy / dt) + 0.2 * velocity
+      dragY = y
+      dragT = now
+    }
+
+    const onInfoTouchEnd = (e: TouchEvent) => {
+      if (content.contains(e.target as Node)) return
+      touchActive = false
+      const step = () => {
+        velocity *= 0.94
+        if (Math.abs(velocity) < 0.05) {
+          scheduleSettle()
+          return
+        }
+        content.scrollTop += velocity * 16
+        momentumRaf = requestAnimationFrame(step)
+      }
+      momentumRaf = requestAnimationFrame(step)
     }
 
     content.addEventListener("scroll", onScroll, { passive: true })
@@ -102,14 +154,23 @@
     content.addEventListener("touchend", onTouchEnd, { passive: true })
     content.addEventListener("touchcancel", onTouchEnd, { passive: true })
     el.addEventListener("wheel", onWheel, { passive: false })
+    el.addEventListener("touchstart", onInfoTouchStart, { passive: true })
+    el.addEventListener("touchmove", onInfoTouchMove, { passive: true })
+    el.addEventListener("touchend", onInfoTouchEnd, { passive: true })
+    el.addEventListener("touchcancel", onInfoTouchEnd, { passive: true })
 
     return () => {
       clearTimeout(settleTimeout)
+      stopMomentum()
       content.removeEventListener("scroll", onScroll)
       content.removeEventListener("touchstart", onTouchStart)
       content.removeEventListener("touchend", onTouchEnd)
       content.removeEventListener("touchcancel", onTouchEnd)
       el.removeEventListener("wheel", onWheel)
+      el.removeEventListener("touchstart", onInfoTouchStart)
+      el.removeEventListener("touchmove", onInfoTouchMove)
+      el.removeEventListener("touchend", onInfoTouchEnd)
+      el.removeEventListener("touchcancel", onInfoTouchEnd)
       progress = 0
     }
   })
