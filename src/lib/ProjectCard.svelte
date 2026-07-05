@@ -34,25 +34,82 @@
   let el: HTMLElement
   let imgY = $state(0)
   let contentEl: HTMLDivElement | undefined = $state(undefined)
-  let overscroll = $state(0)
-  let smoothProgress = $state(0)
-  let rafId = 0
+  let closeZoneEl: HTMLDivElement | undefined = $state(undefined)
+  let progress = $state(0)
 
-  function lerp() {
-    const target = Math.min(overscroll / 1000, 1)
-    smoothProgress += (target - smoothProgress) * 0.08
-    if (Math.abs(target - smoothProgress) > 0.001) {
-      rafId = requestAnimationFrame(lerp)
-    } else {
-      smoothProgress = target
-    }
-  }
-
+  // Scroll-to-close: progress is purely a function of how far the native
+  // scroll position has travelled into the close zone at the end of .content
   $effect(() => {
-    // trigger lerp whenever overscroll changes
-    void overscroll
-    cancelAnimationFrame(rafId)
-    rafId = requestAnimationFrame(lerp)
+    if (!active || !contentEl || !closeZoneEl) return
+    const content = contentEl
+    const zone = closeZoneEl
+    let settleTimeout: ReturnType<typeof setTimeout> | undefined
+    let touchActive = false
+
+    // once the gesture settles inside the zone, commit: past halfway
+    // completes and closes, before halfway rolls smoothly back out
+    const settle = () => {
+      if (closing) return
+      if (progress >= 0.999) {
+        onclose?.()
+        return
+      }
+      if (progress <= 0.001) return
+      const zoneStart =
+        content.scrollHeight - content.clientHeight - zone.offsetHeight
+      const target = progress >= 0.5 ? content.scrollHeight : zoneStart
+      content.scrollTo({ top: target, behavior: "smooth" })
+    }
+
+    const scheduleSettle = () => {
+      clearTimeout(settleTimeout)
+      if (!touchActive) settleTimeout = setTimeout(settle, 150)
+    }
+
+    const onScroll = () => {
+      if (closing) return
+      const zoneStart =
+        content.scrollHeight - content.clientHeight - zone.offsetHeight
+      progress = Math.max(
+        0,
+        Math.min(1, (content.scrollTop - zoneStart) / zone.offsetHeight)
+      )
+      scheduleSettle()
+    }
+
+    const onTouchStart = () => {
+      touchActive = true
+      clearTimeout(settleTimeout)
+    }
+
+    const onTouchEnd = () => {
+      touchActive = false
+      scheduleSettle()
+    }
+
+    const onWheel = (e: WheelEvent) => {
+      // forward wheel from the info pane to the scrollable content,
+      // and stop it from scroll-chaining to the list behind the card
+      if (content.contains(e.target as Node)) return
+      e.preventDefault()
+      content.scrollTop += e.deltaY
+    }
+
+    content.addEventListener("scroll", onScroll, { passive: true })
+    content.addEventListener("touchstart", onTouchStart, { passive: true })
+    content.addEventListener("touchend", onTouchEnd, { passive: true })
+    content.addEventListener("touchcancel", onTouchEnd, { passive: true })
+    el.addEventListener("wheel", onWheel, { passive: false })
+
+    return () => {
+      clearTimeout(settleTimeout)
+      content.removeEventListener("scroll", onScroll)
+      content.removeEventListener("touchstart", onTouchStart)
+      content.removeEventListener("touchend", onTouchEnd)
+      content.removeEventListener("touchcancel", onTouchEnd)
+      el.removeEventListener("wheel", onWheel)
+      progress = 0
+    }
   })
 
   onMount(() => {
@@ -67,57 +124,23 @@
       imgY = -offset * parallaxFactor
     }
 
-    const handleOverscroll = (delta: number) => {
-      if (!contentEl || closing) return
-      const atBottom =
-        contentEl.scrollTop + contentEl.clientHeight >=
-        contentEl.scrollHeight - 2
-      if (atBottom && delta > 0) {
-        overscroll += delta
-        if (overscroll > 1500) {
-          overscroll = 0
-          smoothProgress = 0
-          cancelAnimationFrame(rafId)
-          onclose?.()
+    // only pay for the parallax layout read while the card is near the viewport
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          scroller.addEventListener("scroll", onScroll, { passive: true })
+          onScroll()
+        } else {
+          scroller.removeEventListener("scroll", onScroll)
         }
-      } else {
-        overscroll = 0
-      }
-    }
-
-    const onWheel = (e: WheelEvent) => {
-      if (!active || !contentEl || closing) return
-      if (!contentEl.contains(e.target as Node)) {
-        contentEl.scrollBy({ top: e.deltaY * 2 })
-      }
-      handleOverscroll(e.deltaY)
-    }
-
-    let lastTouchY = 0
-
-    const onTouchStart = (e: TouchEvent) => {
-      lastTouchY = e.touches[0].clientY
-    }
-
-    const onTouchMove = (e: TouchEvent) => {
-      if (!active || !contentEl || closing) return
-      const dy = lastTouchY - e.touches[0].clientY
-      lastTouchY = e.touches[0].clientY
-      handleOverscroll(dy * 3)
-    }
-
-    scroller.addEventListener("scroll", onScroll, { passive: true })
-    window.addEventListener("wheel", onWheel, { passive: true })
-    window.addEventListener("touchstart", onTouchStart, { passive: true })
-    window.addEventListener("touchmove", onTouchMove, { passive: true })
-    onScroll()
+      },
+      { rootMargin: "50%" }
+    )
+    io.observe(el)
 
     return () => {
-      cancelAnimationFrame(rafId)
+      io.disconnect()
       scroller.removeEventListener("scroll", onScroll)
-      window.removeEventListener("wheel", onWheel)
-      window.removeEventListener("touchstart", onTouchStart)
-      window.removeEventListener("touchmove", onTouchMove)
     }
   })
 </script>
@@ -151,17 +174,19 @@
         {/if}
       {/each}
       <img class="hero hero-end" src={hero} alt={project.name} />
-      <div
-        class="scroll-hint"
-        style="background: linear-gradient(to right, var(--background-primary) {smoothProgress *
-          100}%, var(--text-primary) {smoothProgress * 100}%)"
-      >
-        <span
-          class="scroll-text"
-          style="color: {smoothProgress > 0.5
-            ? 'var(--text-primary)'
-            : 'var(--background-primary)'}">Scroll to close</span
+      <div class="close-zone" bind:this={closeZoneEl}>
+        <div
+          class="scroll-hint"
+          style="background: linear-gradient(to right, var(--background-primary) {progress *
+            100}%, var(--text-primary) {progress * 100}%)"
         >
+          <span
+            class="scroll-text"
+            style="color: {progress > 0.5
+              ? 'var(--text-primary)'
+              : 'var(--background-primary)'}">Scroll to close</span
+          >
+        </div>
       </div>
     {/if}
   </div>
@@ -206,9 +231,8 @@
 
       <button
         class="back"
-        style="background: linear-gradient(to right, var(--text-primary) {smoothProgress *
-          100}%, transparent {smoothProgress * 100}%); color: {smoothProgress >
-        0.5
+        style="background: linear-gradient(to right, var(--text-primary) {progress *
+          100}%, transparent {progress * 100}%); color: {progress > 0.5
           ? 'var(--background-extended)'
           : 'var(--text-primary)'}"
         onclick={(e) => {
@@ -259,7 +283,7 @@
     width: 100%;
     height: 100dvh;
     overflow-y: auto;
-    scroll-behavior: smooth;
+    overscroll-behavior: contain;
     scrollbar-width: none;
   }
 
@@ -278,6 +302,14 @@
 
   .active .hero {
     height: 100dvh;
+  }
+
+  /* pins once it fills the pane, so scrolling through the close zone
+     feeds the progress fill instead of visibly scrolling past the end */
+  .active .hero-end {
+    height: 100%;
+    position: sticky;
+    top: 0;
   }
 
   .active .content img:not(.hero),
@@ -318,6 +350,8 @@
     padding-top: calc(var(--padding) + var(--navbar-height));
     overflow: hidden;
     box-sizing: border-box;
+    /* stop touch scrolls here from chaining to the list behind the card */
+    touch-action: none;
   }
 
   .card-index,
@@ -418,6 +452,13 @@
 
   .flipped.active .back {
     align-self: flex-end;
+  }
+
+  .close-zone {
+    display: flex;
+    flex-direction: column;
+    height: 75dvh;
+    flex-shrink: 0;
   }
 
   .scroll-hint {
@@ -524,10 +565,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      position: sticky;
+      bottom: 0;
+      margin-top: auto;
       padding: 12px 0;
       width: 100vw;
       margin-left: calc(-1 * var(--padding));
-      transition: background 0.3s ease;
+      transition: background 0.1s linear;
     }
 
     .scroll-text {
