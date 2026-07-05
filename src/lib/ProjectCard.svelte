@@ -149,7 +149,7 @@
 
 <div
   class="project"
-  class:active
+  class:active={active && !closing}
   class:closing
   class:flipped
   bind:this={el}
@@ -168,7 +168,7 @@
       decoding="async"
       style="transform: translateY({imgY}px)"
     />
-    {#if active}
+    {#if active && !closing}
       {#each contentItems as src}
         {#if src.endsWith(".webm")}
           <div class="video-wrap">
@@ -203,7 +203,7 @@
   </div>
 
   <div class="info">
-    {#if active}
+    {#if active && !closing}
       <div class="header">
         <h1 class="detail-name"><LetterReveal text={project.name} /></h1>
         <span class="detail-index"

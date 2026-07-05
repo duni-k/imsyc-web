@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from "svelte"
+  import { onMount, tick } from "svelte"
   import workData from "../data/workData.json"
   import ProjectCard from "$lib/ProjectCard.svelte"
   import { introDone } from "$lib/introStore"
@@ -17,25 +17,36 @@
     active = workData.find((p) => p.href === initialSlug) ?? null
   }
 
+  const CLOSE_DURATION = 600
+
   function open(project: Project) {
+    if (closing) return
     active = project
     history.pushState({ slug: project.href }, "", `/${project.href}`)
   }
 
-  function close() {
+  // keeps the card mounted as a fixed overlay while the open-transition CSS
+  // plays in reverse, then hands it back to the list aligned to its slot
+  function animateClose() {
+    if (closing || !active) return
+    const href = active.href
     closing = true
-    history.pushState({}, "", "/")
-    requestAnimationFrame(() => {
+    listEl.style.overflow = "hidden"
+    setTimeout(async () => {
       active = null
-      // Block scroll after closing
-      listEl.style.pointerEvents = "none"
-      listEl.style.overflow = "hidden"
-      setTimeout(() => {
-        closing = false
-        listEl.style.pointerEvents = ""
-        listEl.style.overflow = ""
-      }, 600)
-    })
+      closing = false
+      await tick()
+      const idx = workData.findIndex((p) => p.href === href)
+      const slot = listEl.children[idx] as HTMLElement | undefined
+      slot?.scrollIntoView({ block: "start", behavior: "instant" })
+      listEl.style.overflow = ""
+    }, CLOSE_DURATION)
+  }
+
+  function close() {
+    if (closing) return
+    history.pushState({}, "", "/")
+    animateClose()
   }
 
   onMount(() => {
@@ -49,7 +60,12 @@
 
     const onPopState = () => {
       const slug = window.location.pathname.slice(1)
-      active = workData.find((p) => p.href === slug) ?? null
+      const match = workData.find((p) => p.href === slug) ?? null
+      if (!match && active) {
+        animateClose()
+      } else {
+        active = match
+      }
     }
 
     window.addEventListener("popstate", onPopState)
@@ -99,6 +115,7 @@
     position: fixed;
     inset: 0;
     z-index: 10;
+    background: var(--background-primary);
   }
 
   .card-slot.is-hidden {
