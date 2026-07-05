@@ -237,7 +237,7 @@
     flex-direction: column;
     align-items: end;
     gap: var(--padding);
-    padding: calc(var(--navbar-height) + 20px) var(--padding) 0;
+    padding: 0 var(--padding);
   }
 
   .bio {
