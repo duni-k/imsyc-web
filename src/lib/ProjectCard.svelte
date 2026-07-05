@@ -6,6 +6,7 @@
     project,
     active = false,
     closing = false,
+    eager = false,
     onopen,
     onclose,
     onclosedone
@@ -23,13 +24,14 @@
     }
     active?: boolean
     closing?: boolean
+    eager?: boolean
     onopen?: () => void
     onclose?: () => void
     onclosedone?: () => void
   }>()
 
   let flipped = $derived(parseInt(project.index) % 2 === 0)
-  let hero = $derived(`/hero_images/${project.href}_hero.png`)
+  let hero = $derived(`/hero_images/${project.href}_hero.webp`)
   let contentItems = $derived(project.content)
   let el: HTMLElement
   let imgY = $state(0)
@@ -161,6 +163,9 @@
       class="hero"
       src={hero}
       alt={project.name}
+      loading={eager ? "eager" : "lazy"}
+      fetchpriority={eager ? "high" : undefined}
+      decoding="async"
       style="transform: translateY({imgY}px)"
     />
     {#if active}
@@ -170,10 +175,16 @@
             <video {src} autoplay loop muted playsinline></video>
           </div>
         {:else}
-          <img {src} alt={project.name} />
+          <img {src} alt={project.name} loading="lazy" decoding="async" />
         {/if}
       {/each}
-      <img class="hero hero-end" src={hero} alt={project.name} />
+      <img
+        class="hero hero-end"
+        src={hero}
+        alt={project.name}
+        loading="lazy"
+        decoding="async"
+      />
       <div class="close-zone" bind:this={closeZoneEl}>
         <div
           class="scroll-hint"

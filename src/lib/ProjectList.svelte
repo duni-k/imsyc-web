@@ -63,7 +63,7 @@
 </script>
 
 <div class="list" bind:this={listEl}>
-  {#each workData as data}
+  {#each workData as data, i}
     <div
       class="card-slot"
       class:is-active={active?.href === data.href}
@@ -71,6 +71,7 @@
     >
       <ProjectCard
         project={data}
+        eager={i === 0}
         active={active?.href === data.href}
         {closing}
         onopen={() => open(data)}
