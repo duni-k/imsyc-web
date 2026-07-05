@@ -8,10 +8,6 @@
 
   type Project = (typeof workData)[number]
 
-  // the list is rendered several times over and scrolling starts in the
-  // middle copy; when the position drifts into the outer copies it is
-  // shifted back by whole copy-heights (identical content, so the jump is
-  // invisible), which makes the list cycle endlessly in both directions
   const COPIES = 5
   const MID_COPY = Math.floor(COPIES / 2)
   const N = workData.length
@@ -33,16 +29,9 @@
 
   const CLOSE_DURATION = 600
 
-  // correcting scrollTop while a drag, fling or snap animation is running
-  // fights the browser, which keeps re-asserting its own position — that
-  // fight renders as a violent spasm. So the correction only ever runs
-  // once scrolling has been idle for a beat; the extra copies provide the
-  // runway that makes waiting safe.
   function recenter() {
     const copyHeight = listEl.scrollHeight / COPIES
     const cardHeight = copyHeight / N
-    // band edges sit mid-card so they never coincide with a card edge,
-    // where sub-pixel jitter would re-trigger the jump endlessly
     const low = (Math.round(N * (MID_COPY - 0.5)) - 0.5) * cardHeight
     const high = 2 * MID_COPY * copyHeight - low
     const top = listEl.scrollTop
@@ -130,6 +119,17 @@
       }
     }
 
+    let lastScrollHeight = listEl.scrollHeight
+    const resizeObserver = new ResizeObserver(() => {
+      const height = listEl.scrollHeight
+      if (lastScrollHeight > 0 && height !== lastScrollHeight) {
+        listEl.scrollTop = (listEl.scrollTop / lastScrollHeight) * height
+        listEl.dispatchEvent(new CustomEvent("recentered"))
+      }
+      lastScrollHeight = height
+    })
+    resizeObserver.observe(listEl)
+
     window.addEventListener("popstate", onPopState)
     listEl.addEventListener("scroll", scheduleRecenter, { passive: true })
     listEl.addEventListener("touchstart", onTouchStart, { passive: true })
@@ -140,6 +140,7 @@
 
     return () => {
       clearTimeout(settleTimer)
+      resizeObserver.disconnect()
       window.removeEventListener("popstate", onPopState)
       listEl.removeEventListener("scroll", scheduleRecenter)
       listEl.removeEventListener("touchstart", onTouchStart)
@@ -199,9 +200,6 @@
     visibility: hidden;
   }
 
-  /* on mobile the cards are shorter than the viewport (3/4 aspect), and
-     mandatory snapping with snap points denser than the viewport is what
-     caused the jumpy scrolling — so snapping is desktop-only */
   @media only screen and (max-width: 500px) {
     .list {
       scroll-snap-type: none;
